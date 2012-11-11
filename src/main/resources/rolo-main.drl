@@ -1,0 +1,67 @@
+package com.salaboy.lego.wedo;
+
+import com.salaboy.rolo.wedo.model.*;
+import com.salaboy.rolo.wedo.api.*;
+import com.salaboy.rolo.wedo.api.Motor.*;
+import org.drools.event.rule.*;
+import org.drools.common.*;
+import org.drools.runtime.rule.*;
+import org.drools.runtime.KnowledgeRuntime;
+
+declare DistanceReport
+    @role(event)
+    @expires(1s)
+end
+
+declare Started
+
+end
+
+declare Stopped
+
+end
+      
+  
+
+rule "Something too close - Robot Escape" 
+    when
+        $r: RoloTheRobot()
+        Number( doubleValue < 50) from accumulate (DistanceReport( $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+        
+    then
+       $r.getMotorByName("main").start(120, DIRECTION.BACKWARD);
+       AgendaItem item = ( AgendaItem ) kcontext.getActivation();
+              final RoloTheRobot robot = $r;
+                System.out.println(" Registering UnMatchListener");
+            
+                item.setActivationUnMatchListener( new ActivationUnMatchListener() {
+                    
+                    public void unMatch(org.drools.runtime.rule.WorkingMemory wm,
+                                        org.drools.runtime.rule.Activation activation) {
+                        System.out.println(" Stop Motor");
+                        robot.getMotorByName("main").stop();
+                        
+                   }
+                } );
+     
+       
+
+
+end
+
+
+rule " Robot log" 
+    when
+        
+        $n: Number( doubleValue > 50) from accumulate (DistanceReport( $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+    then
+       System.out.println("Current avg: "+$n);
+       
+
+end
+
+
+
+
+
+

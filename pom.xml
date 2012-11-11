@@ -1,0 +1,160 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.salaboy</groupId>
+    <artifactId>rolo_the_robot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rolo The Robot</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <jbpm.version>6.0.0-SNAPSHOT</jbpm.version>
+        <drools.version>6.0.0-SNAPSHOT</drools.version>
+        <hibernate.em.version>3.4.0.GA</hibernate.em.version>
+        <hibernate.core.version>3.3.2.GA</hibernate.core.version>
+        <seam.version>3.1.0.Final</seam.version>
+        <weld.version>1.1.8.Final</weld.version>
+        <arquillian.version>1.0.1.Final</arquillian.version>
+        <arquillian_weld.version>1.0.0.CR3</arquillian_weld.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>core</artifactId>
+            <version>1.2.1</version>
+        </dependency>  
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>${drools.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-compiler</artifactId>
+            <version>${drools.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>knowledge-api</artifactId>
+            <version>${drools.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se</artifactId>
+            <version>${weld.version}</version>
+            
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-core</artifactId>
+            <version>${weld.version}</version>
+            
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <version>${arquillian.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-weld-se-embedded-1.1</artifactId>
+            <version>${arquillian_weld.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- mvn install:install-file  -Dfile=hidapi-1.1.jar   -DgroupId=hid -DartifactId=hid -Dversion=1.0.0 -Dpackaging=jar -->
+        <dependency>
+            
+            <groupId>hid</groupId>
+            <artifactId>hid</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- mvn install:install-file  -Dfile=promidi.jar -DgroupId=promidi -DartifactId=promidi -Dversion=1.0.0 -Dpackaging=jar-->
+        <dependency>
+            
+            <groupId>promidi</groupId>
+            <artifactId>promidi</artifactId>
+            <version>1.0.0</version>
+            
+        </dependency>
+        <!-- mvn install:install-file  -Dfile=sprites.jar -DgroupId=processing-sprites -DartifactId=sprites -Dversion=1.0.0 -Dpackaging=jar -->
+        <dependency>
+            
+            <groupId>processing-sprites</groupId>
+            <artifactId>sprites</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- mvn install:install-file  -Dfile=verletphysics.jar -DgroupId=toxiclibs -DartifactId=verletphysics -Dversion=1.0.0 -Dpackaging=jar -->
+        <dependency>
+            
+            <groupId>toxiclibs</groupId>
+            <artifactId>verletphysics</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- mvn install:install-file  -Dfile=toxiclibscore.jar -DgroupId=toxiclibs -DartifactId=core -Dversion=1.0.0 -Dpackaging=jar -->
+        <dependency>
+            
+            <groupId>toxiclibs</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+    
+    <repositories>
+        <repository>
+            <id>jboss</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>cytoscape</id>
+            <url>http://cytoscape.wodaklab.org/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+       
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        
+                        <argument>com.salaboy.rolo.RoloMain</argument>
+                    </arguments> 
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
