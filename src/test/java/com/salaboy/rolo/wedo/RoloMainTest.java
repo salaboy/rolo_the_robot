@@ -11,14 +11,7 @@ import com.salaboy.rolo.wedo.model.RoloTheRobot;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
-import org.drools.KnowledgeBase;
-import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.KnowledgeBuilder;
-import org.drools.builder.KnowledgeBuilderFactory;
-import org.drools.builder.ResourceType;
 import org.drools.io.impl.ClassPathResource;
-import org.drools.logger.KnowledgeRuntimeLoggerFactory;
-import org.drools.runtime.StatefulKnowledgeSession;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -27,6 +20,13 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kie.KnowledgeBase;
+import org.kie.KnowledgeBaseFactory;
+import org.kie.builder.KnowledgeBuilder;
+import org.kie.builder.KnowledgeBuilderFactory;
+import org.kie.builder.ResourceType;
+import org.kie.logger.KnowledgeRuntimeLoggerFactory;
+import org.kie.runtime.StatefulKnowledgeSession;
 
 /**
  *
