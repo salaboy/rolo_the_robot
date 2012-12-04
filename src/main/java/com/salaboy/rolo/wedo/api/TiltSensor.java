@@ -8,6 +8,6 @@ package com.salaboy.rolo.wedo.api;
  *
  * @author salaboy
  */
-public interface TiltSensor {
+public interface TiltSensor extends Sensor{
     public Tilt readTilt();
 }

@@ -14,6 +14,10 @@ public interface Motor {
         FORWARD, BACKWARD
     };
 
+    void setName(String string);
+    
+    String getName();
+    
     void forward(int speed, long millisec);
 
     void backward(int speed, long millisec);

@@ -18,9 +18,11 @@ public class SimpleTiltSensorImpl implements TiltSensor {
     @Inject
     private BlockManager manager;
 
-    /*
-     * 
-     */
+    private String name;
+
+    public SimpleTiltSensorImpl() {
+    }
+    
     public Tilt readTilt() {
         byte[] buff = new byte[8];
 
@@ -56,5 +58,15 @@ public class SimpleTiltSensorImpl implements TiltSensor {
         
         return Tilt.NO_TILT;
 
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

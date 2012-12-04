@@ -9,5 +9,8 @@ package com.salaboy.rolo.wedo.api;
  * @author salaboy
  */
 public interface Sensor {
-    
+
+    void setName(String string);
+
+    String getName();
 }

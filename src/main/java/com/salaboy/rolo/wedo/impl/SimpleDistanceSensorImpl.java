@@ -17,6 +17,7 @@ public class SimpleDistanceSensorImpl implements DistanceSensor {
     @Inject
     private BlockManager manager;
 
+    private String name;
     /*
      * Distance from 148 to 1, where 1 is extremely close and 148 is Infinite... 
      * 147 aprox 20 cm
@@ -38,5 +39,15 @@ public class SimpleDistanceSensorImpl implements DistanceSensor {
         int finalDistance = distance - 69;
         return finalDistance;
 
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

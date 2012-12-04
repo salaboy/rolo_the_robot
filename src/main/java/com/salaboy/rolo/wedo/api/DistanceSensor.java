@@ -8,6 +8,6 @@ package com.salaboy.rolo.wedo.api;
  *
  * @author salaboy
  */
-public interface DistanceSensor {
+public interface DistanceSensor extends Sensor{
     int readDistance();
 }

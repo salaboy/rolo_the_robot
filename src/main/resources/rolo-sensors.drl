@@ -1,0 +1,47 @@
+package com.salaboy.lego.wedo;
+
+import com.salaboy.rolo.model.*;
+import com.salaboy.rolo.wedo.api.*; 
+import com.salaboy.rolo.wedo.api.Motor.*;
+
+import org.drools.common.*;
+import org.kie.event.rule.*;
+import org.kie.runtime.rule.*;
+import org.kie.runtime.KnowledgeRuntime;
+
+declare DistanceReport
+    @role(event)
+    @expires(1s)
+end
+
+
+rule "Something is getting Closer" 
+    when
+        $r: RoloTheRobot()
+        DistanceSensor( $sensor: name )
+        $n: Number( doubleValue < 0.5 ) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", tendency($d))
+        
+    then
+       System.out.println("WARN: Something is getting closer" + $n);
+end
+
+rule "Something is going away" 
+    when
+        $r: RoloTheRobot()
+        DistanceSensor( $sensor: name )
+        $n: Number( doubleValue > 0.5 ) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", tendency($d))
+        
+    then
+       System.out.println("WARN: Something is going away" + $n);
+end
+
+
+
+
+
+
+
+
+
+
+
