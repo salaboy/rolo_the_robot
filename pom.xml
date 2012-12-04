@@ -133,7 +133,12 @@
             <version>1.0.0</version>
         </dependency>
     </dependencies>
-    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jboss</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <repositories>
         <repository>
             <id>jboss</id>
