@@ -22,7 +22,7 @@ public class WeDoBlockManager implements BlockManager {
     private HIDDevice dev;
 
     static {
-        ClassPathLibraryLoader.loadNativeHIDLibrary();
+       System.loadLibrary("hidapi-jni"); 
 
     }
 

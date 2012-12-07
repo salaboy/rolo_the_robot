@@ -26,7 +26,7 @@ import org.kie.KnowledgeBaseConfiguration;
 import org.kie.KnowledgeBaseFactory;
 import org.kie.builder.KnowledgeBuilder;
 import org.kie.builder.KnowledgeBuilderFactory;
-import org.kie.builder.ResourceType;
+import org.kie.io.ResourceType;
 import org.kie.conf.EventProcessingOption;
 import org.kie.logger.KnowledgeRuntimeLoggerFactory;
 import org.kie.runtime.KnowledgeSessionConfiguration;
