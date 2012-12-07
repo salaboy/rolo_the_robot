@@ -18,9 +18,10 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 /**
  *
- * @author salaboy
- * java -Djava.library.path=/home/pi/projects/javahidapi/linux/ -cp rolo_the_robot-1.0-SNAPSHOT.jar com.salaboy.rolo.tests.CMDMotorAndSensorTest
- * 
+ * @author salaboy java -Djava.library.path=/home/pi/projects/javahidapi/linux/
+ * -cp rolo_the_robot-1.0-SNAPSHOT.jar
+ * com.salaboy.rolo.tests.CMDMotorAndSensorTest
+ *
  */
 public class CMDMotorAndSensorTest {
 
@@ -52,16 +53,17 @@ public class CMDMotorAndSensorTest {
 
         final Motor motor = container.instance().select(Motor.class).get();
         final DistanceSensor distanceSensor = container.instance().select(DistanceSensor.class).get();
-        
+
         final Thread t = new Thread() {
             @Override
             public void run() {
                 while (readSensors) {
                     System.out.println("Starting Motor ...");
                     motor.start(120, Motor.DIRECTION.FORWARD);
-                    int readDistance = distanceSensor.readDistance();
-                    System.out.println("Distance = "+readDistance);
                     try {
+                        Thread.sleep(defaultLatency);
+                        int readDistance = distanceSensor.readDistance();
+                        System.out.println("Distance = " + readDistance);
                         Thread.sleep(defaultLatency);
                         System.out.println("Stopping Motor ...");
                         motor.stop();
@@ -69,7 +71,7 @@ public class CMDMotorAndSensorTest {
                     } catch (InterruptedException ex) {
                         Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
 
                 }
             }
