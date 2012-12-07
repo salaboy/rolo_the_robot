@@ -71,21 +71,24 @@ public class SimpleMotorImpl implements Motor {
         byte[] data = null;
         byte[] buff = new byte[8];
         int n = manager.read(buff);
-
-        if (n != 8) {
-            throw new IllegalStateException(" Wrong data");
-        }
+       
+       
         System.out.println("## " + (buff[0] & 0xff) + "," + (buff[1] & 0xff) + "," + (buff[2] & 0xff) + "," + (buff[3] & 0xff) + "," + (buff[4] & 0xff) + "," + (buff[5] & 0xff) + "," + (buff[6] & 0xff) + "," + (buff[7] & 0xff));
         switch (dir) {
             case BACKWARD:
-
                 data = new byte[]{0, 64, (byte)speed, 0, 0, 0, 0, 0, 0};
+                if (n == 8) {
+                    data = new byte[]{0, 64, (byte)speed, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
+                }
+                
                 System.out.println("## " + (data[0] & 0xff) + "," + (data[1] & 0xff) + "," + (data[2] & 0xff) + "," + (data[3] & 0xff) + "," + (data[4] & 0xff) + "," + (data[5] & 0xff) + "," + (data[6] & 0xff) + "," + (data[7] & 0xff));
                 manager.write(data);
                 break;
             case FORWARD:
-
                 data = new byte[]{0, 64, (byte)-speed, 0, 0, 0, 0, 0, 0};
+                if (n == 8) {
+                    data = new byte[]{0, 64, (byte)-speed, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
+                }
                 System.out.println("## " + (data[0] & 0xff) + "," + (data[1] & 0xff) + "," + (data[2] & 0xff) + "," + (data[3] & 0xff) + "," + (data[4] & 0xff) + "," + (data[5] & 0xff) + "," + (data[6] & 0xff) + "," + (data[7] & 0xff));
                 manager.write(data);
                 break;
