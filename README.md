@@ -15,6 +15,17 @@ Clone sources:
 
 git clone https://github.com/Salaboy/rolo_the_robot.git
 
+from src/main/resources/lib
+
+mvn install:install-file  -Dfile=verletphysics.jar -DgroupId=toxiclibs -DartifactId=verletphysics -Dversion=1.0.0 -Dpackaging=jar
+
+mvn install:install-file  -Dfile=sprites.jar -DgroupId=processing-sprites -DartifactId=sprites -Dversion=1.0.0 -Dpackaging=jar
+
+mvn install:install-file  -Dfile=promidi.jar -DgroupId=promidi -DartifactId=promidi -Dversion=1.0.0 -Dpackaging=jar
+
+mvn install:install-file  -Dfile=hidapi-1.1.jar   -DgroupId=hid -DartifactId=hid -Dversion=1.0.0 -Dpackaging=jar
+
+mvn install:install-file  -Dfile=toxiclibscore.jar -DgroupId=toxiclibs -DartifactId=core -Dversion=1.0.0 -Dpackaging=jar
 
 Clone JAVAHIDAPI with hg. We need to do this because the HIDAPI needs to be compiled for the arm7 platform
 
@@ -22,9 +33,26 @@ Install HG
 
 hg clone https://code.google.com/p/javahidapi/
 
-Modify build.xml to point to linux
+sudo apt-get install libusb-1.0-0-dev
 
-ant compile
+sudo apt-get install libudev-dev
+
+cd javahidapi/linux
+
+Modify Makefile to contain the correct pointers for openjdk6-armhf headers
+
+JAVA6HEADERS=-I/usr/lib/jvm/java-6-openjdk-armhf/include/ -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux
+
+make
+
+Run (to compile):
+
+ant 
+
+Test: 
+Before modify   <jvmarg value="-Djava.library.path=${basedir}/linux"/> to   <jvmarg value="-Djava.library.path=${basedir}/mac"/>
+
+ant run
 
 Plug an USB device and run
 

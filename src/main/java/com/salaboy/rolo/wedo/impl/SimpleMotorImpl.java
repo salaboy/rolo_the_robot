@@ -21,7 +21,7 @@ public class SimpleMotorImpl implements Motor {
     @Inject
     BlockManager manager;
 
-    public void forward(int speed, long millisec) {
+    public synchronized void forward(int speed, long millisec) {
         try {
             byte[] buff = new byte[8];
             int n = manager.read(buff);
@@ -39,7 +39,7 @@ public class SimpleMotorImpl implements Motor {
         }
     }
 
-    public void backward(int speed, long millisec) {
+    public synchronized void backward(int speed, long millisec) {
         try {
             byte[] buff = new byte[8];
             int n = manager.read(buff);
@@ -56,7 +56,7 @@ public class SimpleMotorImpl implements Motor {
         }
     }
 
-    public void stop() {
+    public synchronized void stop() {
         byte[] buff = new byte[8];
         int n = manager.read(buff);
         if (n != 8) {
@@ -66,7 +66,7 @@ public class SimpleMotorImpl implements Motor {
         manager.write(data);
     }
 
-    public void start(int speed, DIRECTION dir) {
+    public synchronized void start(int speed, DIRECTION dir) {
         byte[] data = null;
         byte[] buff = new byte[8];
         int n = manager.read(buff);

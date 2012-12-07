@@ -19,7 +19,7 @@ import org.jboss.weld.environment.se.WeldContainer;
 /**
  *
  * @author salaboy
- * java -cp rolo_the_robot-1.0-SNAPSHOT.jar com.salaboy.rolo.tests.CMDMotorAndSensorTest
+ * java -Djava.library.path=/home/pi/projects/javahidapi/linux/ -cp rolo_the_robot-1.0-SNAPSHOT.jar com.salaboy.rolo.tests.CMDMotorAndSensorTest
  * 
  */
 public class CMDMotorAndSensorTest {

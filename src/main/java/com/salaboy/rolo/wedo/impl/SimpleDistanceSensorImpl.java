@@ -22,7 +22,7 @@ public class SimpleDistanceSensorImpl implements DistanceSensor {
      * Distance from 148 to 1, where 1 is extremely close and 148 is Infinite... 
      * 147 aprox 20 cm
      */
-    public int readDistance() {
+    public synchronized int readDistance() {
         byte[] buff = new byte[8];
 
         int n = manager.read(buff);

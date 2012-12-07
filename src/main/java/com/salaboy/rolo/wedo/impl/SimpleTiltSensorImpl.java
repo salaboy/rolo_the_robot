@@ -23,7 +23,7 @@ public class SimpleTiltSensorImpl implements TiltSensor {
     public SimpleTiltSensorImpl() {
     }
     
-    public Tilt readTilt() {
+    public synchronized Tilt readTilt() {
         byte[] buff = new byte[8];
 
         int n = manager.read(buff);
