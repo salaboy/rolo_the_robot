@@ -27,7 +27,7 @@ public class SimpleDistanceSensorImpl implements DistanceSensor {
 
         int n = manager.read(buff);
         if (n != 8) {
-            throw new IllegalStateException(" Wrong data");
+            return -1;
         }
         int distance = -1;
         

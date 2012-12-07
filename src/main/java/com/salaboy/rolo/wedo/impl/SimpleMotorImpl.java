@@ -43,10 +43,11 @@ public class SimpleMotorImpl implements Motor {
         try {
             byte[] buff = new byte[8];
             int n = manager.read(buff);
-            if (n != 8) {
-                throw new IllegalStateException(" Wrong data");
+            byte[] data = new byte[]{0, 64, -60, (byte) speed, 0, 0, 0, 0, 0};
+            if (n == 8) {
+                data = new byte[]{0, 64, -60, (byte) speed, buff[3], buff[4], buff[5], buff[6], buff[7]};
             }
-            byte[] data = new byte[]{0, 64, -60, (byte) speed, buff[3], buff[4], buff[5], buff[6], buff[7]};
+            
             manager.write(data);
             Thread.sleep(millisec);
             data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
@@ -59,10 +60,10 @@ public class SimpleMotorImpl implements Motor {
     public synchronized void stop() {
         byte[] buff = new byte[8];
         int n = manager.read(buff);
-        if (n != 8) {
-            throw new IllegalStateException(" Wrong data");
+        byte[] data = new byte[]{0, 64, 0, 0, 0, 0, 0, 0, 0};
+        if (n == 8) {
+            data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
         }
-        byte[] data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
         manager.write(data);
     }
 

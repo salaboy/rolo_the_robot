@@ -20,13 +20,21 @@ import java.util.logging.Logger;
 public class WeDoBlockManager implements BlockManager {
 
     private HIDDevice dev;
-
+    public static String arch = "arm7";
     static {
-       System.loadLibrary("hidapi-jni"); 
+        
+        
+       
 
     }
 
     public WeDoBlockManager() {
+        if(arch.equals("pc")){
+            ClassPathLibraryLoader.loadNativeHIDLibrary();
+        }
+        if(arch.equals("arm7")){
+            System.loadLibrary("hidapi-jni"); 
+        }
         try {
             dev = HIDManager.getInstance().openById(VENDOR_ID, PRODUCT_ID, null);
         } catch (HIDDeviceNotFoundException ex) {
