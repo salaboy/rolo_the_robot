@@ -42,7 +42,7 @@ public class WeDoBlockManager implements BlockManager {
         return this.dev;
     }
 
-    public void write(byte[] data) {
+    public synchronized void write(byte[] data) {
         try {
             dev.write(data);
         } catch (IOException ex) {
@@ -50,7 +50,7 @@ public class WeDoBlockManager implements BlockManager {
         }
     }
 
-    public int read(byte[] buff) {
+    public synchronized int read(byte[] buff) {
         try {
             return dev.read(buff);
         } catch (IOException ex) {
