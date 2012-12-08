@@ -9,6 +9,7 @@ import com.salaboy.rolo.wedo.api.DistanceSensor;
 import com.salaboy.rolo.wedo.api.Motor;
 import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.RoloTheRobot;
+import com.salaboy.rolo.wedo.impl.WeDoBlockManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
@@ -43,6 +44,7 @@ public class RoloMain {
 
         // add t option
         options.addOption("t", true, "sensors latency");
+        options.addOption("arch", true, "architecture");
         CommandLineParser parser = new PosixParser();
         CommandLine cmd = parser.parse(options, args);
 
@@ -53,7 +55,13 @@ public class RoloMain {
             System.out.println(" The Latency will be set to: "+sensorLatency);
             defaultLatency = new Long(sensorLatency);
         }
-
+        String arch = cmd.getOptionValue("arch");
+        if (arch == null) {
+            System.out.println(" The Default Arch will be used: arm7" );
+        } else {
+            System.out.println(" The Arch will be set to: "+arch );
+            WeDoBlockManager.arch = arch;
+        }
 
         System.out.println("Starting Rolo ...");
 
