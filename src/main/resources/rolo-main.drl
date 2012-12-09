@@ -7,6 +7,7 @@ import com.salaboy.rolo.wedo.api.Motor.*;
 import org.drools.common.*;
 import org.kie.event.rule.*;
 import org.kie.runtime.rule.*;
+import org.kie.runtime.*;
 import org.kie.runtime.KnowledgeRuntime;
 
 declare DistanceReport
@@ -40,12 +41,12 @@ rule "Something too close - Robot Go Back"
         
     then
        $m.start(120, DIRECTION.BACKWARD);
-       AgendaItem item = ( AgendaItem ) kcontext.getActivation();
+       Match item = ( Match ) kcontext.getMatch();
               final Motor motor = $m;
-              item.setActivationUnMatchListener( new ActivationUnMatchListener() {
+              ((AgendaItem)item).setActivationUnMatchListener( new ActivationUnMatchListener() {
                     
-                    public void unMatch(org.kie.runtime.rule.WorkingMemory wm,
-                                        org.kie.runtime.rule.Match match) {
+                    public void unMatch(WorkingMemory wm,
+                                        Match match) {
                         System.out.println(" Stop Motor");
                         motor.stop();
                         

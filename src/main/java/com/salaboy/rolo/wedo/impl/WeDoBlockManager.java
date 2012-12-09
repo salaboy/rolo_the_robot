@@ -12,21 +12,16 @@ import com.salaboy.rolo.wedo.api.BlockManager;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.inject.Singleton;
 /**
  *
  * @author salaboy
  */
+@Singleton
 public class WeDoBlockManager implements BlockManager {
 
     private HIDDevice dev;
     public static String arch = "arm7";
-    static {
-        
-        
-       
-
-    }
 
     public WeDoBlockManager() {
         if(arch.equals("pc")){

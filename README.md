@@ -42,7 +42,7 @@ cd javahidapi/linux
 Modify Makefile to contain the correct pointers for openjdk6-armhf headers
 
 JAVA6HEADERS=-I/usr/lib/jvm/java-6-openjdk-armhf/include/ -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux
-
+cd linux/
 make
 
 Run (to compile):
@@ -51,7 +51,7 @@ ant
 
 Test: 
 Before modify   <jvmarg value="-Djava.library.path=${basedir}/linux"/> to   <jvmarg value="-Djava.library.path=${basedir}/mac"/>
-
+Also change classpath to build instead of bin
 ant run
 
 Plug an USB device and run
@@ -60,4 +60,4 @@ ant run
 
 You should see the device being listed. The test is waiting for a PS3 controller
 
-ant package -> to get a jar, we need to manually install it inside the maven repo, so it can be picked up by maven
+ant dist -> to get a jar, we need to manually install it inside the maven repo, so it can be picked up by maven
