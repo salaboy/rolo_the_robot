@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import org.drools.compiler.PackageBuilderConfiguration;
 import org.drools.io.impl.ClassPathResource;
-import org.drools.marshalling.impl.ProtobufMessages.KnowledgeBase;
 import org.drools.time.SessionPseudoClock;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -22,14 +21,14 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.kie.KnowledgeBaseConfiguration;
+import org.kie.KieBaseConfiguration;
 import org.kie.KnowledgeBaseFactory;
 import org.kie.builder.KnowledgeBuilder;
 import org.kie.builder.KnowledgeBuilderFactory;
 import org.kie.conf.EventProcessingOption;
 import org.kie.io.ResourceType;
 import org.kie.logger.KnowledgeRuntimeLoggerFactory;
-import org.kie.runtime.KnowledgeSessionConfiguration;
+import org.kie.runtime.KieSessionConfiguration;
 import org.kie.runtime.StatefulKnowledgeSession;
 import org.kie.runtime.conf.ClockTypeOption;
 
@@ -63,11 +62,11 @@ public class SensorsTest {
         if (kbuilder.getErrors().size() > 0) {
             throw new IllegalStateException(kbuilder.getErrors().toString());
         }
-        KnowledgeBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
+        KieBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
         kBaseConfig.setOption(EventProcessingOption.STREAM);
         org.kie.KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase(kBaseConfig);
         kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-        KnowledgeSessionConfiguration config = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
+        KieSessionConfiguration config = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
         config.setOption(ClockTypeOption.get("pseudo"));
         final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession(config, null);
 

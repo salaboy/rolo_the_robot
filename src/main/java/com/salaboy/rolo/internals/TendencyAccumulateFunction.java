@@ -10,12 +10,13 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Arrays;
+import org.kie.runtime.rule.TypedAccumulateFunction;
 
 /**
  *
  * @author salaboy
  */
-public class TendencyAccumulateFunction implements org.kie.runtime.rule.TypedAccumulateFunction {
+public class TendencyAccumulateFunction implements TypedAccumulateFunction {
 
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {

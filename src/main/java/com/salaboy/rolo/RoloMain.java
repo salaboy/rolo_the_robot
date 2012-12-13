@@ -18,10 +18,12 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
 import org.drools.compiler.PackageBuilderConfiguration;
 import org.drools.io.impl.ClassPathResource;
+
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
+import org.kie.KieBaseConfiguration;
+// 6.0.0-SNAPSHOT
 import org.kie.KnowledgeBase;
-import org.kie.KnowledgeBaseConfiguration;
 import org.kie.KnowledgeBaseFactory;
 import org.kie.builder.KnowledgeBuilder;
 import org.kie.builder.KnowledgeBuilderFactory;
@@ -79,7 +81,7 @@ public class RoloMain {
         if (kbuilder.getErrors().size() > 0) {
             throw new IllegalStateException(kbuilder.getErrors().toString());
         }
-        KnowledgeBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
+        KieBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
         kBaseConfig.setOption(EventProcessingOption.STREAM);
         KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase(kBaseConfig);
         kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
