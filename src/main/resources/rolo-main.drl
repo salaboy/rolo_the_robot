@@ -1,8 +1,9 @@
 package com.salaboy.lego.wedo;
 
 import com.salaboy.rolo.model.*;
-import com.salaboy.rolo.wedo.api.*; 
-import com.salaboy.rolo.wedo.api.Motor.*;
+
+import com.salaboy.rolo.api.*;
+import com.salaboy.rolo.api.Motor.*;
 
 import org.drools.common.*;
 import org.kie.event.rule.*;
@@ -59,7 +60,7 @@ rule "Something too close - Robot Go Back"
 end
 
 
-rule "Something is getting Closer" 
+/*rule "Something is getting Closer" 
     when
         $r: RoloTheRobot()
         DistanceSensor( $sensor: name )
@@ -77,7 +78,7 @@ rule "Something is going away"
         
     then
        System.out.println("WARN: Something is going away" + $n);
-end
+end*/
 
 
 

@@ -21,7 +21,6 @@ public class TendencyAccumulateFunction implements TypedAccumulateFunction {
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 
-
     }
 
 

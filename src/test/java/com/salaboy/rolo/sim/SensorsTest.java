@@ -8,7 +8,6 @@ import com.salaboy.rolo.internals.TendencyAccumulateFunction;
 import com.salaboy.rolo.api.DistanceSensor;
 import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.RoloTheRobot;
-import com.salaboy.rolo.wedo.impl.WeDoBlockManager;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import org.drools.compiler.PackageBuilderConfiguration;
@@ -20,7 +19,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kie.KieBaseConfiguration;
@@ -48,6 +46,8 @@ public class SensorsTest {
         return ShrinkWrap.create(JavaArchive.class, "sim.jar")
                 .addPackage("com.salaboy.rolo.api")
                 .addPackage("com.salaboy.rolo.mock")
+                .addPackage("com.salaboy.rolo.internals")
+                .addPackage(" com.salaboy.rolo.model")
                 .addAsManifestResource("META-INF/beans.xml", ArchivePaths.create("beans.xml"));
 
     }
@@ -122,10 +122,8 @@ public class SensorsTest {
     
     private StatefulKnowledgeSession createSession(){
     
-        PackageBuilderConfiguration pkgConf = new PackageBuilderConfiguration();
-        pkgConf.addAccumulateFunction("tendency", TendencyAccumulateFunction.class);
-        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(pkgConf);
-        
+       
+        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         kbuilder.add(new ClassPathResource("rolo-sensors.drl"), ResourceType.DRL);
 
         if (kbuilder.getErrors().size() > 0) {
