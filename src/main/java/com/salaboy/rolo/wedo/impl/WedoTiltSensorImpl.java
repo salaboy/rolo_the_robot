@@ -5,22 +5,22 @@
 package com.salaboy.rolo.wedo.impl;
 
 import com.salaboy.rolo.wedo.api.BlockManager;
-import com.salaboy.rolo.wedo.api.Tilt;
-import com.salaboy.rolo.wedo.api.TiltSensor;
+import com.salaboy.rolo.api.Tilt;
+import com.salaboy.rolo.api.TiltSensor;
 import javax.inject.Inject;
 
 /**
  *
  * @author salaboy
  */
-public class SimpleTiltSensorImpl implements TiltSensor {
+public class WedoTiltSensorImpl implements TiltSensor {
 
     @Inject
     private BlockManager manager;
 
     private String name;
 
-    public SimpleTiltSensorImpl() {
+    public WedoTiltSensorImpl() {
     }
     
     public synchronized Tilt readTilt() {

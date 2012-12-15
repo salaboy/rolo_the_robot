@@ -5,8 +5,8 @@
 package com.salaboy.rolo;
 
 import com.salaboy.rolo.internals.TendencyAccumulateFunction;
-import com.salaboy.rolo.wedo.api.DistanceSensor;
-import com.salaboy.rolo.wedo.api.Motor;
+import com.salaboy.rolo.api.DistanceSensor;
+import com.salaboy.rolo.api.Motor;
 import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.RoloTheRobot;
 import com.salaboy.rolo.wedo.impl.WeDoBlockManager;
@@ -104,7 +104,7 @@ public class RoloMain {
             public void run() {
                 while (readSensors) {
                     int readDistance = distanceSensor.readDistance();
-                    ksession.getWorkingMemoryEntryPoint("distance-sensor").insert(new DistanceReport(distanceSensor.getName(), readDistance));
+                    ksession.getEntryPoint("distance-sensor").insert(new DistanceReport(distanceSensor.getName(), readDistance));
                     ksession.fireAllRules();
                     try {
                         Thread.sleep(defaultLatency);

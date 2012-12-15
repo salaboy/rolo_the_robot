@@ -5,14 +5,14 @@
 package com.salaboy.rolo.wedo.impl;
 
 import com.salaboy.rolo.wedo.api.BlockManager;
-import com.salaboy.rolo.wedo.api.DistanceSensor;
+import com.salaboy.rolo.api.DistanceSensor;
 import javax.inject.Inject;
 
 /**
  *
  * @author salaboy
  */
-public class SimpleDistanceSensorImpl implements DistanceSensor {
+public class WedoDistanceSensorImpl implements DistanceSensor {
 
     @Inject
     private BlockManager manager;

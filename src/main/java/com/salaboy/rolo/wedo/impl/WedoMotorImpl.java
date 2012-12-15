@@ -5,8 +5,8 @@
 package com.salaboy.rolo.wedo.impl;
 
 import com.salaboy.rolo.wedo.api.BlockManager;
-import com.salaboy.rolo.wedo.api.Motor;
-import com.salaboy.rolo.wedo.api.Motor.DIRECTION;
+import com.salaboy.rolo.api.Motor;
+import com.salaboy.rolo.api.Motor.DIRECTION;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
  *
  * @author salaboy
  */
-public class SimpleMotorImpl implements Motor {
+public class WedoMotorImpl implements Motor {
 
     private String name;
     @Inject
@@ -35,7 +35,7 @@ public class SimpleMotorImpl implements Motor {
             data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
             manager.write(data);
         } catch (InterruptedException ex) {
-            Logger.getLogger(SimpleMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WedoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -53,7 +53,7 @@ public class SimpleMotorImpl implements Motor {
             data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
             manager.write(data);
         } catch (InterruptedException ex) {
-            Logger.getLogger(SimpleMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WedoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
