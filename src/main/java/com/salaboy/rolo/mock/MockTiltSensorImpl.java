@@ -6,11 +6,13 @@ package com.salaboy.rolo.mock;
 
 import com.salaboy.rolo.api.Tilt;
 import com.salaboy.rolo.api.TiltSensor;
+import javax.enterprise.inject.Alternative;
 
 /**
  *
  * @author salaboy
  */
+@Alternative
 public class MockTiltSensorImpl implements TiltSensor {
 
     private String name;

@@ -5,11 +5,13 @@
 package com.salaboy.rolo.mock;
 
 import com.salaboy.rolo.api.Motor;
+import javax.enterprise.inject.Alternative;
 
 /**
  *
  * @author salaboy
  */
+@Alternative
 public class MockMotorImpl implements Motor{
 
     private String name;
