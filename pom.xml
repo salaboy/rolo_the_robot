@@ -132,10 +132,10 @@
             <artifactId>core</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <!-- mvn install:install-file  -Dfile=arduino.jar -DgroupId=arduino -DartifactId=arduino -Dversion=1.0.0 -Dpackaging=jar -->
+        <!-- mvn install:install-file  -Dfile=Arduino.jar -DgroupId=arduino -DartifactId=arduino -Dversion=1.0.0 -Dpackaging=jar -->
         <dependency>
             
-            <groupId>arudino</groupId>
+            <groupId>arduino</groupId>
             <artifactId>arduino</artifactId>
             <version>1.0.0</version>
         </dependency>

@@ -46,7 +46,7 @@ rule "Something too close - Robot Go Back"
               final Motor motor = $m;
               ((AgendaItem)item).setActivationUnMatchListener( new ActivationUnMatchListener() {
                     
-                    public void unMatch(WorkingMemory wm,
+                    public void unMatch(Session session,
                                         Match match) {
                         System.out.println(" Stop Motor");
                         motor.stop();
