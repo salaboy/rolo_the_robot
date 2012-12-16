@@ -4,13 +4,11 @@
  */
 package com.salaboy.rolo.sim;
 
-import com.salaboy.rolo.internals.TendencyAccumulateFunction;
 import com.salaboy.rolo.api.DistanceSensor;
 import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.RoloTheRobot;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import org.drools.compiler.PackageBuilderConfiguration;
 import org.drools.io.impl.ClassPathResource;
 import org.drools.time.SessionPseudoClock;
 import org.jboss.arquillian.container.test.api.Deployment;

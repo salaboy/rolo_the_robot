@@ -1,0 +1,62 @@
+package com.salaboy.lego.wedo;
+
+import com.salaboy.rolo.model.*;
+
+import com.salaboy.rolo.api.*;
+import com.salaboy.rolo.api.Motor.*;
+import com.salaboy.rolo.api.Motor.DIRECTION.*;
+
+import org.drools.common.*;
+import org.kie.event.rule.*;
+import org.kie.runtime.rule.*;
+import org.kie.runtime.*;
+import org.kie.runtime.KnowledgeRuntime;
+
+declare DistanceReport
+    @role(event)
+    @expires(1s)
+end
+
+
+rule "test motor"
+    
+    when
+        $m: Motor(running == false)
+        Number( doubleValue > 100 ) from accumulate (DistanceReport( $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+    then
+        $m.start(126, Motor.DIRECTION.FORWARD);
+        //I'm starting the motor and changing it's status I need to udpate
+        update($m);
+end
+
+
+rule "Motor A stop on short distance"
+    when
+        $m: Motor(name == "MotorA", running == true)
+        Number( doubleValue < 50) from accumulate (DistanceReport( $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+    then
+        $m.stop();
+        //I'm stoping the motor and changing it's status I need to udpate
+        update($m);
+end
+
+rule "Motor B stop on mid distance"
+    when
+        $m: Motor(name == "MotorB", running == true)
+        Number( doubleValue < 100) from accumulate (DistanceReport( $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+    then
+        $m.stop();
+        //I'm stoping the motor and changing it's status I need to udpate
+        update($m);
+end
+
+
+
+
+
+
+
+
+
+
+

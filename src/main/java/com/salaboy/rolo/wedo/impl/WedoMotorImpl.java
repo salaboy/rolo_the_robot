@@ -20,6 +20,8 @@ public class WedoMotorImpl implements Motor {
     private String name;
     @Inject
     BlockManager manager;
+    
+    private boolean running = false;
 
     public synchronized void forward(int speed, long millisec) {
         try {
@@ -30,10 +32,12 @@ public class WedoMotorImpl implements Motor {
             }
             byte[] data = new byte[]{0, 64, 60, (byte) -speed, buff[3], buff[4], buff[5], buff[6], buff[7]};
             manager.write(data);
+            this.running = true;
             Thread.sleep(millisec);
             //data = new byte[]{0, 64, -60, 0, 0, 0, 1, 0, 0};
             data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
             manager.write(data);
+            this.running = false;
         } catch (InterruptedException ex) {
             Logger.getLogger(WedoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,9 +53,11 @@ public class WedoMotorImpl implements Motor {
             }
             
             manager.write(data);
+            this.running = true;
             Thread.sleep(millisec);
             data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
             manager.write(data);
+            this.running = false;
         } catch (InterruptedException ex) {
             Logger.getLogger(WedoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,6 +71,7 @@ public class WedoMotorImpl implements Motor {
             data = new byte[]{0, 64, 0, 0, buff[3], buff[4], buff[5], buff[6], buff[7]};
         }
         manager.write(data);
+        this.running = false;
     }
 
     public synchronized void start(int speed, DIRECTION dir) {
@@ -93,6 +100,7 @@ public class WedoMotorImpl implements Motor {
                 manager.write(data);
                 break;
         }
+        this.running = true;
 
     }
 
@@ -104,5 +112,15 @@ public class WedoMotorImpl implements Motor {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public boolean isRunning() {
+        return running;
+    }
+
+    @Override
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 }

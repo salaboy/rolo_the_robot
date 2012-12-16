@@ -25,4 +25,8 @@ public interface Motor {
     void start(int speed, DIRECTION dir);
     
     void stop();
+    
+    boolean isRunning();
+    
+    void setRunning(boolean running);
 }
