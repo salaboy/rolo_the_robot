@@ -36,8 +36,8 @@ end
 rule "Something too close - Robot Go Back" 
     when
         $r: RoloTheRobot()
-        $m: Motor( name == "main" )
-        DistanceSensor( $sensor: name )
+        $m: Motor( name == "MotorA" )
+        UltraSonicSensor( $sensor: name )
         Number( doubleValue < 50) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
         
     then

@@ -41,7 +41,7 @@ public class ArduinoUltraSonicSensorTest {
     private UltraSonicSensor ultraSonic;
 
     @Test
-    public void motorTest() throws InterruptedException {
+    public void distanceTest() throws InterruptedException {
         assertNotNull(ultraSonic);
         
         while(true){

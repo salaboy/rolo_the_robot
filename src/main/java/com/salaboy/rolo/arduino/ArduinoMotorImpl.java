@@ -27,14 +27,16 @@ public class ArduinoMotorImpl implements ArduinoMotor {
     
     private boolean running = false;
     
+    static long defaultLatency = 100;
+    
     public ArduinoMotorImpl() {
         
     }
     /*
      * We need to setup the correct pins to use for each motor
      * In my configuration I have
-     * MotorA:  s1: 7, s2: 11,  -> Enable (pwm) 9 
-     * MotorB:  s1: 8, s2: 12,  -> Enable (pwm)10
+     * MotorA:  s1: 7, s2: 11,  -> Enable (pwm) 5 
+     * MotorB:  s1: 6, s2: 12,  -> Enable (pwm)10
      */
     @Override
     public void setupMotor(int signal1, int signal2, int pwm){

@@ -36,6 +36,9 @@ query getAllWorldShapes()
     $ws: WorldShape()
 end
 
+rule "find place to go"
+    when
         
+    then
 
-
+end

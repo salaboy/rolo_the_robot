@@ -88,6 +88,9 @@ public class RoloLevelsTest {
         
         mind.insert(new Wall(100, 100, 10, 20));
         
+        
+        
+        
 
         QueryResults queryResults = mind.getQueryResults("getAllWorldShapes");
         Iterator<QueryResultsRow> iterator = queryResults.iterator();
