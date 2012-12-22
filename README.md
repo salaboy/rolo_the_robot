@@ -66,6 +66,13 @@ ant dist -> to get a jar, we need to manually install it inside the maven repo, 
 In order to work with RXTX in the PI we need to install the following package:
 sudo apt-get install librxtx-java
 
+Create a simbolic link to the real RXTXcomm.jar from your default jvm:
+from: /usr/lib/jvm/java-6-openjdk-armhf/jre/lib/ext
+
+sudo ln -s ../../../../java-6-openjdk-common/jre/lib/ext/RXTXcomm.jar RXTXcomm.jar
+
+Then it will look like this: RXTXcomm.jar -> ../../../../java-6-openjdk-common/jre/lib/ext/RXTXcomm.jar
+
 In order to use the system installed jars and native extensions we need to export:
 
 export MAVEN_OPTS="-Djava.ext.dirs=/usr/share/java/ -Djava.library.path=/usr/lib/jni/"
