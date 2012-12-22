@@ -4,7 +4,7 @@
  */
 package com.salaboy.rolo.arduino;
 
-import com.salaboy.rolo.api.LightSensor;
+import com.salaboy.rolo.api.UltraSonicSensor;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,29 +14,32 @@ import javax.inject.Named;
  * @author salaboy
  */
 @Arduino
-public class ArduinoLightSensorImpl implements LightSensor {
+public class UltraSonicSensorImpl implements UltraSonicSensor {
 
     private String name;
     @Inject
     @Named("arduino")
     private ArduinoFirmata arduino;
 
-    public ArduinoLightSensorImpl() {
+    public UltraSonicSensorImpl() {
         
     }
     
     @PostConstruct
     public void init(){
-        arduino.pinMode(1, ArduinoFirmata.INPUT);
+       
+        arduino.pinMode(5, ArduinoFirmata.INPUT);
     }
 
-    public ArduinoLightSensorImpl(String name) {
+    public UltraSonicSensorImpl(String name) {
         this.name = name;
     }
 
     @Override
-    public int readLight() {
-        return arduino.analogRead(1);
+    public int readDistance() {
+        return arduino.analogRead(5);
+        
+        
     }
 
     @Override

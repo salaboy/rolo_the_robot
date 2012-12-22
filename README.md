@@ -61,3 +61,11 @@ ant run
 You should see the device being listed. The test is waiting for a PS3 controller
 
 ant dist -> to get a jar, we need to manually install it inside the maven repo, so it can be picked up by maven
+
+
+In order to work with RXTX in the PI we need to install the following package:
+sudo apt-get install librxtx-java
+
+In order to use the system installed jars and native extensions we need to export:
+
+export MAVEN_OPTS="-Djava.ext.dirs=/usr/share/java/ -Djava.library.path=/usr/lib/jni/"

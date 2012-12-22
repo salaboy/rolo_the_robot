@@ -13,15 +13,15 @@ import javax.annotation.PostConstruct;
 public class RoloTheRobot {
 
     private String name;
-    
-    private String status;
-    
+    private String status = "alive!";
+    private int positionX = 0;
+    private int positionY = 0;
+    private int orientation = 0; // 0 - 360
 
     @PostConstruct
-    public void init(){
-        // This should have the session
+    public void init() {
     }
-    
+
     public RoloTheRobot(String name) {
         this.name = name;
     }
@@ -42,11 +42,35 @@ public class RoloTheRobot {
         this.status = status;
     }
 
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
+
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public void setPositionY(int positionY) {
+        this.positionY = positionY;
+
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+
+    }
+
     @Override
     public String toString() {
         return "RoloTheRobot{" + "name=" + name + ", status=" + status + '}';
     }
-
-    
- 
 }

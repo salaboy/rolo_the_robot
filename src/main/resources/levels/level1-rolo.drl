@@ -1,0 +1,41 @@
+package com.salaboy.lego.wedo;
+
+import com.salaboy.rolo.model.*;
+
+import com.salaboy.rolo.api.*;
+import com.salaboy.rolo.api.Motor.*;
+
+import org.drools.common.*;
+import org.kie.event.rule.*;
+import org.kie.runtime.rule.*;
+import org.kie.runtime.*;
+import org.kie.runtime.KnowledgeRuntime;
+
+declare DistanceReport
+    @role(event)
+    @expires(1s)
+end
+
+query getAllMotors()
+    Motor()
+end
+
+query getAllSensors()
+    Sensor()
+end
+
+query getAllDistanceSensors()
+    DistanceSensor()
+end
+
+query getAllTiltSensors()
+    TiltSensor()
+end
+
+query getAllWorldShapes()
+    $ws: WorldShape()
+end
+
+        
+
+
