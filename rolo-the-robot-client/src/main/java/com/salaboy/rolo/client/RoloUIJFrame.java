@@ -285,7 +285,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     private void connectjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectjButtonActionPerformed
         
         if(!connected){
-            connected = roloClientConnector.connect("192.168.0.194", 5445);
+            connected = roloClientConnector.connect(serverAddressjTextField.getText(), 5445);
             if(connected){
                 statusjLabel.setText("Connected");
                 statusjLabel.setForeground(Color.green);

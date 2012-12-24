@@ -15,10 +15,11 @@
  */
 package com.salaboy.rolo;
 
-import com.salaboy.rolo.api.Motor;
 import com.salaboy.rolo.api.UltraSonicSensor;
 import com.salaboy.rolo.arduino.Arduino;
 import com.salaboy.rolo.arduino.ArduinoMotor;
+import com.salaboy.rolo.model.DistanceReport;
+import com.salaboy.rolo.model.RoloTheRobot;
 import com.salaboy.rolo.wedo.impl.WeDoBlockManager;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -51,13 +52,21 @@ import org.hornetq.core.server.HornetQServer;
 import org.hornetq.core.server.HornetQServers;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
+import org.kie.KieBaseConfiguration;
+import org.kie.KnowledgeBase;
+import org.kie.KnowledgeBaseFactory;
+import org.kie.builder.KnowledgeBuilder;
+import org.kie.builder.KnowledgeBuilderFactory;
+import org.kie.conf.EventProcessingOption;
+import org.kie.io.ResourceFactory;
+import org.kie.io.ResourceType;
+import org.kie.runtime.StatefulKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
  * java -jar rolo_the_robot-main-1.0-SNAPSHOT.jar -t 400 -ip 192.168.0.x -port 5445
  */
-
 public class RoloCommandServer implements Runnable {
 
     public static final String SERVER_TASK_COMMANDS_QUEUE = "commandsQueue";
@@ -82,7 +91,7 @@ public class RoloCommandServer implements Runnable {
     private ClientSession session;
     private ClientConsumer consumer;
     static boolean readSensors = true;
-    static long defaultLatency = 1000;
+    static long defaultLatency = 100;
 
     public static void main(String[] args) throws Exception {
         Weld weld = new Weld();
@@ -123,22 +132,22 @@ public class RoloCommandServer implements Runnable {
         if (ip == null) {
             System.out.println(" The Default IP will be used: 127.0.0.1");
             roloCommandServer.setHost("127.0.0.1");
-            
+
         } else {
             System.out.println(" The IP will be set to: " + ip);
             roloCommandServer.setHost(ip);
         }
-        
+
         String port = cmd.getOptionValue("port");
         if (port == null) {
             System.out.println(" The Default Port will be used: 5445");
             roloCommandServer.setPort(5445);
-            
+
         } else {
             System.out.println(" The Port will be set to: " + port);
             roloCommandServer.setPort(Integer.parseInt(port));
         }
-        
+
         System.out.println("Starting Rolo ...");
 
 
@@ -171,18 +180,61 @@ public class RoloCommandServer implements Runnable {
     }
 
     public void run() {
-        motorA.setupMotor(7, 11, 5);
-        motorB.setupMotor(6, 12, 10);
+        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+        kbuilder.add(ResourceFactory.newClassPathResource("rolo-main.drl"), ResourceType.DRL);
+
+        if (kbuilder.getErrors().size() > 0) {
+            throw new IllegalStateException(kbuilder.getErrors().toString());
+        }
+        KieBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
+        kBaseConfig.setOption(EventProcessingOption.STREAM);
+        KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase(kBaseConfig);
+        kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+
+        final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
         try {
             start();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(RoloCommandServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ClientProducer producer = null;
+        try {
+            producer = session.createProducer("rolo-ui");
+        } catch (HornetQException ex) {
+            java.util.logging.Logger.getLogger(RoloCommandServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        final HornetQSessionWriter notifications = new HornetQSessionWriter(session, producer);
+        ksession.setGlobal("notifications", notifications);
+        try {
+ 
+            motorA.setupMotor(7, 11, 5);
+            motorA.setName("MotorA");
+            motorB.setupMotor(6, 12, 10);
+            motorB.setName("MotorB");
+
+            ultraSonicSensor.setName("distance-sensor");
+
+            ksession.insert(motorA);
+
+            ksession.insert(motorB);
+            
+            ksession.insert(ultraSonicSensor);
+
+            ksession.insert(new RoloTheRobot("rolo"));
+
+            ksession.fireAllRules();
+
+
+
             final Thread t = new Thread() {
                 @Override
                 public void run() {
                     while (readSensors) {
                         int readDistance = ultraSonicSensor.readDistance();
+                        ksession.getEntryPoint("distance-sensor").insert(new DistanceReport(ultraSonicSensor.getName(), readDistance));
+                        ksession.fireAllRules();
                         try {
-                            ClientProducer producer = session.createProducer("rolo-ui");
-                            new HornetQSessionWriter(session, producer).write(">> Ultra Sonic Sensor Report: " + readDistance);
+                            notifications.write(">> Ultra Sonic Sensor Report: " + readDistance);
                             Thread.sleep(defaultLatency);
                         } catch (Exception ex) {
                             java.util.logging.Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -201,44 +253,48 @@ public class RoloCommandServer implements Runnable {
             try {
                 ClientMessage message = consumer.receive();
                 if (message != null) {
+
                     Object object = readMessage(message);
-                    String clientId = message.getStringProperty("producerId");
-                    System.out.println("Message Recieved in Server = " + object);
-                    System.out.println("Answer to = " + clientId);
-                    if (object.equals("FORWARD")) {
-                        System.out.println(">>> Moving Forward");
-                        motorA.start(126, Motor.DIRECTION.FORWARD);
-                        motorB.start(126, Motor.DIRECTION.FORWARD);
-                    } else if (object.equals("BACKWARD")) {
-                        System.out.println(">>> Moving Backward");
-                        motorA.start(126, Motor.DIRECTION.BACKWARD);
-                        motorB.start(126, Motor.DIRECTION.BACKWARD);
-                    } else if (object.equals("STOP")) {
-                        System.out.println(">>> STOP!");
-                        motorA.stop();
-                        motorB.stop();
-                    } else if (object.equals("LEFT")) {
-                        System.out.println(">>> Moving Left");
-                        motorA.forward(126, 1500);
-                    } else if (object.equals("RIGHT")) {
-                        System.out.println(">>> Moving Right");
-                        motorB.forward(126, 1500);
-                    } else if (object.equals("ROTATE LEFT")) {
-                        System.out.println(">>> Rotating Left");
-                        motorA.forward(126, 1500);
-                        motorB.backward(126, 1500);
-                    } else if (object.equals("ROTATE RIGHT")) {
-                        System.out.println(">>> Rotating Right");
-                        motorA.backward(126, 1500);
-                        motorB.forward(126, 1500);
-                    }
-                    ClientProducer producer = session.createProducer(clientId);
-                    new HornetQSessionWriter(session, producer).write(object);
+                    ksession.insert(new RoloCommand(object.toString()));
+                    ksession.fireAllRules();
+//                    String clientId = message.getStringProperty("producerId");
+//                    System.out.println("Message Recieved in Server = " + object);
+//                    System.out.println("Answer to = " + clientId);
+//                    if (object.equals("FORWARD")) {
+//                        System.out.println(">>> Moving Forward");
+//                        motorA.start(126, Motor.DIRECTION.FORWARD);
+//                        motorB.start(126, Motor.DIRECTION.FORWARD);
+//                    } else if (object.equals("BACKWARD")) {
+//                        System.out.println(">>> Moving Backward");
+//                        motorA.start(126, Motor.DIRECTION.BACKWARD);
+//                        motorB.start(126, Motor.DIRECTION.BACKWARD);
+//                    } else if (object.equals("STOP")) {
+//                        System.out.println(">>> STOP!");
+//                        motorA.stop();
+//                        motorB.stop();
+//                    } else if (object.equals("LEFT")) {
+//                        System.out.println(">>> Moving Left");
+//                        motorA.forward(126, 1500);
+//                    } else if (object.equals("RIGHT")) {
+//                        System.out.println(">>> Moving Right");
+//                        motorB.forward(126, 1500);
+//                    } else if (object.equals("ROTATE LEFT")) {
+//                        System.out.println(">>> Rotating Left");
+//                        motorA.forward(126, 1500);
+//                        motorB.backward(126, 1500);
+//                    } else if (object.equals("ROTATE RIGHT")) {
+//                        System.out.println(">>> Rotating Right");
+//                        motorA.backward(126, 1500);
+//                        motorB.forward(126, 1500);
+//                    }
+//                    ClientProducer producer = session.createProducer(clientId);
+//                    new HornetQSessionWriter(session, producer).write(object);
+                    notifications.write(object);
                 }
             } catch (HornetQException e) {
                 switch (e.getCode()) {
                     case HornetQException.OBJECT_CLOSED:
-                        logger.warn("TaskServer: HornetQ object closed error encountered: " + getClass() + " using port " + port, e);
+                        logger.warn("Rolo Server: HornetQ object closed error encountered: " + getClass() + " using port " + port, e);
                         break;
                     default:
                         logger.error(" +++ " + e.getMessage());

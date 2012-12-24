@@ -20,17 +20,13 @@ public class ArduinoMotorImpl implements ArduinoMotor {
     @Inject
     @Named("arduino")
     private ArduinoFirmata arduino;
-
-    private int signal1; 
-    private int signal2; 
+    private int signal1;
+    private int signal2;
     private int pwm;
-    
     private boolean running = false;
-    
     static long defaultLatency = 100;
-    
+
     public ArduinoMotorImpl() {
-        
     }
     /*
      * We need to setup the correct pins to use for each motor
@@ -38,17 +34,18 @@ public class ArduinoMotorImpl implements ArduinoMotor {
      * MotorA:  s1: 7, s2: 11,  -> Enable (pwm) 5 
      * MotorB:  s1: 6, s2: 12,  -> Enable (pwm)10
      */
+
     @Override
-    public void setupMotor(int signal1, int signal2, int pwm){
+    public void setupMotor(int signal1, int signal2, int pwm) {
         this.signal1 = signal1;
         this.signal2 = signal2;
         this.pwm = pwm;
-        
-        arduino.pinMode(this.signal1, ArduinoFirmata.OUTPUT); 
+
+        arduino.pinMode(this.signal1, ArduinoFirmata.OUTPUT);
         arduino.pinMode(this.signal2, ArduinoFirmata.OUTPUT);
         arduino.pinMode(this.pwm, ArduinoFirmata.OUTPUT);
     }
-    
+
     @Override
     public void setName(String name) {
         this.name = name;
@@ -60,46 +57,64 @@ public class ArduinoMotorImpl implements ArduinoMotor {
     }
 
     @Override
-    public void forward(int speed, long millisec) {
-        arduino.digitalWrite(this.signal1, ArduinoFirmata.HIGH);
-        arduino.digitalWrite(this.signal2, ArduinoFirmata.LOW);
-        arduino.digitalWrite(this.pwm, speed);
-        this.running = true;
-        try {
-            Thread.sleep(millisec);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ArduinoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        arduino.digitalWrite(this.signal1, ArduinoFirmata.LOW);
-        arduino.digitalWrite(this.signal2, ArduinoFirmata.LOW);
-        arduino.digitalWrite(this.pwm, 0);
-        this.running = false;
+    public void forward(final int speed, final long millisec) {
+        final int localSignal1 = this.signal1;
+        final int localSignal2 = this.signal2;
+        final int localPWM = this.pwm;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                arduino.digitalWrite(localSignal1, ArduinoFirmata.HIGH);
+                arduino.digitalWrite(localSignal2, ArduinoFirmata.LOW);
+                arduino.digitalWrite(localPWM, speed);
+
+                try {
+                    Thread.sleep(millisec);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ArduinoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                arduino.digitalWrite(localSignal1, ArduinoFirmata.LOW);
+                arduino.digitalWrite(localSignal2, ArduinoFirmata.LOW);
+                arduino.digitalWrite(localPWM, 0);
+
+            }
+        }).start();
+
     }
 
     @Override
-    public void backward(int speed, long millisec) {
-        arduino.digitalWrite(this.signal1, ArduinoFirmata.LOW);
-        arduino.digitalWrite(this.signal2, ArduinoFirmata.HIGH);
-        arduino.digitalWrite(this.pwm, speed);
-        this.running = true;
-        try {
-            Thread.sleep(millisec);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ArduinoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        arduino.digitalWrite(this.signal1, ArduinoFirmata.LOW);
-        arduino.digitalWrite(this.signal2, ArduinoFirmata.LOW);
-        arduino.digitalWrite(this.pwm, 0);
-        this.running = false;
+    public void backward(final int speed, final long millisec) {
+        final int localSignal1 = this.signal1;
+        final int localSignal2 = this.signal2;
+        final int localPWM = this.pwm;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                arduino.digitalWrite(localSignal1, ArduinoFirmata.LOW);
+                arduino.digitalWrite(localSignal2, ArduinoFirmata.HIGH);
+                arduino.digitalWrite(localPWM, speed);
+               
+                try {
+                    Thread.sleep(millisec);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ArduinoMotorImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                arduino.digitalWrite(localSignal1, ArduinoFirmata.LOW);
+                arduino.digitalWrite(localSignal2, ArduinoFirmata.LOW);
+                arduino.digitalWrite(localPWM, 0);
+               
+                }
+        }).start();
+        
     }
 
     @Override
     public void start(int speed, DIRECTION dir) {
-        
-        if(dir.equals(DIRECTION.FORWARD)){
+
+        if (dir.equals(DIRECTION.FORWARD)) {
             arduino.digitalWrite(this.signal1, ArduinoFirmata.HIGH);
             arduino.digitalWrite(this.signal2, ArduinoFirmata.LOW);
-        }else if(dir.equals(DIRECTION.BACKWARD)){
+        } else if (dir.equals(DIRECTION.BACKWARD)) {
             arduino.digitalWrite(this.signal1, ArduinoFirmata.LOW);
             arduino.digitalWrite(this.signal2, ArduinoFirmata.HIGH);
         }

@@ -1,6 +1,7 @@
 package com.salaboy.lego.wedo;
 
 import com.salaboy.rolo.model.*;
+import com.salaboy.rolo.*;
 
 import com.salaboy.rolo.api.*;
 import com.salaboy.rolo.api.Motor.*;
@@ -32,24 +33,34 @@ query getAllTiltSensors()
     TiltSensor()
 end
 
+global HornetQSessionWriter notifications;
+
 
 rule "Something too close - Robot Go Back" 
     when
         $r: RoloTheRobot()
-        $m: Motor( name == "MotorA" )
+        $m: Motor(  )
         UltraSonicSensor( $sensor: name )
-        Number( doubleValue < 50) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+        $n: Number( doubleValue < 15) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
         
     then
+       notifications.write(" (Executed >> ) Starting motor because distance avg is ="+$n); 
        $m.start(120, DIRECTION.BACKWARD);
        Match item = ( Match ) kcontext.getMatch();
               final Motor motor = $m;
+              final HornetQSessionWriter notif = notifications;
               ((AgendaItem)item).setActivationUnMatchListener( new ActivationUnMatchListener() {
                     
                     public void unMatch(Session session,
                                         Match match) {
                         System.out.println(" Stop Motor");
+                        
                         motor.stop();
+                        try{
+                            notif.write(" (Executed >> ) Stopping Motor because avg over 15");
+                        } catch(Exception e){
+                            System.out.println("ERROR sending notification!!!");
+                        }
                         
                    }
                 } );
@@ -57,6 +68,74 @@ rule "Something too close - Robot Go Back"
        
 
 
+end
+
+rule "Process Forward Command" 
+    when
+        RoloCommand(cmd == "FORWARD")
+        $m: Motor( )
+    then
+        $m.start(126, Motor.DIRECTION.FORWARD);
+        notifications.write(" (Executed >> ) Process Forward Command");
+end
+
+rule "Process Backward Command" 
+    when
+        RoloCommand(cmd == "BACKWARD")
+        $m: Motor( )
+    then
+        $m.start(126, Motor.DIRECTION.BACKWARD);
+        notifications.write(" (Executed >> ) Process Backward Command");
+end
+
+rule "Process Stop Command" 
+    when
+        RoloCommand(cmd == "STOP")
+        $m: Motor( )
+    then
+        $m.stop();
+        notifications.write(" (Executed >> ) Process Stop Command");
+end
+
+rule "Process Left Command" 
+    when
+        RoloCommand(cmd == "LEFT")
+        $m: Motor( name == "MotorA")
+    then
+        $m.forward(126, 700);
+        notifications.write(" (Executed >> ) Process Left Command");
+end
+
+rule "Process Right Command" 
+    when
+        RoloCommand(cmd == "RIGHT")
+        $m: Motor( name == "MotorB")
+    then
+        $m.forward(126, 700);
+        notifications.write(" (Executed >> ) Process Right Command");
+end
+
+
+rule "Process Rotate Left"
+    when
+       RoloCommand(cmd == "ROTATE LEFT")
+       $mA: Motor( name == "MotorA") 
+       $mB: Motor( name == "MotorB") 
+    then
+         $mA.forward(126, 700);
+         $mB.backward(126, 700);
+         notifications.write(" (Executed >> ) Process Rotate Left Command");
+end
+
+rule "Process Rotate Right"
+    when
+       RoloCommand(cmd == "ROTATE RIGHT")
+       $mA: Motor( name == "MotorA") 
+       $mB: Motor( name == "MotorB") 
+    then
+         $mA.backward(126, 700);
+         $mB.forward(126, 700);
+         notifications.write(" (Executed >> ) Process Rotate Right Command");
 end
 
 
