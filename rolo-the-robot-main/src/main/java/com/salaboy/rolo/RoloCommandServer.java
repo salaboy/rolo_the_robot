@@ -54,6 +54,10 @@ import org.jboss.weld.environment.se.WeldContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+ * java -jar rolo_the_robot-main-1.0-SNAPSHOT.jar -t 400 -ip 192.168.0.x -port 5445
+ */
+
 public class RoloCommandServer implements Runnable {
 
     public static final String SERVER_TASK_COMMANDS_QUEUE = "commandsQueue";
@@ -86,8 +90,8 @@ public class RoloCommandServer implements Runnable {
         WeldContainer container = weld.initialize();
 
         RoloCommandServer roloCommandServer = container.instance().select(RoloCommandServer.class).get();
-        roloCommandServer.setHost("192.168.0.194");
-        roloCommandServer.setPort(5445);
+//        roloCommandServer.setHost("192.168.0.194");
+//        roloCommandServer.setPort(5445);
 
         // create Options object
         Options options = new Options();
@@ -113,6 +117,26 @@ public class RoloCommandServer implements Runnable {
             WeDoBlockManager.arch = arch;
         }
 
+        String ip = cmd.getOptionValue("ip");
+        if (ip == null) {
+            System.out.println(" The Default IP will be used: 127.0.0.1");
+            roloCommandServer.setHost("127.0.0.1");
+            
+        } else {
+            System.out.println(" The IP will be set to: " + ip);
+            roloCommandServer.setHost(ip);
+        }
+        
+        String port = cmd.getOptionValue("port");
+        if (port == null) {
+            System.out.println(" The Default Port will be used: 5445");
+            roloCommandServer.setPort(5445);
+            
+        } else {
+            System.out.println(" The Port will be set to: " + port);
+            roloCommandServer.setPort(Integer.parseInt(port));
+        }
+        
         System.out.println("Starting Rolo ...");
 
 

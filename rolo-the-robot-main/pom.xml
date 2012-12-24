@@ -168,7 +168,7 @@
                         <argument>-classpath</argument>
                         <classpath/>
                         
-                        <argument>com.salaboy.rolo.RoloServer</argument>
+                        <argument>com.salaboy.rolo.RoloCommandServer</argument>
                     </arguments> 
                 </configuration>
             </plugin>
@@ -205,7 +205,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>com.salaboy.rolo.RoloServer</mainClass>
+                            <mainClass>com.salaboy.rolo.RoloCommandServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
