@@ -99,6 +99,8 @@ public class RoloCommandServer implements Runnable {
         // add t option
         options.addOption("t", true, "sensors latency");
         options.addOption("arch", true, "architecture");
+        options.addOption("ip", true, "host");
+        options.addOption("port", true, "port");
         CommandLineParser parser = new PosixParser();
         CommandLine cmd = parser.parse(options, args);
 
