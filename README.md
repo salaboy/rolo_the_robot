@@ -1,11 +1,34 @@
-rolo_the_robot
+Rolo The Robot
 ==============
 
 Experimental tests with Drools/jBPM + Processing + Raspberry Pi + Arduino + Lego
+To build a scalable platform for Rules/Process driven Robots to conquer the galaxy
 
-Install
+There are three main modules in the project at this point:
 
-On Raspberry Pi:
+1) rolo-the-robot-main:
+	This project contains the main java project which contains all the core logic. This project is prepared to run 
+	on your computer or inside the Raspberry Pi. All the test were done in both a Mac Book Pro and the Raspberry Pi, and the primary 
+	intention is to keep compatibilty for both. The main goal is to provide an autonomous platform to run the rule engine, and for that 
+	reason, running this project in a laptop or regular computer doesn't allow the project to be small, portable and autonomous. 
+2) rolo-the-robot-client:
+    This project is a simple Swing application which allow us to monitor and interact with Rolo. This first version 
+    uses HornetQ for sending messages back and forth with the main project.
+
+3) rolo-the-robot-arduino:
+	This project contains a modified version of the Firmata project (StandardFirmata -> firmata.org) for working with a HC_SR04 UltraSonicSensor.
+	In order to provide that feature, the StandardFirmata sketch was modified to include the sensor reading using another open source 
+	library which provide the support for ultrasonic sensors. In order to compile this scketch you need to have the Ultrasonic library, also provided
+	installed inside the Arduino IDE. The sources for this library can be found here: https://github.com/elrodri/Ultrasonic-HC-SR04/
+
+	(TODO: analyze new ping -> http://code.google.com/p/arduino-new-ping/ and it's integration with firmata)
+
+Install 
+=======
+
+(TODO: Write a tutorial without compiling on the Raspberry Pi board and just use the compiled bins.)
+
+On Raspberry Pi: (Running raspbian)
 
 Install Java, Maven and Git
 
