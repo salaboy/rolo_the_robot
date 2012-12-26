@@ -18,8 +18,10 @@ package com.salaboy.rolo;
 import com.salaboy.rolo.api.Servo180;
 import com.salaboy.rolo.api.UltraSonicSensor;
 import com.salaboy.rolo.arduino.Arduino;
+import com.salaboy.rolo.arduino.ArduinoLightSensor;
 import com.salaboy.rolo.arduino.ArduinoMotor;
 import com.salaboy.rolo.model.DistanceReport;
+import com.salaboy.rolo.model.LightReport;
 import com.salaboy.rolo.model.RoloTheRobot;
 import com.salaboy.rolo.wedo.impl.WeDoBlockManager;
 import java.io.ByteArrayInputStream;
@@ -83,11 +85,12 @@ public class RoloCommandServer implements Runnable {
     @Inject
     @Arduino
     private UltraSonicSensor ultraSonicSensor;
-    
     @Inject
     @Arduino
     private Servo180 servo180;
-    
+    @Inject
+    @Arduino
+    private ArduinoLightSensor lightSensor;
     private Configuration configuration;
     private boolean standalone = false;
     private String host;
@@ -105,8 +108,7 @@ public class RoloCommandServer implements Runnable {
         WeldContainer container = weld.initialize();
 
         RoloCommandServer roloCommandServer = container.instance().select(RoloCommandServer.class).get();
-//        roloCommandServer.setHost("192.168.0.194");
-//        roloCommandServer.setPort(5445);
+
 
         // create Options object
         Options options = new Options();
@@ -212,7 +214,7 @@ public class RoloCommandServer implements Runnable {
         final HornetQSessionWriter notifications = new HornetQSessionWriter(session, producer);
         ksession.setGlobal("notifications", notifications);
         try {
- 
+
             motorA.setupMotor(7, 11, 5);
             motorA.setName("MotorA");
             motorB.setupMotor(6, 12, 10);
@@ -220,15 +222,19 @@ public class RoloCommandServer implements Runnable {
             servo180.setName("Head");
             servo180.setPin(3); // there is no need to do this.. just for clarity
 
+            lightSensor.setName("light-master");
+
             ultraSonicSensor.setName("distance-sensor");
 
             ksession.insert(motorA);
 
             ksession.insert(motorB);
-            
+
             ksession.insert(ultraSonicSensor);
-            
+
             ksession.insert(servo180);
+
+            ksession.insert(lightSensor);
 
             ksession.insert(new RoloTheRobot("rolo"));
 
@@ -244,7 +250,7 @@ public class RoloCommandServer implements Runnable {
                         ksession.getEntryPoint("distance-sensor").insert(new DistanceReport(ultraSonicSensor.getName(), readDistance));
                         ksession.fireAllRules();
                         try {
-                            notifications.write(">> Ultra Sonic Sensor Report: " + readDistance);
+                            notifications.write("DISTANCE_REPORT:" + readDistance);
                             Thread.sleep(defaultLatency);
                         } catch (Exception ex) {
                             java.util.logging.Logger.getLogger(RoloCommandServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,6 +260,25 @@ public class RoloCommandServer implements Runnable {
                 }
             };
             t.start();
+
+            final Thread t2 = new Thread() {
+                @Override
+                public void run() {
+                    while (readSensors) {
+                        int readLight = lightSensor.readLight();
+                        ksession.getEntryPoint("light-sensor").insert(new LightReport(lightSensor.getName(), readLight));
+                        ksession.fireAllRules();
+                        try {
+                            notifications.write("LIGHT_REPORT: " + readLight);
+                            Thread.sleep(defaultLatency*5);
+                        } catch (Exception ex) {
+                            java.util.logging.Logger.getLogger(RoloCommandServer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                }
+            };
+            t2.start();
         } catch (Exception e) {
             //throw new RuntimeException(" + Server Exception with class " + getClass() + " using port " + port, e);
             logger.error(" + Server Exception with class " + getClass() + " using port " + port + " E: " + e.getMessage());
@@ -265,7 +290,13 @@ public class RoloCommandServer implements Runnable {
                 if (message != null) {
 
                     Object object = readMessage(message);
-                    ksession.insert(new RoloCommand(object.toString()));
+                    String[] values = object.toString().split(":");
+                    if(values.length == 2){
+                        ksession.insert(new RoloCommand(values[0], values[1]));
+                    }else if(values.length == 1){
+                        ksession.insert(new RoloCommand(values[0], "0"));
+                    }
+                    
                     ksession.fireAllRules();
 
                     notifications.write(object);

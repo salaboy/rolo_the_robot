@@ -17,6 +17,11 @@ declare DistanceReport
     @expires(1s)
 end
 
+declare LightReport
+    @role(event)
+    @expires(2s)
+end
+
 query getAllMotors()
     Motor()
 end
@@ -44,7 +49,7 @@ rule "Something too close - Robot Go Back"
         $n: Number( doubleValue < 30) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
         
     then
-       notifications.write(" (Executed >> ) Starting motor because distance avg is ="+$n); 
+       notifications.write("Process-SOMETHING_TOO_CLOSE:"+$n); 
        $m.start(120, DIRECTION.BACKWARD);
        Match item = ( Match ) kcontext.getMatch();
               final Motor motor = $m;
@@ -57,7 +62,7 @@ rule "Something too close - Robot Go Back"
                         
                         motor.stop();
                         try{
-                            notif.write(" (Executed >> ) Stopping Motor because avg over 15");
+                            notif.write("Stopping Motor because avg over: 30");
                         } catch(Exception e){
                             System.out.println("ERROR sending notification!!!");
                         }
@@ -68,22 +73,46 @@ rule "Something too close - Robot Go Back"
 
 end
 
+rule "Too Dark - Look another place" 
+    when
+        $r: RoloTheRobot()
+        $s180: Servo180(name == "Head")
+        LightSensor( $sensor: name )
+        $n: Number( doubleValue < 300) from accumulate (LightReport( sensorName == $sensor, $l: light ) over window:time( 10s ) from entry-point "light-sensor", average($l))
+        
+    then
+       notifications.write("Process-TOO_DARK:"+$n); 
+       try{
+            $s180.rotate(170);
+            Thread.sleep(1000);
+            $s180.rotate(0);
+            Thread.sleep(1000);
+            $s180.rotate(80);
+            Thread.sleep(1000);
+            
+       }catch(Exception e){
+           e.printStackTrace();
+       }     
+       
+end
+
+
 rule "Process Forward Command" 
     when
-        RoloCommand(cmd == "FORWARD")
+        RoloCommand(cmd == "FORWARD", $value: value )
         $m: Motor( )
     then
-        $m.start(126, Motor.DIRECTION.FORWARD);
-        notifications.write(" (Executed >> ) Process Forward Command");
+        $m.start(Integer.valueOf($value), Motor.DIRECTION.FORWARD);
+        notifications.write("Process-FORWARD:"+$value);
 end
 
 rule "Process Backward Command" 
     when
-        RoloCommand(cmd == "BACKWARD")
+        RoloCommand(cmd == "BACKWARD", $value: value)
         $m: Motor( )
     then
-        $m.start(126, Motor.DIRECTION.BACKWARD);
-        notifications.write(" (Executed >> ) Process Backward Command");
+        $m.start(Integer.valueOf($value), Motor.DIRECTION.BACKWARD);
+        notifications.write("Process-BACKWARD:"+$value);
 end
 
 rule "Process Stop Command" 
@@ -92,66 +121,66 @@ rule "Process Stop Command"
         $m: Motor( )
     then
         $m.stop();
-        notifications.write(" (Executed >> ) Process Stop Command");
+        notifications.write("Process-STOP:");
 end
 
 rule "Process Left Command" 
     when
-        RoloCommand(cmd == "LEFT")
+        RoloCommand(cmd == "LEFT", $value: value)
         $m: Motor( name == "MotorA")
     then
-        $m.forward(126, 700);
-        notifications.write(" (Executed >> ) Process Left Command");
+        $m.forward(Integer.valueOf($value), 500);
+        notifications.write("Process-LEFT:"+$value);
 end
 
 rule "Process Right Command" 
     when
-        RoloCommand(cmd == "RIGHT")
+        RoloCommand(cmd == "RIGHT", $value: value)
         $m: Motor( name == "MotorB")
     then
-        $m.forward(126, 700);
-        notifications.write(" (Executed >> ) Process Right Command");
+        $m.forward(Integer.valueOf($value), 500);
+        notifications.write("Process-RIGHT:"+$value);
 end
 
 
 rule "Process Rotate Left"
     when
-       RoloCommand(cmd == "ROTATE LEFT")
+       RoloCommand(cmd == "ROTATE LEFT", $value: value)
        $mA: Motor( name == "MotorA") 
        $mB: Motor( name == "MotorB") 
     then
-         $mA.forward(126, 700);
-         $mB.backward(126, 700);
-         notifications.write(" (Executed >> ) Process Rotate Left Command");
+         $mA.forward(Integer.valueOf($value), 500);
+         $mB.backward(Integer.valueOf($value), 500);
+         notifications.write("Process-ROTATE_LEFT:"+$value);
 end
 
 rule "Process Rotate Right"
     when
-       RoloCommand(cmd == "ROTATE RIGHT")
+       RoloCommand(cmd == "ROTATE RIGHT", $value: value)
        $mA: Motor( name == "MotorA") 
        $mB: Motor( name == "MotorB") 
     then
-         $mA.backward(126, 700);
-         $mB.forward(126, 700);
-         notifications.write(" (Executed >> ) Process Rotate Right Command");
+         $mA.backward(Integer.valueOf($value), 500);
+         $mB.forward(Integer.valueOf($value), 500);
+         notifications.write("Process-ROTATE_RIGHT:"+$value);
 end
 
 rule "Process Rotate Head Left"
     when
-        RoloCommand(cmd == "ROTATE HEAD LEFT")
-        $s180: Servo180(name == "Head", $currentDegree: currentDegree < 170)
+        RoloCommand(cmd == "ROTATE HEAD LEFT", $value: value)
+        $s180: Servo180(name == "Head")
     then
-        $s180.rotate($currentDegree + 20);
-        notifications.write(" (Executed >> ) Process Head Rotate Left Command - Current Degree = "+ $s180.getCurrentDegree());
+        $s180.rotate($s180.getCurrentDegree() + Integer.valueOf($value));
+        notifications.write("Process-ROTATE_HEAD_LEFT:"+ $s180.getCurrentDegree());
 end
 
 rule "Process Rotate Head Right"
     when
-        RoloCommand(cmd == "ROTATE HEAD RIGHT")
-        $s180: Servo180(name == "Head", $currentDegree: currentDegree > 20)
+        RoloCommand(cmd == "ROTATE HEAD RIGHT", $value: value)
+        $s180: Servo180(name == "Head")
     then
-        $s180.rotate($currentDegree - 20);
-        notifications.write(" (Executed >> ) Process Head Rotate Right Command - Current Degree = "+ $s180.getCurrentDegree());
+        $s180.rotate($s180.getCurrentDegree() - Integer.valueOf($value));
+        notifications.write("Process-ROTATE_HEAD_RIGHT:"+ $s180.getCurrentDegree());
 end
 
 

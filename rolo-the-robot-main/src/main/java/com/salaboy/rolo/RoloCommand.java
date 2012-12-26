@@ -12,11 +12,13 @@ import java.io.Serializable;
  */
 public class RoloCommand implements Serializable{
     private String cmd;
-
-    public RoloCommand(String cmd) {
+    private String value;
+    
+    public RoloCommand(String cmd, String value) {
         this.cmd = cmd;
+        this.value = value;
     }
-
+    
     public String getCmd() {
         return cmd;
     }
@@ -25,10 +27,20 @@ public class RoloCommand implements Serializable{
         this.cmd = cmd;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
-        return "RoloCommand{" + "cmd=" + cmd + '}';
+        return "RoloCommand{" + "cmd=" + cmd + ", value=" + value + '}';
     }
+
+   
     
     
 }

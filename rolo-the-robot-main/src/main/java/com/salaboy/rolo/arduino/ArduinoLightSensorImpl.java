@@ -14,12 +14,14 @@ import javax.inject.Named;
  * @author salaboy
  */
 @Arduino
-public class ArduinoLightSensorImpl implements LightSensor {
+public class ArduinoLightSensorImpl implements ArduinoLightSensor {
 
     private String name;
     @Inject
     @Named("arduino")
     private ArduinoFirmata arduino;
+    
+    private int pin = 0;
 
     public ArduinoLightSensorImpl() {
         
@@ -27,7 +29,17 @@ public class ArduinoLightSensorImpl implements LightSensor {
     
     @PostConstruct
     public void init(){
-        arduino.pinMode(1, ArduinoFirmata.INPUT);
+        arduino.pinMode(pin, ArduinoFirmata.INPUT);
+    }
+
+    @Override
+    public int getPin() {
+        return pin;
+    }
+
+    @Override
+    public void setPin(int pin) {
+        this.pin = pin;
     }
 
     public ArduinoLightSensorImpl(String name) {
@@ -36,7 +48,7 @@ public class ArduinoLightSensorImpl implements LightSensor {
 
     @Override
     public int readLight() {
-        return arduino.analogRead(1);
+        return arduino.analogRead(0);
     }
 
     @Override

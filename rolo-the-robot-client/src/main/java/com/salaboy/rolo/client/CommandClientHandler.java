@@ -15,22 +15,21 @@
  */
 package com.salaboy.rolo.client;
 
-import javax.swing.JTextArea;
 
 import org.hornetq.api.core.client.ClientSession;
 
 public class CommandClientHandler {
     
-    private JTextArea notificationjTextArea;
     
-    public CommandClientHandler() {
-        
-        
-    }
+    private RoloUIJFrame ui;
     
-    public CommandClientHandler(JTextArea notificationjTextArea) {
-        this.notificationjTextArea = notificationjTextArea;
+    
+    
+    public CommandClientHandler(RoloUIJFrame ui) {
+        this.ui = ui;
     }
+
+   
     
     public void exceptionCaught(ClientSession session, Throwable cause) throws Exception {
 //    	handler.exceptionCaught(new HornetQSessionWriter(session, message), cause);
@@ -39,6 +38,15 @@ public class CommandClientHandler {
     public void messageReceived(ClientSession session, Object message, String producerId) throws Exception {
         
         System.out.println(">>> Client Handler Message Recieved = " + message);
-        notificationjTextArea.setText(notificationjTextArea.getText() + ">>> Client Handler Message Recieved = " + message + "\n");
+        String[] values = message.toString().split(":");
+        if(values[0].equals("DISTANCE_REPORT")){
+            ui.getDistancejTextField().setText(values[1]); 
+        }
+        
+        if(values[0].equals("LIGHT_REPORT")){
+            ui.getLightjTextField().setText(values[1]);
+        }
+        
+        ui.getNotificationjTextArea().setText(">>> Client Handler Message Recieved = " + message + "\n"+ui.getNotificationjTextArea().getText());
     }
 }

@@ -8,6 +8,7 @@
 //import com.salaboy.rolo.api.Servo180;
 //import com.salaboy.rolo.api.UltraSonicSensor;
 //import com.salaboy.rolo.arduino.Arduino;
+//import com.salaboy.rolo.arduino.ArduinoLightSensor;
 //import com.salaboy.rolo.arduino.ArduinoMotor;
 //import javax.inject.Inject;
 //import org.jboss.arquillian.container.test.api.Deployment;
@@ -59,6 +60,10 @@
 //    @Inject
 //    @Arduino
 //    private ArduinoMotor motorB;
+//    
+//    @Inject
+//    @Arduino
+//    private ArduinoLightSensor lightSensor;
 //
 //    @Test
 //    public void motorTest() throws InterruptedException {
@@ -71,6 +76,10 @@
 //        servo.setPin(3); // It's defaulted to 3 but it can be configured to another pin
 //
 //        assertNotNull(ultraSonic);
+//
+//        assertNotNull(lightSensor);
+//        lightSensor.setPin(0);
+//        
 //        
 //
 ////        for (int i = 0; i < 200; i = i + 20) {
@@ -97,6 +106,7 @@
 //                System.out.println("Degree = " + i + " -  Distance = " + ultraSonic.readDistance());
 //                System.out.println("Degree = " + i + " -  Distance = " + ultraSonic.readDistance());
 //                System.out.println("Degree = " + i + " -  Distance = " + ultraSonic.readDistance());
+//                System.out.println("Light = "+lightSensor.readLight());
 //                System.out.println("###############");
 //                Thread.sleep(1000);
 //
