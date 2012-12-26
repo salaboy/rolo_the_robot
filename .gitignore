@@ -4,3 +4,7 @@
 *.war
 *.ear
 /target/
+/rolo_the_robot-main/target/
+/rolo-the_robot-main/target/
+/rolo-the-robot-main/target/
+/rolo-the-robot-client/target/

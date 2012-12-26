@@ -4,7 +4,6 @@
  */
 package com.salaboy.rolo.tests;
 
-import com.salaboy.rolo.RoloMain;
 import com.salaboy.rolo.api.DistanceSensor;
 import com.salaboy.rolo.api.Motor;
 import com.salaboy.rolo.wedo.impl.WeDoBlockManager;
@@ -78,7 +77,7 @@ public class CMDMotorAndSensorTest {
                         motor.stop();
                         Thread.sleep(defaultLatency);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CMDMotorAndSensorTest.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
 

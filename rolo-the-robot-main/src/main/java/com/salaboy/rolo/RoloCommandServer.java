@@ -15,6 +15,7 @@
  */
 package com.salaboy.rolo;
 
+import com.salaboy.rolo.api.Servo180;
 import com.salaboy.rolo.api.UltraSonicSensor;
 import com.salaboy.rolo.arduino.Arduino;
 import com.salaboy.rolo.arduino.ArduinoMotor;
@@ -82,6 +83,11 @@ public class RoloCommandServer implements Runnable {
     @Inject
     @Arduino
     private UltraSonicSensor ultraSonicSensor;
+    
+    @Inject
+    @Arduino
+    private Servo180 servo180;
+    
     private Configuration configuration;
     private boolean standalone = false;
     private String host;
@@ -211,6 +217,8 @@ public class RoloCommandServer implements Runnable {
             motorA.setName("MotorA");
             motorB.setupMotor(6, 12, 10);
             motorB.setName("MotorB");
+            servo180.setName("Head");
+            servo180.setPin(3); // there is no need to do this.. just for clarity
 
             ultraSonicSensor.setName("distance-sensor");
 
@@ -219,6 +227,8 @@ public class RoloCommandServer implements Runnable {
             ksession.insert(motorB);
             
             ksession.insert(ultraSonicSensor);
+            
+            ksession.insert(servo180);
 
             ksession.insert(new RoloTheRobot("rolo"));
 
@@ -237,7 +247,7 @@ public class RoloCommandServer implements Runnable {
                             notifications.write(">> Ultra Sonic Sensor Report: " + readDistance);
                             Thread.sleep(defaultLatency);
                         } catch (Exception ex) {
-                            java.util.logging.Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
+                            java.util.logging.Logger.getLogger(RoloCommandServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
                     }
@@ -257,38 +267,7 @@ public class RoloCommandServer implements Runnable {
                     Object object = readMessage(message);
                     ksession.insert(new RoloCommand(object.toString()));
                     ksession.fireAllRules();
-//                    String clientId = message.getStringProperty("producerId");
-//                    System.out.println("Message Recieved in Server = " + object);
-//                    System.out.println("Answer to = " + clientId);
-//                    if (object.equals("FORWARD")) {
-//                        System.out.println(">>> Moving Forward");
-//                        motorA.start(126, Motor.DIRECTION.FORWARD);
-//                        motorB.start(126, Motor.DIRECTION.FORWARD);
-//                    } else if (object.equals("BACKWARD")) {
-//                        System.out.println(">>> Moving Backward");
-//                        motorA.start(126, Motor.DIRECTION.BACKWARD);
-//                        motorB.start(126, Motor.DIRECTION.BACKWARD);
-//                    } else if (object.equals("STOP")) {
-//                        System.out.println(">>> STOP!");
-//                        motorA.stop();
-//                        motorB.stop();
-//                    } else if (object.equals("LEFT")) {
-//                        System.out.println(">>> Moving Left");
-//                        motorA.forward(126, 1500);
-//                    } else if (object.equals("RIGHT")) {
-//                        System.out.println(">>> Moving Right");
-//                        motorB.forward(126, 1500);
-//                    } else if (object.equals("ROTATE LEFT")) {
-//                        System.out.println(">>> Rotating Left");
-//                        motorA.forward(126, 1500);
-//                        motorB.backward(126, 1500);
-//                    } else if (object.equals("ROTATE RIGHT")) {
-//                        System.out.println(">>> Rotating Right");
-//                        motorA.backward(126, 1500);
-//                        motorB.forward(126, 1500);
-//                    }
-//                    ClientProducer producer = session.createProducer(clientId);
-//                    new HornetQSessionWriter(session, producer).write(object);
+
                     notifications.write(object);
                 }
             } catch (HornetQException e) {

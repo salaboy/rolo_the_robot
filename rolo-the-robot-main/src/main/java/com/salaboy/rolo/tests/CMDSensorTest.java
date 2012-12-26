@@ -4,10 +4,7 @@
  */
 package com.salaboy.rolo.tests;
 
-import com.salaboy.rolo.RoloMain;
-import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.api.DistanceSensor;
-import com.salaboy.rolo.api.Motor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
@@ -62,7 +59,7 @@ public class CMDSensorTest {
                     try {
                         Thread.sleep(defaultLatency);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CMDSensorTest.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }

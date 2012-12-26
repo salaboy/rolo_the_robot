@@ -5,13 +5,12 @@
 package com.salaboy.rolo.mock;
 
 import com.salaboy.rolo.api.DistanceSensor;
-import javax.enterprise.inject.Alternative;
 
 /**
  *
  * @author salaboy
  */
-@Alternative
+@Mock
 public class MockDistanceSensorImpl implements DistanceSensor {
 
     private String name;

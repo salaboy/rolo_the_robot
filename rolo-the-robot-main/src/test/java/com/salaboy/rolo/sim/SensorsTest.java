@@ -5,6 +5,7 @@
 package com.salaboy.rolo.sim;
 
 import com.salaboy.rolo.api.DistanceSensor;
+import com.salaboy.rolo.mock.Mock;
 import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.RoloTheRobot;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +51,7 @@ public class SensorsTest {
 
     }
     @Inject
+    @Mock
     private DistanceSensor distanceSensor;
 
     @Test

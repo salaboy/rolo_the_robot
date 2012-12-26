@@ -227,7 +227,7 @@ public class ArduinoFirmata {
      * (always on)
      */
     public void analogWrite(int pin, int value) {
-        pinMode(pin, PWM);
+        //pinMode(pin, PWM); -> This is breaking the Servo features.. this should not be here.. 
         serial.write(ANALOG_MESSAGE | (pin & 0x0F));
         serial.write(value & 0x7F);
         serial.write(value >> 7);

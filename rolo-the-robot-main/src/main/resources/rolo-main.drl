@@ -41,7 +41,7 @@ rule "Something too close - Robot Go Back"
         $r: RoloTheRobot()
         $m: Motor(  )
         UltraSonicSensor( $sensor: name )
-        $n: Number( doubleValue < 15) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+        $n: Number( doubleValue < 30) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
         
     then
        notifications.write(" (Executed >> ) Starting motor because distance avg is ="+$n); 
@@ -64,8 +64,6 @@ rule "Something too close - Robot Go Back"
                         
                    }
                 } );
-     
-       
 
 
 end
@@ -137,6 +135,25 @@ rule "Process Rotate Right"
          $mB.forward(126, 700);
          notifications.write(" (Executed >> ) Process Rotate Right Command");
 end
+
+rule "Process Rotate Head Left"
+    when
+        RoloCommand(cmd == "ROTATE HEAD LEFT")
+        $s180: Servo180(name == "Head", $currentDegree: currentDegree < 170)
+    then
+        $s180.rotate($currentDegree + 20);
+        notifications.write(" (Executed >> ) Process Head Rotate Left Command - Current Degree = "+ $s180.getCurrentDegree());
+end
+
+rule "Process Rotate Head Right"
+    when
+        RoloCommand(cmd == "ROTATE HEAD RIGHT")
+        $s180: Servo180(name == "Head", $currentDegree: currentDegree > 20)
+    then
+        $s180.rotate($currentDegree - 20);
+        notifications.write(" (Executed >> ) Process Head Rotate Right Command - Current Degree = "+ $s180.getCurrentDegree());
+end
+
 
 
 /*rule "Something is getting Closer" 
