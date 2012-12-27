@@ -74,3 +74,9 @@ To run the Rolo Server (inside the rolo-the-robot-main/target dir, to avoid usin
 java -jar rolo_the_robot-main-1.0-SNAPSHOT.jar -t 100 -ip 192.168.0.x 
 
 (-port 5445 - used by default) 
+
+For compiling and testing on a regular PC/Laptop
+
+RXTX-com on windows: http://rxtx.qbang.org/wiki/index.php/Installation_for_Windows
+
+RXTX-com on Mac: http://rxtx.qbang.org/wiki/index.php/Installation_on_MacOS_X
