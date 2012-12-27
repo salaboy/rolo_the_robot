@@ -30,15 +30,19 @@ Install
 
 On Raspberry Pi: (Running raspbian)
 
-Install Java, Maven and Git
+Install Java: sudo apt-get install openjdk-6-jdk
 
-sudo apt-get install maven2 git
+Install Maven and Git
 
-Clone sources:
+sudo apt-get install maven git // be careful to not install maven2 because we need maven 3.0.3+
+
+Clone sources using git:
 
 git clone https://github.com/Salaboy/rolo_the_robot.git
 
-from src/main/resources/lib
+We need to install extra libs which are not in maven repositories: 
+
+from rolo-the-robot-main/src/main/resources/lib
 
 mvn install:install-file  -Dfile=verletphysics.jar -DgroupId=toxiclibs -DartifactId=verletphysics -Dversion=1.0.0 -Dpackaging=jar
 
@@ -50,40 +54,6 @@ mvn install:install-file  -Dfile=hidapi-1.1.jar   -DgroupId=hid -DartifactId=hid
 
 mvn install:install-file  -Dfile=toxiclibscore.jar -DgroupId=toxiclibs -DartifactId=core -Dversion=1.0.0 -Dpackaging=jar
 
-Clone JAVAHIDAPI with hg. We need to do this because the HIDAPI needs to be compiled for the arm7 platform
-
-Install HG
-
-hg clone https://code.google.com/p/javahidapi/
-
-sudo apt-get install libusb-1.0-0-dev
-
-sudo apt-get install libudev-dev
-
-cd javahidapi/linux
-
-Modify Makefile to contain the correct pointers for openjdk6-armhf headers
-
-JAVA6HEADERS=-I/usr/lib/jvm/java-6-openjdk-armhf/include/ -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux
-cd linux/
-make
-
-Run (to compile):
-
-ant 
-
-Test: 
-Before modify   <jvmarg value="-Djava.library.path=${basedir}/linux"/> to   <jvmarg value="-Djava.library.path=${basedir}/mac"/>
-Also change classpath to build instead of bin
-ant run
-
-Plug an USB device and run
-
-ant run
-
-You should see the device being listed. The test is waiting for a PS3 controller
-
-ant dist -> to get a jar, we need to manually install it inside the maven repo, so it can be picked up by maven
 
 
 In order to work with RXTX in the PI we need to install the following package:
@@ -92,10 +62,15 @@ sudo apt-get install librxtx-java
 Create a simbolic link to the real RXTXcomm.jar from your default jvm:
 from: /usr/lib/jvm/java-6-openjdk-armhf/jre/lib/ext
 
-sudo ln -s ../../../../java-6-openjdk-common/jre/lib/ext/RXTXcomm.jar RXTXcomm.jar
+
+sudo ln -s /usr/share/java/RXTX-comm.jar RXTX-comm.jar
 
 Then it will look like this: RXTXcomm.jar -> ../../../../java-6-openjdk-common/jre/lib/ext/RXTXcomm.jar
 
-In order to use the system installed jars and native extensions we need to export:
 
-export MAVEN_OPTS="-Djava.ext.dirs=/usr/share/java/ -Djava.library.path=/usr/lib/jni/"
+
+To run the Rolo Server (inside the rolo-the-robot-main/target dir, to avoid using maven on the Pi)
+
+java -jar rolo_the_robot-main-1.0-SNAPSHOT.jar -t 100 -ip 192.168.0.x 
+
+(-port 5445 - used by default) 
