@@ -23,7 +23,6 @@ import com.salaboy.rolo.arduino.ArduinoMotor;
 import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.LightReport;
 import com.salaboy.rolo.model.RoloTheRobot;
-import com.salaboy.rolo.wedo.impl.WeDoBlockManager;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -115,7 +114,6 @@ public class RoloCommandServer implements Runnable {
 
         // add t option
         options.addOption("t", true, "sensors latency");
-        options.addOption("arch", true, "architecture");
         options.addOption("ip", true, "host");
         options.addOption("port", true, "port");
         CommandLineParser parser = new PosixParser();
@@ -127,13 +125,6 @@ public class RoloCommandServer implements Runnable {
         } else {
             System.out.println(" The Latency will be set to: " + sensorLatency);
             defaultLatency = new Long(sensorLatency);
-        }
-        String arch = cmd.getOptionValue("arch");
-        if (arch == null) {
-            System.out.println(" The Default Arch will be used: arm7");
-        } else {
-            System.out.println(" The Arch will be set to: " + arch);
-            WeDoBlockManager.arch = arch;
         }
 
         String ip = cmd.getOptionValue("ip");

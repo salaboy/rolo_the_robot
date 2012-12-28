@@ -46,6 +46,7 @@ public class RoloHornetQServerTest {
 
     @Before
     public void setUp() {
+        
         try {
             // Step 1. Create the Configuration, and set the properties accordingly
             Configuration configuration = new ConfigurationImpl();
