@@ -20,9 +20,11 @@ import com.salaboy.rolo.api.UltraSonicSensor;
 import com.salaboy.rolo.arduino.Arduino;
 import com.salaboy.rolo.arduino.ArduinoLightSensor;
 import com.salaboy.rolo.arduino.ArduinoMotor;
+import com.salaboy.rolo.arduino.ArduinoTouchSensor;
 import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.LightReport;
 import com.salaboy.rolo.model.RoloTheRobot;
+import com.salaboy.rolo.model.TouchReport;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -93,6 +95,9 @@ public class RoloCommandServer implements Runnable {
     @Inject
     @Arduino
     private ArduinoLightSensor lightSensor;
+    @Inject
+    @Arduino
+    private ArduinoTouchSensor touchSensor;
     private Configuration configuration;
     private boolean standalone = false;
     private String host;
@@ -220,6 +225,9 @@ public class RoloCommandServer implements Runnable {
 
             lightSensor.setName("light-master");
 
+            
+            touchSensor.setName("touch-master");
+            
             ultraSonicSensor.setName("distance-sensor");
 
             ksession.insert(motorA);
@@ -227,6 +235,8 @@ public class RoloCommandServer implements Runnable {
             ksession.insert(motorB);
             
             ksession.insert(motorC);
+            
+            ksession.insert(touchSensor);
 
             ksession.insert(ultraSonicSensor);
 
@@ -258,6 +268,8 @@ public class RoloCommandServer implements Runnable {
                 }
             };
             t.start();
+            
+          
 
             final Thread t2 = new Thread() {
                 @Override
@@ -277,6 +289,25 @@ public class RoloCommandServer implements Runnable {
                 }
             };
             t2.start();
+            
+            final Thread t3 = new Thread() {
+                @Override
+                public void run() {
+                    while (readSensors) {
+                        boolean pressed = touchSensor.readTouch();
+//                            ksession.getEntryPoint("touch-sensor").insert(new TouchReport(touchSensor.getName(), pressed));
+//                            ksession.fireAllRules();
+                        try {
+                            notifications.write("TOUCH_REPORT: " + pressed);
+                            Thread.sleep(defaultLatency*5);
+                        } catch (Exception ex) {
+                            java.util.logging.Logger.getLogger(RoloCommandServer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                }
+            };
+            t3.start();
         } catch (Exception e) {
             //throw new RuntimeException(" + Server Exception with class " + getClass() + " using port " + port, e);
             logger.error(" + Server Exception with class " + getClass() + " using port " + port + " E: " + e.getMessage());
