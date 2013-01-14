@@ -42,6 +42,11 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         return lightjTextField;
     }
 
+    public JTextField getTouchjTextField() {
+        return touchjTextField;
+    }
+
+    
     
     
     /**
@@ -80,6 +85,8 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         distancejTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lightjTextField = new javax.swing.JTextField();
+        touchjTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,7 +175,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(90, 90, 90)
                         .add(stopjButton)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .add(jPanel1Layout.createSequentialGroup()
                 .add(14, 14, 14)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -280,6 +287,8 @@ public class RoloUIJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Light:");
 
+        jLabel4.setText("Touch:");
+
         org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -293,6 +302,10 @@ public class RoloUIJFrame extends javax.swing.JFrame {
                 .add(jLabel3)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(21, 21, 21)
+                .add(jLabel4)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 76, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -303,8 +316,10 @@ public class RoloUIJFrame extends javax.swing.JFrame {
                     .add(jLabel2)
                     .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel3))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .add(jLabel3)
+                    .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel4))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -455,6 +470,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -469,6 +485,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField serverAddressjTextField;
     private javax.swing.JLabel statusjLabel;
     private javax.swing.JButton stopjButton;
+    private javax.swing.JTextField touchjTextField;
     // End of variables declaration//GEN-END:variables
     
 }

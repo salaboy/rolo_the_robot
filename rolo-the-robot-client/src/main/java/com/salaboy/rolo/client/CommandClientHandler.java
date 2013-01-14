@@ -47,6 +47,10 @@ public class CommandClientHandler {
             ui.getLightjTextField().setText(values[1]);
         }
         
+        if(values[0].equals("TOUCH_REPORT")){
+            ui.getTouchjTextField().setText(values[1]);
+        }
+        
         ui.getNotificationjTextArea().setText(">>> Client Handler Message Recieved = " + message + "\n"+ui.getNotificationjTextArea().getText());
     }
 }
