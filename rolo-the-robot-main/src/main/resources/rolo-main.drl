@@ -149,6 +149,8 @@ rule "Process Rotate Left"
        $mA: Motor( name == "MotorA") 
        $mB: Motor( name == "MotorB") 
     then
+          System.out.println("########LEFT############### -> MA: "+$mA);
+     System.out.println("########LEFT############### -> MB: "+$mB);
          $mA.forward(Integer.valueOf($value), 500);
          $mB.backward(Integer.valueOf($value), 500);
          notifications.write("Process-ROTATE_LEFT:"+$value);
@@ -160,7 +162,9 @@ rule "Process Rotate Right"
        $mA: Motor( name == "MotorA") 
        $mB: Motor( name == "MotorB") 
     then
-         $mA.backward(Integer.valueOf($value), 500);
+     System.out.println("########RIGHT############### -> MA: "+$mA);
+     System.out.println("########RIGHT############### -> MB: "+$mB);
+        $mA.backward(Integer.valueOf($value), 500);
          $mB.forward(Integer.valueOf($value), 500);
          notifications.write("Process-ROTATE_RIGHT:"+$value);
 end

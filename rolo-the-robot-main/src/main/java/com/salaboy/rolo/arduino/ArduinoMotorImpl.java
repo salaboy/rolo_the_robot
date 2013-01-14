@@ -32,7 +32,11 @@ public class ArduinoMotorImpl implements ArduinoMotor {
      * We need to setup the correct pins to use for each motor
      * In my configuration I have
      * MotorA:  s1: 7, s2: 11,  -> Enable (pwm) 5 
+     *   new:
      * MotorB:  s1: 6, s2: 12,  -> Enable (pwm)10
+     *   new: s1: 4, s2: 12 -> 10
+     * 
+     * Motor C(arm): s1: 2, s2: 13, -> Enable (pwm)6
      */
 
     @Override
@@ -139,4 +143,11 @@ public class ArduinoMotorImpl implements ArduinoMotor {
     public void setRunning(boolean running) {
         this.running = running;
     }
+
+    @Override
+    public String toString() {
+        return "ArduinoMotorImpl["+this.hashCode()+"]{" + "name=" + name + ", arduino=" + arduino + ", signal1=" + signal1 + ", signal2=" + signal2 + ", pwm=" + pwm + ", running=" + running + '}';
+    }
+    
+    
 }

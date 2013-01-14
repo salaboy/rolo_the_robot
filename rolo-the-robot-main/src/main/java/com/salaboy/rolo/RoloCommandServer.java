@@ -83,6 +83,9 @@ public class RoloCommandServer implements Runnable {
     private ArduinoMotor motorB;
     @Inject
     @Arduino
+    private ArduinoMotor motorC;
+    @Inject
+    @Arduino
     private UltraSonicSensor ultraSonicSensor;
     @Inject
     @Arduino
@@ -208,8 +211,10 @@ public class RoloCommandServer implements Runnable {
 
             motorA.setupMotor(7, 11, 5);
             motorA.setName("MotorA");
-            motorB.setupMotor(6, 12, 10);
+            motorB.setupMotor(4, 12, 10);
             motorB.setName("MotorB");
+            motorC.setupMotor(2, 13, 6);
+            motorC.setName("MotorC");
             servo180.setName("Head");
             servo180.setPin(3); // there is no need to do this.. just for clarity
 
@@ -220,6 +225,8 @@ public class RoloCommandServer implements Runnable {
             ksession.insert(motorA);
 
             ksession.insert(motorB);
+            
+            ksession.insert(motorC);
 
             ksession.insert(ultraSonicSensor);
 
