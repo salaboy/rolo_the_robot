@@ -71,3 +71,5 @@ RXTX-com on Mac: http://rxtx.qbang.org/wiki/index.php/Installation_on_MacOS_X
 Because I'm working with Arduino, I've installed the RXTX Libs from the Arduino IDE distribution into the 
 /Library/Java/Extensions/ directory on my Mac and everything is working fine with that. 
 
+But for Mac you will probably need: http://blog.iharder.net/2009/08/18/rxtx-java-6-and-librxtxserial-jnilib-on-intel-mac-os-x/
+

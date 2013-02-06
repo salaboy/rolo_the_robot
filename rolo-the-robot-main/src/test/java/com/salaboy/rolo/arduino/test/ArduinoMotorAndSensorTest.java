@@ -4,7 +4,6 @@
 // */
 //package com.salaboy.rolo.arduino.test;
 //
-//import com.salaboy.rolo.RoloMain;
 //import com.salaboy.rolo.api.LightSensor;
 //import com.salaboy.rolo.api.Motor;
 //import com.salaboy.rolo.api.UltraSonicSensor;
@@ -70,7 +69,7 @@
 //    
 //    
 //    @Test
-//    @Ignore
+//    
 //    public void motorAndSensorTest() throws InterruptedException {
 //        assertNotNull(motorA);
 //        motorA.setupMotor(7, 11, 5);
@@ -80,12 +79,12 @@
 //            @Override
 //            public void run() {
 //                while (true) {
-//                    int readDistance = ultraSonicSensor.readDistance();
+//                    int readDistance = lightSensor.readLight();
 //                    System.out.println("readDistance -> " + readDistance);
 //                    try {
 //                        Thread.sleep(100);
 //                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(ArduinoMotorAndSensorTest.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
 //
 //                }
@@ -97,14 +96,16 @@
 //            @Override
 //            public void run() {
 //                while (true) {
+//                    System.out.println("Start Motor");
 //                    motorA.start(126, Motor.DIRECTION.FORWARD);
 //
 //                    try {
 //                        Thread.sleep(2000);
+//                        System.out.println("Stop Motor");
 //                        motorA.stop();
 //                        Thread.sleep(2000);
 //                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(ArduinoMotorAndSensorTest.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
 //
 //                }
@@ -116,13 +117,13 @@
 //    }
 //
 //    @Test
-//    
+//    @Ignore
 //    public void motorAndSensorRulesTest() throws InterruptedException {
 //        final StatefulKnowledgeSession ksession = createSession();
 //
 //
 //        assertNotNull(motorA);
-//        motorA.setupMotor(7, 11, 5);
+//        motorA.setupMotor(7, 13, 5);
 //        motorA.setName("MotorA");
 //        ksession.insert(motorA);
 //        
@@ -140,7 +141,7 @@
 //                    try {
 //                        Thread.sleep(defaultLatency);
 //                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(RoloMain.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(ArduinoMotorAndSensorTest.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
 //
 //                }

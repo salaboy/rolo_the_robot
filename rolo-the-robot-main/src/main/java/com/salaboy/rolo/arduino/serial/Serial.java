@@ -123,8 +123,8 @@ public class Serial implements SerialPortEventListener {
         //parent.attach(this);
         this.parent = parent;
         // On OS X, make sure the lock folder needed by RXTX is present
-        //if (PApplet.platform == PConstants.MACOSX) {
         if (System.getProperty("os.name").toString().endsWith("Mac OS X")) {
+            
             File lockFolder = new File("/var/lock");
             if (!lockFolder.exists()
                     || !lockFolder.canRead()

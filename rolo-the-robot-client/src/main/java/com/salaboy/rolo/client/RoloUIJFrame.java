@@ -59,304 +59,315 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+  private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        backwardjButton = new javax.swing.JButton();
-        leftjButton = new javax.swing.JButton();
-        rightjButton = new javax.swing.JButton();
-        forwardjButton = new javax.swing.JButton();
-        rotateLeftjButton = new javax.swing.JButton();
-        rotateRightjButton = new javax.swing.JButton();
-        stopjButton = new javax.swing.JButton();
-        headRightjButton = new javax.swing.JButton();
-        headLeftjButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        notificationjTextArea = new javax.swing.JTextArea();
-        jPanel3 = new javax.swing.JPanel();
-        serverAddressjTextField = new javax.swing.JTextField();
-        connectjButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        statusjLabel = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        distancejTextField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        lightjTextField = new javax.swing.JTextField();
-        touchjTextField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+    jPanel1 = new javax.swing.JPanel();
+    backwardjButton = new javax.swing.JButton();
+    leftjButton = new javax.swing.JButton();
+    rightjButton = new javax.swing.JButton();
+    forwardjButton = new javax.swing.JButton();
+    rotateLeftjButton = new javax.swing.JButton();
+    rotateRightjButton = new javax.swing.JButton();
+    stopjButton = new javax.swing.JButton();
+    headRightjButton = new javax.swing.JButton();
+    headLeftjButton = new javax.swing.JButton();
+    jPanel2 = new javax.swing.JPanel();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    notificationjTextArea = new javax.swing.JTextArea();
+    jPanel3 = new javax.swing.JPanel();
+    serverAddressjTextField = new javax.swing.JTextField();
+    connectjButton = new javax.swing.JButton();
+    jLabel1 = new javax.swing.JLabel();
+    statusjLabel = new javax.swing.JLabel();
+    localjCheckBox = new javax.swing.JCheckBox();
+    jPanel4 = new javax.swing.JPanel();
+    jLabel2 = new javax.swing.JLabel();
+    distancejTextField = new javax.swing.JTextField();
+    jLabel3 = new javax.swing.JLabel();
+    lightjTextField = new javax.swing.JTextField();
+    touchjTextField = new javax.swing.JTextField();
+    jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Controls"));
+    jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Controls"));
 
-        backwardjButton.setText("Backward");
-        backwardjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backwardjButtonActionPerformed(evt);
-            }
-        });
+    backwardjButton.setText("Backward");
+    backwardjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backwardjButtonActionPerformed(evt);
+      }
+    });
 
-        leftjButton.setText("Left");
-        leftjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leftjButtonActionPerformed(evt);
-            }
-        });
+    leftjButton.setText("Left");
+    leftjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        leftjButtonActionPerformed(evt);
+      }
+    });
 
-        rightjButton.setText("Right");
-        rightjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rightjButtonActionPerformed(evt);
-            }
-        });
+    rightjButton.setText("Right");
+    rightjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rightjButtonActionPerformed(evt);
+      }
+    });
 
-        forwardjButton.setText("Forward");
-        forwardjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                forwardjButtonActionPerformed(evt);
-            }
-        });
+    forwardjButton.setText("Forward");
+    forwardjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        forwardjButtonActionPerformed(evt);
+      }
+    });
 
-        rotateLeftjButton.setText("Rotate Left");
-        rotateLeftjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rotateLeftjButtonActionPerformed(evt);
-            }
-        });
+    rotateLeftjButton.setText("Rotate Left");
+    rotateLeftjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rotateLeftjButtonActionPerformed(evt);
+      }
+    });
 
-        rotateRightjButton.setText("Rotate Right");
-        rotateRightjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rotateRightjButtonActionPerformed(evt);
-            }
-        });
+    rotateRightjButton.setText("Rotate Right");
+    rotateRightjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rotateRightjButtonActionPerformed(evt);
+      }
+    });
 
-        stopjButton.setText("Stop");
-        stopjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopjButtonActionPerformed(evt);
-            }
-        });
+    stopjButton.setText("Stop");
+    stopjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        stopjButtonActionPerformed(evt);
+      }
+    });
 
-        headRightjButton.setText("Head Right");
-        headRightjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                headRightjButtonActionPerformed(evt);
-            }
-        });
+    headRightjButton.setText("Head Right");
+    headRightjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        headRightjButtonActionPerformed(evt);
+      }
+    });
 
-        headLeftjButton.setText("Head Left");
-        headLeftjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                headLeftjButtonActionPerformed(evt);
-            }
-        });
+    headLeftjButton.setText("Head Left");
+    headLeftjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        headLeftjButtonActionPerformed(evt);
+      }
+    });
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(rotateLeftjButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(rotateRightjButton))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(80, 80, 80)
-                        .add(forwardjButton))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(71, 71, 71)
-                        .add(backwardjButton))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(90, 90, 90)
-                        .add(stopjButton)))
-                .addContainerGap())
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(14, 14, 14)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(leftjButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(rightjButton)
-                        .add(16, 16, 16))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .add(headLeftjButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(headRightjButton)
-                        .add(17, 17, 17))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(headLeftjButton)
-                    .add(headRightjButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 21, Short.MAX_VALUE)
-                .add(stopjButton)
-                .add(18, 18, 18)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rotateLeftjButton)
-                    .add(rotateRightjButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(forwardjButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(leftjButton)
-                    .add(rightjButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(backwardjButton)
-                .add(15, 15, 15))
-        );
+    org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+    jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(
+      jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel1Layout.createSequentialGroup()
+        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel1Layout.createSequentialGroup()
+            .addContainerGap()
+            .add(rotateLeftjButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(rotateRightjButton))
+          .add(jPanel1Layout.createSequentialGroup()
+            .add(80, 80, 80)
+            .add(forwardjButton))
+          .add(jPanel1Layout.createSequentialGroup()
+            .add(71, 71, 71)
+            .add(backwardjButton))
+          .add(jPanel1Layout.createSequentialGroup()
+            .add(90, 90, 90)
+            .add(stopjButton)))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      .add(jPanel1Layout.createSequentialGroup()
+        .add(14, 14, 14)
+        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel1Layout.createSequentialGroup()
+            .add(leftjButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(rightjButton)
+            .add(16, 16, 16))
+          .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+            .add(headLeftjButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(headRightjButton)
+            .add(17, 17, 17))))
+    );
+    jPanel1Layout.setVerticalGroup(
+      jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+        .addContainerGap()
+        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(headLeftjButton)
+          .add(headRightjButton))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 21, Short.MAX_VALUE)
+        .add(stopjButton)
+        .add(18, 18, 18)
+        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(rotateLeftjButton)
+          .add(rotateRightjButton))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(forwardjButton)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(leftjButton)
+          .add(rightjButton))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(backwardjButton)
+        .add(15, 15, 15))
+    );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Notifications"));
+    jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Notifications"));
 
-        notificationjTextArea.setColumns(20);
-        notificationjTextArea.setRows(5);
-        jScrollPane1.setViewportView(notificationjTextArea);
+    notificationjTextArea.setColumns(20);
+    notificationjTextArea.setRows(5);
+    jScrollPane1.setViewportView(notificationjTextArea);
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1)
-                .addContainerGap())
-        );
+    org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
+    jPanel2.setLayout(jPanel2Layout);
+    jPanel2Layout.setHorizontalGroup(
+      jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel2Layout.createSequentialGroup()
+        .addContainerGap()
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+        .addContainerGap())
+    );
+    jPanel2Layout.setVerticalGroup(
+      jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
+        .addContainerGap()
+        .add(jScrollPane1)
+        .addContainerGap())
+    );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
+    jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
 
-        serverAddressjTextField.setText("192.168.0.x");
+    serverAddressjTextField.setText("192.168.0.x");
 
-        connectjButton.setText("Connect");
-        connectjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectjButtonActionPerformed(evt);
-            }
-        });
+    connectjButton.setText("Connect");
+    connectjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        connectjButtonActionPerformed(evt);
+      }
+    });
 
-        jLabel1.setText("Status:");
+    jLabel1.setText("Status:");
 
-        statusjLabel.setBackground(new java.awt.Color(153, 0, 0));
-        statusjLabel.setForeground(new java.awt.Color(153, 0, 0));
-        statusjLabel.setText("Disconnected");
+    statusjLabel.setBackground(new java.awt.Color(153, 0, 0));
+    statusjLabel.setForeground(new java.awt.Color(153, 0, 0));
+    statusjLabel.setText("Disconnected");
 
-        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
-                .add(18, 18, 18)
-                .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(connectjButton)
-                .add(73, 73, 73)
-                .add(jLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(statusjLabel)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3Layout.createSequentialGroup()
-                .add(26, 26, 26)
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(connectjButton)
-                    .add(jLabel1)
-                    .add(statusjLabel))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+    localjCheckBox.setText("Local?");
+    localjCheckBox.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        localjCheckBoxActionPerformed(evt);
+      }
+    });
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Reports"));
+    org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+    jPanel3.setLayout(jPanel3Layout);
+    jPanel3Layout.setHorizontalGroup(
+      jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel3Layout.createSequentialGroup()
+        .add(18, 18, 18)
+        .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(connectjButton)
+        .add(18, 18, 18)
+        .add(localjCheckBox)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(jLabel1)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(statusjLabel)
+        .add(67, 67, 67))
+    );
+    jPanel3Layout.setVerticalGroup(
+      jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel3Layout.createSequentialGroup()
+        .add(26, 26, 26)
+        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(connectjButton)
+          .add(jLabel1)
+          .add(statusjLabel)
+          .add(localjCheckBox))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
 
-        jLabel2.setText("Distance:");
+    jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Reports"));
 
-        jLabel3.setText("Light:");
+    jLabel2.setText("Distance:");
 
-        jLabel4.setText("Touch:");
+    jLabel3.setText("Light:");
 
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel2)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(34, 34, 34)
-                .add(jLabel3)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(21, 21, 21)
-                .add(jLabel4)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 76, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .add(16, 16, 16)
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel2)
-                    .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel3)
-                    .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel4))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+    jLabel4.setText("Touch:");
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(19, 19, 19)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(22, 22, 22)
-                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(layout.createSequentialGroup()
-                        .add(16, 16, 16)
-                        .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .add(12, 12, 12))
-        );
+    org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
+    jPanel4.setLayout(jPanel4Layout);
+    jPanel4Layout.setHorizontalGroup(
+      jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel4Layout.createSequentialGroup()
+        .addContainerGap()
+        .add(jLabel2)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(34, 34, 34)
+        .add(jLabel3)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(21, 21, 21)
+        .add(jLabel4)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 76, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    jPanel4Layout.setVerticalGroup(
+      jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel4Layout.createSequentialGroup()
+        .add(16, 16, 16)
+        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(jLabel2)
+          .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabel3)
+          .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabel4))
+        .addContainerGap(21, Short.MAX_VALUE))
+    );
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+    org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(layout.createSequentialGroup()
+        .add(19, 19, 19)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .add(layout.createSequentialGroup()
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(18, 18, 18)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        .addContainerGap())
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+        .add(22, 22, 22)
+        .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createSequentialGroup()
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(layout.createSequentialGroup()
+            .add(16, 16, 16)
+            .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .add(12, 12, 12))
+    );
+
+    pack();
+  }// </editor-fold>//GEN-END:initComponents
 
     private void forwardjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardjButtonActionPerformed
         // TODO add your handling code here:
@@ -426,6 +437,15 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         roloClientConnector.write("ROTATE HEAD LEFT:10");
     }//GEN-LAST:event_headLeftjButtonActionPerformed
 
+  private void localjCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localjCheckBoxActionPerformed
+    // TODO add your handling code here:
+    if(localjCheckBox.isSelected()){
+      serverAddressjTextField.setText("127.0.0.1");
+    }else{
+      serverAddressjTextField.setText("192.168.0.x");
+    }
+  }//GEN-LAST:event_localjCheckBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -460,32 +480,33 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             }
         });
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backwardjButton;
-    private javax.swing.JButton connectjButton;
-    private javax.swing.JTextField distancejTextField;
-    private javax.swing.JButton forwardjButton;
-    private javax.swing.JButton headLeftjButton;
-    private javax.swing.JButton headRightjButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton leftjButton;
-    private javax.swing.JTextField lightjTextField;
-    private javax.swing.JTextArea notificationjTextArea;
-    private javax.swing.JButton rightjButton;
-    private javax.swing.JButton rotateLeftjButton;
-    private javax.swing.JButton rotateRightjButton;
-    private javax.swing.JTextField serverAddressjTextField;
-    private javax.swing.JLabel statusjLabel;
-    private javax.swing.JButton stopjButton;
-    private javax.swing.JTextField touchjTextField;
-    // End of variables declaration//GEN-END:variables
+  // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton backwardjButton;
+  private javax.swing.JButton connectjButton;
+  private javax.swing.JTextField distancejTextField;
+  private javax.swing.JButton forwardjButton;
+  private javax.swing.JButton headLeftjButton;
+  private javax.swing.JButton headRightjButton;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JLabel jLabel4;
+  private javax.swing.JPanel jPanel1;
+  private javax.swing.JPanel jPanel2;
+  private javax.swing.JPanel jPanel3;
+  private javax.swing.JPanel jPanel4;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JButton leftjButton;
+  private javax.swing.JTextField lightjTextField;
+  private javax.swing.JCheckBox localjCheckBox;
+  private javax.swing.JTextArea notificationjTextArea;
+  private javax.swing.JButton rightjButton;
+  private javax.swing.JButton rotateLeftjButton;
+  private javax.swing.JButton rotateRightjButton;
+  private javax.swing.JTextField serverAddressjTextField;
+  private javax.swing.JLabel statusjLabel;
+  private javax.swing.JButton stopjButton;
+  private javax.swing.JTextField touchjTextField;
+  // End of variables declaration//GEN-END:variables
     
 }
