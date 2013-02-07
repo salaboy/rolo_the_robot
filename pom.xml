@@ -15,6 +15,7 @@
     <module>rolo-the-robot-main</module>
     <module>rolo-the-robot-client</module>
     <module>rolo-the-robot-hardware-test</module>
+    <module>rolo-the-robot-hardware-test-ui</module>
   </modules>
 
   <properties>

@@ -302,11 +302,29 @@ public class HardwareTestCommandServer implements Runnable {
           String[] values = object.toString().split(":");
           if (values.length == 2) {
             System.out.println("Value 0 = " + values[0] + "Value 1 = " + values[1]);
-            if (values[0].equals("FORWARD")) {
+            if (values[0].equals("FORWARD-A")) {
               motorA.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
-            } else if (values[0].equals("BACKWARD")) {
+            } else if (values[0].equals("BACKWARD-A")) {
               motorA.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
-            } else if (values[0].equals("SENSOR-ON")) {
+            } else if (values[0].equals("FORWARD-B")) {
+              motorB.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
+            } else if (values[0].equals("BACKWARD-B")) {
+              motorB.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
+            } else if (values[0].equals("FORWARD-C")) {
+              motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
+            } else if (values[0].equals("BACKWARD-C")) {
+              motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
+            }if (values[0].equals("FORWARD-GLOBAL")) {
+              motorA.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
+              motorB.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
+              motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
+            } else if (values[0].equals("BACKWARD-GLOBAL")) {
+              motorA.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
+              motorB.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
+              motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
+            }
+          
+            else if (values[0].equals("SENSOR-ON")) {
               if (values[1].equals("ALL")) {
                 readDistanceSensors = true;
                 readLightSensors = true;
@@ -335,8 +353,16 @@ public class HardwareTestCommandServer implements Runnable {
           } else if (values.length == 1) {
 
             System.out.println("Value 0 = " + values[0]);
-            if (values[0].equals("STOP")) {
+            if (values[0].equals("STOP-A")) {
               motorA.stop();
+            }else if (values[0].equals("STOP-B")) {
+              motorB.stop();
+            }else if (values[0].equals("STOP-C")) {
+              motorC.stop();
+            }else if (values[0].equals("STOP-GLOBAL")) {
+              motorA.stop();
+              motorB.stop();
+              motorC.stop();
             }
 
           }
