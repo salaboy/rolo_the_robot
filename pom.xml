@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
   
 
-    <groupId>com.salaboy</groupId>
-    <artifactId>rolo_the_robot</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>Rolo The Robot</name>
-    <modules>
-        <module>rolo-the-robot-main</module>
-        <module>rolo-the-robot-client</module>
-    </modules>
+  <groupId>com.salaboy</groupId>
+  <artifactId>rolo_the_robot</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Rolo The Robot</name>
+  <modules>
+    <module>rolo-the-robot-api</module>
+    <module>rolo-the-robot-core</module>
+    <module>rolo-the-robot-main</module>
+    <module>rolo-the-robot-client</module>
+    <module>rolo-the-robot-hardware-test</module>
+  </modules>
 
-    <properties>
-        <jbpm.version>6.0.0-SNAPSHOT</jbpm.version>
-        <drools.version>6.0.0-SNAPSHOT</drools.version>
-        <hibernate.em.version>3.4.0.GA</hibernate.em.version>
-        <hibernate.core.version>3.3.2.GA</hibernate.core.version>
-        <seam.version>3.1.0.Final</seam.version>
-        <weld.version>1.1.8.Final</weld.version>
-        <hornetq.version>2.2.21.Final</hornetq.version>
-        <arquillian.version>1.0.1.Final</arquillian.version>
-        <arquillian_weld.version>1.0.0.CR3</arquillian_weld.version>
-    </properties>
+  <properties>
+    <jbpm.version>6.0.0-SNAPSHOT</jbpm.version>
+    <drools.version>6.0.0-SNAPSHOT</drools.version>
+    <hibernate.em.version>3.4.0.GA</hibernate.em.version>
+    <hibernate.core.version>3.3.2.GA</hibernate.core.version>
+    <seam.version>3.1.0.Final</seam.version>
+    <weld.version>1.1.8.Final</weld.version>
+    <hornetq.version>2.2.21.Final</hornetq.version>
+    <arquillian.version>1.0.1.Final</arquillian.version>
+    <arquillian_weld.version>1.0.0.CR3</arquillian_weld.version>
+  </properties>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jboss</id>
-            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
-    <repositories>
-        <repository>
-            <id>jboss</id>
-            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-        </repository>
-        <!--repository>
-            <id>cytoscape</id>
-            <url>http://cytoscape.wodaklab.org/nexus/content/repositories/releases/</url>
-        </repository-->
-    </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jboss</id>
+      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <repositories>
+    <repository>
+      <id>jboss</id>
+      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+    </repository>
+    <!--repository>
+        <id>cytoscape</id>
+        <url>http://cytoscape.wodaklab.org/nexus/content/repositories/releases/</url>
+    </repository-->
+  </repositories>
 
 </project>

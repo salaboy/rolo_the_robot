@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.salaboy.rolo;
+package com.salaboy.rolo.hardware.test;
 
 import com.salaboy.rolo.api.Motor;
 import com.salaboy.rolo.api.Servo180;
@@ -22,9 +22,7 @@ import com.salaboy.rolo.arduino.Arduino;
 import com.salaboy.rolo.arduino.ArduinoLightSensor;
 import com.salaboy.rolo.arduino.ArduinoMotor;
 import com.salaboy.rolo.arduino.ArduinoTouchSensor;
-import com.salaboy.rolo.model.DistanceReport;
-import com.salaboy.rolo.model.LightReport;
-import com.salaboy.rolo.model.RoloTheRobot;
+import com.salaboy.rolo.transport.HornetQSessionWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -56,20 +54,11 @@ import org.hornetq.core.server.HornetQServer;
 import org.hornetq.core.server.HornetQServers;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
-import org.kie.KieBaseConfiguration;
-import org.kie.KnowledgeBase;
-import org.kie.KnowledgeBaseFactory;
-import org.kie.builder.KnowledgeBuilder;
-import org.kie.builder.KnowledgeBuilderFactory;
-import org.kie.conf.EventProcessingOption;
-import org.kie.io.ResourceFactory;
-import org.kie.io.ResourceType;
-import org.kie.runtime.StatefulKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
- * java -jar rolo_the_robot-main-1.0-SNAPSHOT.jar -t 400 -ip 192.168.0.x -port 5445
+ * java -jar rolo_the_robot-hardware-test-1.0-SNAPSHOT.jar -t 100 -ip 192.168.0.x -port 5445
  */
 public class HardwareTestCommandServer implements Runnable {
 
@@ -191,17 +180,6 @@ public class HardwareTestCommandServer implements Runnable {
   }
 
   public void run() {
-    KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-    kbuilder.add(ResourceFactory.newClassPathResource("rolo-main.drl"), ResourceType.DRL);
-
-    if (kbuilder.getErrors().size() > 0) {
-      throw new IllegalStateException(kbuilder.getErrors().toString());
-    }
-    KieBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
-    kBaseConfig.setOption(EventProcessingOption.STREAM);
-    KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase(kBaseConfig);
-    kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-
 
     try {
       start();
