@@ -83,6 +83,10 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     lightjTextField = new javax.swing.JTextField();
     touchjTextField = new javax.swing.JTextField();
     jLabel4 = new javax.swing.JLabel();
+    distanceEnabledjCheckBox = new javax.swing.JCheckBox();
+    lightEnabledjCheckBox = new javax.swing.JCheckBox();
+    touchEnabledjCheckBox = new javax.swing.JCheckBox();
+    globalEnabledjCheckBox = new javax.swing.JCheckBox();
     jPanel5 = new javax.swing.JPanel();
     backwardCjButton1 = new javax.swing.JButton();
     forwardCjButton1 = new javax.swing.JButton();
@@ -98,6 +102,11 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     forwardGlobaljButton = new javax.swing.JButton();
     stopGlobaljButton = new javax.swing.JButton();
     motorGlobaljSlider = new javax.swing.JSlider();
+    jPanel8 = new javax.swing.JPanel();
+    backwardGlobaljButton1 = new javax.swing.JButton();
+    servo180rightjButton = new javax.swing.JButton();
+    servo180CenterjButton = new javax.swing.JButton();
+    servo180jSlider = new javax.swing.JSlider();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,14 +175,14 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
       jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel2Layout.createSequentialGroup()
         .addContainerGap()
-        .add(jScrollPane1)
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
         .addContainerGap())
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
         .addContainerGap()
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+        .add(jScrollPane1)
         .addContainerGap())
     );
 
@@ -206,28 +215,31 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     jPanel3Layout.setHorizontalGroup(
       jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel3Layout.createSequentialGroup()
-        .add(18, 18, 18)
-        .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(connectjButton)
-        .add(18, 18, 18)
-        .add(localjCheckBox)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .add(jLabel1)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-        .add(statusjLabel)
-        .add(67, 67, 67))
+        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel3Layout.createSequentialGroup()
+            .add(18, 18, 18)
+            .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(connectjButton)
+            .add(29, 29, 29)
+            .add(jLabel1)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(statusjLabel))
+          .add(jPanel3Layout.createSequentialGroup()
+            .add(304, 304, 304)
+            .add(localjCheckBox)))
+        .addContainerGap(30, Short.MAX_VALUE))
     );
     jPanel3Layout.setVerticalGroup(
       jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel3Layout.createSequentialGroup()
-        .add(26, 26, 26)
+        .add(localjCheckBox)
+        .add(3, 3, 3)
         .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(connectjButton)
           .add(jLabel1)
-          .add(statusjLabel)
-          .add(localjCheckBox))
+          .add(statusjLabel))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -239,29 +251,74 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
 
     jLabel4.setText("Touch:");
 
+    distanceEnabledjCheckBox.setText("Enabled?");
+    distanceEnabledjCheckBox.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        distanceEnabledjCheckBoxActionPerformed(evt);
+      }
+    });
+
+    lightEnabledjCheckBox.setText("Enabled?");
+    lightEnabledjCheckBox.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        lightEnabledjCheckBoxActionPerformed(evt);
+      }
+    });
+
+    touchEnabledjCheckBox.setText("Enabled?");
+    touchEnabledjCheckBox.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        touchEnabledjCheckBoxActionPerformed(evt);
+      }
+    });
+
+    globalEnabledjCheckBox.setText("Global Enabled?");
+    globalEnabledjCheckBox.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        globalEnabledjCheckBoxActionPerformed(evt);
+      }
+    });
+
     org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
     jPanel4.setLayout(jPanel4Layout);
     jPanel4Layout.setHorizontalGroup(
       jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel4Layout.createSequentialGroup()
         .addContainerGap()
-        .add(jLabel2)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-        .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .add(34, 34, 34)
-        .add(jLabel3)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .add(21, 21, 21)
-        .add(jLabel4)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-        .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 76, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(21, Short.MAX_VALUE))
+        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel4Layout.createSequentialGroup()
+            .add(jLabel2)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(distanceEnabledjCheckBox)
+              .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+              .add(jPanel4Layout.createSequentialGroup()
+                .add(43, 43, 43)
+                .add(lightEnabledjCheckBox))
+              .add(jPanel4Layout.createSequentialGroup()
+                .add(jLabel3)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jLabel4)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+              .add(touchEnabledjCheckBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 86, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+          .add(globalEnabledjCheckBox))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel4Layout.setVerticalGroup(
       jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel4Layout.createSequentialGroup()
-        .add(16, 16, 16)
+        .addContainerGap()
+        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(distanceEnabledjCheckBox)
+          .add(lightEnabledjCheckBox)
+          .add(touchEnabledjCheckBox))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jLabel2)
           .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -269,7 +326,9 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
           .add(jLabel3)
           .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabel4))
-        .addContainerGap(21, Short.MAX_VALUE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(globalEnabledjCheckBox)
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Motor C"));
@@ -309,7 +368,7 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         .add(stopCjButton1)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(motorCjSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(16, Short.MAX_VALUE))
+        .addContainerGap(26, Short.MAX_VALUE))
     );
     jPanel5Layout.setVerticalGroup(
       jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -431,44 +490,98 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         .add(0, 0, Short.MAX_VALUE))
     );
 
+    jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Servo180"));
+
+    backwardGlobaljButton1.setText("Left");
+    backwardGlobaljButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backwardGlobaljButton1ActionPerformed(evt);
+      }
+    });
+
+    servo180rightjButton.setText("Right");
+    servo180rightjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        servo180rightjButtonActionPerformed(evt);
+      }
+    });
+
+    servo180CenterjButton.setText("Center");
+    servo180CenterjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        servo180CenterjButtonActionPerformed(evt);
+      }
+    });
+
+    servo180jSlider.setMaximum(255);
+    servo180jSlider.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+      public void propertyChange(java.beans.PropertyChangeEvent evt) {
+        servo180jSliderPropertyChange(evt);
+      }
+    });
+
+    org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
+    jPanel8.setLayout(jPanel8Layout);
+    jPanel8Layout.setHorizontalGroup(
+      jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel8Layout.createSequentialGroup()
+        .add(servo180rightjButton)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(backwardGlobaljButton1)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(servo180CenterjButton)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(servo180jSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(30, 30, 30))
+    );
+    jPanel8Layout.setVerticalGroup(
+      jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(servo180rightjButton)
+          .add(servo180CenterjButton)
+          .add(backwardGlobaljButton1))
+        .add(214, 214, 214))
+      .add(jPanel8Layout.createSequentialGroup()
+        .add(servo180jSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(0, 0, Short.MAX_VALUE))
+    );
+
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+          .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+            .add(layout.createSequentialGroup()
+              .addContainerGap()
+              .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                  .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(layout.createSequentialGroup()
-            .add(19, 19, 19)
-            .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .add(layout.createSequentialGroup()
-            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-              .add(layout.createSequentialGroup()
-                .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                  .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-              .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 15, Short.MAX_VALUE)
-            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-              .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        .addContainerGap())
+          .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+      .add(layout.createSequentialGroup()
         .add(22, 22, 22)
-        .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
           .add(layout.createSequentialGroup()
-            .add(16, 16, 16)
             .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(12, 12, 12))
+            .add(27, 27, 27)
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .add(layout.createSequentialGroup()
+            .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -477,7 +590,9 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
             .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     jPanel4.getAccessibleContext().setAccessibleName("Sensors");
@@ -531,7 +646,7 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
 
   private void backwardCjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardCjButton1ActionPerformed
     // TODO add your handling code here:
-    roloClientConnector.write("BACKWARD-C:"+motorAjSlider.getValue());
+    roloClientConnector.write("BACKWARD-C:"+motorCjSlider.getValue());
     
   }//GEN-LAST:event_backwardCjButton1ActionPerformed
 
@@ -547,7 +662,7 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
 
   private void backwardBjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardBjButton2ActionPerformed
     // TODO add your handling code here:
-    roloClientConnector.write("BACKWARD-B:"+motorAjSlider.getValue());
+    roloClientConnector.write("BACKWARD-B:"+motorBjSlider.getValue());
   }//GEN-LAST:event_backwardBjButton2ActionPerformed
 
   private void forwardBjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardBjButton2ActionPerformed
@@ -562,7 +677,7 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
 
   private void backwardGlobaljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardGlobaljButtonActionPerformed
     // TODO add your handling code here:
-    roloClientConnector.write("BACKWARD-GLOBAL:"+motorAjSlider.getValue());
+    roloClientConnector.write("BACKWARD-GLOBAL:"+motorGlobaljSlider.getValue());
   }//GEN-LAST:event_backwardGlobaljButtonActionPerformed
 
   private void forwardGlobaljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardGlobaljButtonActionPerformed
@@ -574,6 +689,68 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     // TODO add your handling code here:
     roloClientConnector.write("STOP-GLOBAL:");
   }//GEN-LAST:event_stopGlobaljButtonActionPerformed
+
+  private void distanceEnabledjCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distanceEnabledjCheckBoxActionPerformed
+    // TODO add your handling code here:
+    if(distanceEnabledjCheckBox.isSelected()){
+      roloClientConnector.write("SENSOR-ON:DISTANCE");
+    }else{
+      roloClientConnector.write("SENSOR-OFF:DISTANCE");
+    }
+  }//GEN-LAST:event_distanceEnabledjCheckBoxActionPerformed
+
+  private void lightEnabledjCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lightEnabledjCheckBoxActionPerformed
+    // TODO add your handling code here:
+    if(lightEnabledjCheckBox.isSelected()){
+      roloClientConnector.write("SENSOR-ON:LIGHT");
+    }else{
+      roloClientConnector.write("SENSOR-OFF:LIGHT");
+    }
+  }//GEN-LAST:event_lightEnabledjCheckBoxActionPerformed
+
+  private void touchEnabledjCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_touchEnabledjCheckBoxActionPerformed
+    // TODO add your handling code here:
+    if(lightEnabledjCheckBox.isSelected()){
+      roloClientConnector.write("SENSOR-ON:TOUCH");
+    }else{
+      roloClientConnector.write("SENSOR-OFF:TOUCH");
+    }
+  }//GEN-LAST:event_touchEnabledjCheckBoxActionPerformed
+
+  private void globalEnabledjCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_globalEnabledjCheckBoxActionPerformed
+    // TODO add your handling code here:
+    if(lightEnabledjCheckBox.isSelected()){
+      roloClientConnector.write("SENSOR-ON:ALL");
+      lightEnabledjCheckBox.setSelected(true);
+      touchEnabledjCheckBox.setSelected(true);
+      distanceEnabledjCheckBox.setSelected(true);
+    }else{
+      roloClientConnector.write("SENSOR-OFF:ALL");
+      lightEnabledjCheckBox.setSelected(false);
+      touchEnabledjCheckBox.setSelected(false);
+      distanceEnabledjCheckBox.setSelected(false);
+    }
+  }//GEN-LAST:event_globalEnabledjCheckBoxActionPerformed
+
+  private void backwardGlobaljButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardGlobaljButton1ActionPerformed
+    // TODO add your handling code here:
+    roloClientConnector.write("SERVO180:LEFT");
+  }//GEN-LAST:event_backwardGlobaljButton1ActionPerformed
+
+  private void servo180rightjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180rightjButtonActionPerformed
+    // TODO add your handling code here:
+    roloClientConnector.write("SERVO180:RIGHT");
+  }//GEN-LAST:event_servo180rightjButtonActionPerformed
+
+  private void servo180CenterjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180CenterjButtonActionPerformed
+    // TODO add your handling code here:
+    roloClientConnector.write("SERVO180:CENTER");
+  }//GEN-LAST:event_servo180CenterjButtonActionPerformed
+
+  private void servo180jSliderPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_servo180jSliderPropertyChange
+    // TODO add your handling code here:
+    roloClientConnector.write("SERVO180:"+evt.getNewValue());
+  }//GEN-LAST:event_servo180jSliderPropertyChange
 
     /**
      * @param args the command line arguments
@@ -614,12 +791,15 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
   private javax.swing.JButton backwardBjButton2;
   private javax.swing.JButton backwardCjButton1;
   private javax.swing.JButton backwardGlobaljButton;
+  private javax.swing.JButton backwardGlobaljButton1;
   private javax.swing.JButton connectjButton;
+  private javax.swing.JCheckBox distanceEnabledjCheckBox;
   private javax.swing.JTextField distancejTextField;
   private javax.swing.JButton forwardAjButton;
   private javax.swing.JButton forwardBjButton2;
   private javax.swing.JButton forwardCjButton1;
   private javax.swing.JButton forwardGlobaljButton;
+  private javax.swing.JCheckBox globalEnabledjCheckBox;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
@@ -631,7 +811,9 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
   private javax.swing.JPanel jPanel5;
   private javax.swing.JPanel jPanel6;
   private javax.swing.JPanel jPanel7;
+  private javax.swing.JPanel jPanel8;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JCheckBox lightEnabledjCheckBox;
   private javax.swing.JTextField lightjTextField;
   private javax.swing.JCheckBox localjCheckBox;
   private javax.swing.JSlider motorAjSlider;
@@ -640,11 +822,15 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
   private javax.swing.JSlider motorGlobaljSlider;
   private javax.swing.JTextArea notificationjTextArea;
   private javax.swing.JTextField serverAddressjTextField;
+  private javax.swing.JButton servo180CenterjButton;
+  private javax.swing.JSlider servo180jSlider;
+  private javax.swing.JButton servo180rightjButton;
   private javax.swing.JLabel statusjLabel;
   private javax.swing.JButton stopAjButton;
   private javax.swing.JButton stopBjButton2;
   private javax.swing.JButton stopCjButton1;
   private javax.swing.JButton stopGlobaljButton;
+  private javax.swing.JCheckBox touchEnabledjCheckBox;
   private javax.swing.JTextField touchjTextField;
   // End of variables declaration//GEN-END:variables
     

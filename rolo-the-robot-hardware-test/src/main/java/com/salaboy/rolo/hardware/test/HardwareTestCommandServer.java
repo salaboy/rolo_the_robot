@@ -349,6 +349,17 @@ public class HardwareTestCommandServer implements Runnable {
                 readTouchSensors = false;
               }
 
+            }else if (values[0].equals("SERVO180")) {
+              if(values[1].equals("CENTER")){
+                servo180.rotate(90);
+              }else if(values[1].equals("LEFT")){
+                servo180.rotate(servo180.getCurrentDegree() - 10);
+              }else if(values[1].equals("RIGHT")){
+                servo180.rotate(servo180.getCurrentDegree() + 10);
+              }else{
+                servo180.rotate(Integer.parseInt(values[1]));
+              } 
+              
             }
           } else if (values.length == 1) {
 
