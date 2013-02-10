@@ -17,6 +17,7 @@ public class MockMotorImpl implements Motor {
 
     private String name;
     private boolean running = false;
+    private DIRECTION currentDirection = DIRECTION.NONE;
 
     public MockMotorImpl() {
     }
@@ -81,5 +82,10 @@ public class MockMotorImpl implements Motor {
     @Override
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    @Override
+    public DIRECTION getCurrentDirection() {
+        return currentDirection;
     }
 }
