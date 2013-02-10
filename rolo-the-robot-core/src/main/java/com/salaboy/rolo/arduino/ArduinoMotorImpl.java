@@ -24,6 +24,7 @@ public class ArduinoMotorImpl implements ArduinoMotor {
     private int signal2;
     private int pwm;
     private boolean running = false;
+    private DIRECTION currentDirection = DIRECTION.NONE;
     static long defaultLatency = 100;
 
     public ArduinoMotorImpl() {
@@ -71,7 +72,8 @@ public class ArduinoMotorImpl implements ArduinoMotor {
                 arduino.digitalWrite(localSignal1, ArduinoFirmata.HIGH);
                 arduino.digitalWrite(localSignal2, ArduinoFirmata.LOW);
                 arduino.digitalWrite(localPWM, speed);
-
+                running = true;
+                currentDirection = DIRECTION.FORWARD;
                 try {
                     Thread.sleep(millisec);
                 } catch (InterruptedException ex) {
@@ -80,6 +82,8 @@ public class ArduinoMotorImpl implements ArduinoMotor {
                 arduino.digitalWrite(localSignal1, ArduinoFirmata.LOW);
                 arduino.digitalWrite(localSignal2, ArduinoFirmata.LOW);
                 arduino.digitalWrite(localPWM, 0);
+                running = false;
+                currentDirection = DIRECTION.NONE;
 
             }
         }).start();
@@ -97,7 +101,8 @@ public class ArduinoMotorImpl implements ArduinoMotor {
                 arduino.digitalWrite(localSignal1, ArduinoFirmata.LOW);
                 arduino.digitalWrite(localSignal2, ArduinoFirmata.HIGH);
                 arduino.digitalWrite(localPWM, speed);
-               
+                running = true;
+                currentDirection = DIRECTION.BACKWARD;
                 try {
                     Thread.sleep(millisec);
                 } catch (InterruptedException ex) {
@@ -106,8 +111,9 @@ public class ArduinoMotorImpl implements ArduinoMotor {
                 arduino.digitalWrite(localSignal1, ArduinoFirmata.LOW);
                 arduino.digitalWrite(localSignal2, ArduinoFirmata.LOW);
                 arduino.digitalWrite(localPWM, 0);
-               
-                }
+                running = false;
+                currentDirection = DIRECTION.NONE;
+            }
         }).start();
         
     }
@@ -118,12 +124,14 @@ public class ArduinoMotorImpl implements ArduinoMotor {
         if (dir.equals(DIRECTION.FORWARD)) {
             arduino.digitalWrite(this.signal1, ArduinoFirmata.HIGH);
             arduino.digitalWrite(this.signal2, ArduinoFirmata.LOW);
+            currentDirection = DIRECTION.FORWARD;
         } else if (dir.equals(DIRECTION.BACKWARD)) {
             arduino.digitalWrite(this.signal1, ArduinoFirmata.LOW);
             arduino.digitalWrite(this.signal2, ArduinoFirmata.HIGH);
+            currentDirection = DIRECTION.BACKWARD;
         }
         arduino.digitalWrite(this.pwm, speed);
-        this.running = true;
+        this.running = true; 
     }
 
     @Override
@@ -131,6 +139,7 @@ public class ArduinoMotorImpl implements ArduinoMotor {
         arduino.digitalWrite(this.signal1, ArduinoFirmata.LOW);
         arduino.digitalWrite(this.signal2, ArduinoFirmata.LOW);
         arduino.digitalWrite(this.pwm, 0);
+        currentDirection = DIRECTION.NONE;
         this.running = false;
     }
 
@@ -139,11 +148,30 @@ public class ArduinoMotorImpl implements ArduinoMotor {
         return running;
     }
 
+    public DIRECTION getCurrentDirection() {
+      return currentDirection;
+    }
+ 
     @Override
     public void setRunning(boolean running) {
         this.running = running;
     }
 
+    @Override
+    public int getSignal1() {
+      return this.signal1;
+    }
+
+    @Override
+    public int getSignal2() {
+      return this.signal2;
+    }
+
+    @Override
+    public int getPwm() {
+      return this.pwm;
+    }
+    
     @Override
     public String toString() {
         return "ArduinoMotorImpl["+this.hashCode()+"]{" + "name=" + name + ", arduino=" + arduino + ", signal1=" + signal1 + ", signal2=" + signal2 + ", pwm=" + pwm + ", running=" + running + '}';

@@ -22,6 +22,9 @@ import com.salaboy.rolo.arduino.Arduino;
 import com.salaboy.rolo.arduino.ArduinoLightSensor;
 import com.salaboy.rolo.arduino.ArduinoMotor;
 import com.salaboy.rolo.arduino.ArduinoTouchSensor;
+import com.salaboy.rolo.arduino.behavior.RoloHead;
+import com.salaboy.rolo.arduino.behavior.RoloTractionMotorPair;
+import com.salaboy.rolo.arduino.behavior.RoloTractionMotorPair.ROTATION;
 import com.salaboy.rolo.transport.HornetQSessionWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -87,6 +90,11 @@ public class HardwareTestCommandServer implements Runnable {
   @Inject
   @Arduino
   private ArduinoTouchSensor touchSensor;
+  @Inject
+  @Arduino
+  private RoloTractionMotorPair tractionPair;
+  @Inject
+  private RoloHead roloHead;
   private Configuration configuration;
   private boolean standalone = false;
   private String host;
@@ -98,6 +106,9 @@ public class HardwareTestCommandServer implements Runnable {
   static boolean readDistanceSensors = false;
   static boolean readLightSensors = false;
   static boolean readTouchSensors = false;
+  static boolean monitorMotorA = false;
+  static boolean monitorMotorB = false;
+  static boolean monitorMotorC = false;
   static long defaultLatency = 100;
 
   public static void main(String[] args) throws Exception {
@@ -153,10 +164,6 @@ public class HardwareTestCommandServer implements Runnable {
     thread.start();
 
 
-
-
-
-
     Runtime.getRuntime().addShutdownHook(new Thread() {
       public void run() {
         System.out.println("Shutdown Hook is running !");
@@ -209,6 +216,13 @@ public class HardwareTestCommandServer implements Runnable {
 
       touchSensor.setName("touch-master");
       ultraSonicSensor.setName("distance-sensor");
+
+      roloHead.setDistanceSensor(ultraSonicSensor);
+      roloHead.setNeck(servo180);
+
+      tractionPair.setRightMotor(motorA);
+      tractionPair.setLeftMotor(motorB);
+
 
       final Thread t = new Thread() {
         @Override
@@ -286,6 +300,34 @@ public class HardwareTestCommandServer implements Runnable {
         }
       };
       t3.start();
+
+      final Thread t4 = new Thread() {
+        @Override
+        public void run() {
+          while (true) {
+            while (monitorMotorA) {
+              try {
+                notifications.write("MOTOR (A) REPORT: \n"
+                        + "\t Running: " + motorA.isRunning() +" \n"
+                        + "\t Direction: "+ motorA.getCurrentDirection());
+                Thread.sleep(defaultLatency * 5);
+              } catch (Exception ex) {
+                java.util.logging.Logger.getLogger(HardwareTestCommandServer.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            }
+            try {
+              Thread.sleep(defaultLatency * 5);
+            } catch (InterruptedException ex) {
+              java.util.logging.Logger.getLogger(HardwareTestCommandServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          }
+        }
+      };
+      t4.start();
+
+
+
+
     } catch (Exception e) {
       //throw new RuntimeException(" + Server Exception with class " + getClass() + " using port " + port, e);
       logger.error(" + Server Exception with class " + getClass() + " using port " + port + " E: " + e.getMessage());
@@ -296,9 +338,9 @@ public class HardwareTestCommandServer implements Runnable {
         ClientMessage message = consumer.receive();
         System.out.println("Message Recieved.... ");
         if (message != null) {
-          
+
           Object object = readMessage(message);
-          System.out.println("Message Parsed.... "+object);
+          System.out.println("Message Parsed.... " + object);
           String[] values = object.toString().split(":");
           if (values.length == 2) {
             System.out.println("Value 0 = " + values[0] + "Value 1 = " + values[1]);
@@ -314,7 +356,8 @@ public class HardwareTestCommandServer implements Runnable {
               motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
             } else if (values[0].equals("BACKWARD-C")) {
               motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
-            }if (values[0].equals("FORWARD-GLOBAL")) {
+            }
+            if (values[0].equals("FORWARD-GLOBAL")) {
               motorA.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
               motorB.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
               motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.FORWARD);
@@ -322,9 +365,40 @@ public class HardwareTestCommandServer implements Runnable {
               motorA.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
               motorB.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
               motorC.start(Integer.valueOf(values[1]), Motor.DIRECTION.BACKWARD);
+            } else if(values[0].equals("MONITOR-ON")) {
+                if (values[1].equals("MOTORA")) {
+                  monitorMotorA = true;
+                }
+            } else if(values[0].equals("MONITOR-OFF")) {
+                if (values[1].equals("MOTORA")) {
+                  monitorMotorA = false;
+                }
             }
-          
-            else if (values[0].equals("SENSOR-ON")) {
+            
+            
+            else if (values[0].equals("MULTI")) {
+              if (values[1].equals("ROTATE-LEFT")) {
+                tractionPair.rotate(ROTATION.LEFT);
+              } else if (values[1].equals("ROTATE-RIGHT")) {
+                tractionPair.rotate(ROTATION.RIGHT);
+              } else if (values[1].equals("SCAN")) {
+                roloHead.scan();
+              } else if (values[1].equals("SCAN-RESULTS")) {
+                Map<Integer, Integer> lastScan = roloHead.getLastScan();
+                String report = "";
+                for (Integer degree : lastScan.keySet()) {
+                  report += "Degree: " + degree + " - Distance: " + lastScan.get(degree) + "\n";
+                }
+                notifications.write("SCAN-RESULTS: \n\t" + report);
+
+              } else if (values[1].equals("SCAN-STOP")) {
+                roloHead.stopScanning();
+              } else if (values[1].equals("SCAN-CLEAN")) {
+                roloHead.cleanLastScan();
+              }
+
+
+            } else if (values[0].equals("SENSOR-ON")) {
               if (values[1].equals("ALL")) {
                 readDistanceSensors = true;
                 readLightSensors = true;
@@ -349,28 +423,28 @@ public class HardwareTestCommandServer implements Runnable {
                 readTouchSensors = false;
               }
 
-            }else if (values[0].equals("SERVO180")) {
-              if(values[1].equals("CENTER")){
+            } else if (values[0].equals("SERVO180")) {
+              if (values[1].equals("CENTER")) {
                 servo180.rotate(90);
-              }else if(values[1].equals("LEFT")){
+              } else if (values[1].equals("LEFT")) {
                 servo180.rotate(servo180.getCurrentDegree() - 10);
-              }else if(values[1].equals("RIGHT")){
+              } else if (values[1].equals("RIGHT")) {
                 servo180.rotate(servo180.getCurrentDegree() + 10);
-              }else{
+              } else {
                 servo180.rotate(Integer.parseInt(values[1]));
-              } 
-              
+              }
+
             }
           } else if (values.length == 1) {
 
             System.out.println("Value 0 = " + values[0]);
             if (values[0].equals("STOP-A")) {
               motorA.stop();
-            }else if (values[0].equals("STOP-B")) {
+            } else if (values[0].equals("STOP-B")) {
               motorB.stop();
-            }else if (values[0].equals("STOP-C")) {
+            } else if (values[0].equals("STOP-C")) {
               motorC.stop();
-            }else if (values[0].equals("STOP-GLOBAL")) {
+            } else if (values[0].equals("STOP-GLOBAL")) {
               motorA.stop();
               motorB.stop();
               motorC.stop();

@@ -26,8 +26,6 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         roloClientConnector = new RoloClientConnector("rolo-ui", new CommandClientHandler(this));
         
         
-        
-        
     }
 
     public JTextArea getNotificationjTextArea() {
@@ -67,9 +65,11 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     forwardAjButton = new javax.swing.JButton();
     stopAjButton = new javax.swing.JButton();
     motorAjSlider = new javax.swing.JSlider();
+    monitorMotorAjCheckBox = new javax.swing.JCheckBox();
     jPanel2 = new javax.swing.JPanel();
     jScrollPane1 = new javax.swing.JScrollPane();
     notificationjTextArea = new javax.swing.JTextArea();
+    jButton1 = new javax.swing.JButton();
     jPanel3 = new javax.swing.JPanel();
     serverAddressjTextField = new javax.swing.JTextField();
     connectjButton = new javax.swing.JButton();
@@ -103,10 +103,22 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     stopGlobaljButton = new javax.swing.JButton();
     motorGlobaljSlider = new javax.swing.JSlider();
     jPanel8 = new javax.swing.JPanel();
-    backwardGlobaljButton1 = new javax.swing.JButton();
-    servo180rightjButton = new javax.swing.JButton();
-    servo180CenterjButton = new javax.swing.JButton();
-    servo180jSlider = new javax.swing.JSlider();
+    multiRotateLjButton = new javax.swing.JButton();
+    multiRotateRjButton = new javax.swing.JButton();
+    multiLookupjButton = new javax.swing.JButton();
+    multiScanResultsjButton1 = new javax.swing.JButton();
+    multiScanStopjButton = new javax.swing.JButton();
+    multiScanCleanjButton = new javax.swing.JButton();
+    jLabel5 = new javax.swing.JLabel();
+    jLabel6 = new javax.swing.JLabel();
+    multiRotateLjButton1 = new javax.swing.JButton();
+    multiRotateLjButton2 = new javax.swing.JButton();
+    multiRotateLjButton3 = new javax.swing.JButton();
+    jPanel9 = new javax.swing.JPanel();
+    backwardGlobaljButton2 = new javax.swing.JButton();
+    servo180rightjButton1 = new javax.swing.JButton();
+    servo180CenterjButton1 = new javax.swing.JButton();
+    servo180jSlider1 = new javax.swing.JSlider();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +147,13 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
 
     motorAjSlider.setMaximum(255);
 
+    monitorMotorAjCheckBox.setText("Monitor");
+    monitorMotorAjCheckBox.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        monitorMotorAjCheckBoxActionPerformed(evt);
+      }
+    });
+
     org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -147,6 +166,8 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         .add(stopAjButton)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(motorAjSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(monitorMotorAjCheckBox)
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel1Layout.setVerticalGroup(
@@ -159,7 +180,9 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
           .add(backwardAjButton))
         .add(214, 214, 214))
       .add(jPanel1Layout.createSequentialGroup()
-        .add(motorAjSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+          .add(monitorMotorAjCheckBox)
+          .add(motorAjSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .add(0, 0, Short.MAX_VALUE))
     );
 
@@ -169,21 +192,32 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     notificationjTextArea.setRows(5);
     jScrollPane1.setViewportView(notificationjTextArea);
 
+    jButton1.setText("Clear");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1ActionPerformed(evt);
+      }
+    });
+
     org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
       jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel2Layout.createSequentialGroup()
         .addContainerGap()
-        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jScrollPane1)
+          .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
+            .add(0, 0, Short.MAX_VALUE)
+            .add(jButton1)))
         .addContainerGap())
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-        .addContainerGap()
-        .add(jScrollPane1)
-        .addContainerGap())
+      .add(jPanel2Layout.createSequentialGroup()
+        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 361, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(jButton1))
     );
 
     jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
@@ -215,32 +249,26 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     jPanel3Layout.setHorizontalGroup(
       jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel3Layout.createSequentialGroup()
-        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jPanel3Layout.createSequentialGroup()
-            .add(18, 18, 18)
-            .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(connectjButton)
-            .add(29, 29, 29)
-            .add(jLabel1)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(statusjLabel))
-          .add(jPanel3Layout.createSequentialGroup()
-            .add(304, 304, 304)
-            .add(localjCheckBox)))
-        .addContainerGap(30, Short.MAX_VALUE))
+        .addContainerGap()
+        .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(connectjButton)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(localjCheckBox)
+        .add(18, 18, 18)
+        .add(jLabel1)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(statusjLabel)
+        .addContainerGap(64, Short.MAX_VALUE))
     );
     jPanel3Layout.setVerticalGroup(
       jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(jPanel3Layout.createSequentialGroup()
+      .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
         .add(localjCheckBox)
-        .add(3, 3, 3)
-        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(connectjButton)
-          .add(jLabel1)
-          .add(statusjLabel))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(jLabel1)
+        .add(statusjLabel)
+        .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .add(connectjButton))
     );
 
     jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Sensors"));
@@ -286,48 +314,50 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
       .add(jPanel4Layout.createSequentialGroup()
         .addContainerGap()
         .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+            .add(jPanel4Layout.createSequentialGroup()
+              .add(jLabel2)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+              .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+              .add(distanceEnabledjCheckBox))
+            .add(jPanel4Layout.createSequentialGroup()
+              .add(jLabel3)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+              .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+              .add(lightEnabledjCheckBox))
+            .add(jPanel4Layout.createSequentialGroup()
+              .add(jLabel4)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+              .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 86, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+              .add(touchEnabledjCheckBox)))
           .add(jPanel4Layout.createSequentialGroup()
-            .add(jLabel2)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-              .add(distanceEnabledjCheckBox)
-              .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 85, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-              .add(jPanel4Layout.createSequentialGroup()
-                .add(43, 43, 43)
-                .add(lightEnabledjCheckBox))
-              .add(jPanel4Layout.createSequentialGroup()
-                .add(jLabel3)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 87, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jLabel4)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-              .add(touchEnabledjCheckBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 86, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-          .add(globalEnabledjCheckBox))
+            .add(162, 162, 162)
+            .add(globalEnabledjCheckBox)))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel4Layout.setVerticalGroup(
       jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel4Layout.createSequentialGroup()
         .addContainerGap()
+        .add(globalEnabledjCheckBox)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(distanceEnabledjCheckBox)
-          .add(lightEnabledjCheckBox)
-          .add(touchEnabledjCheckBox))
+          .add(jLabel2)
+          .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jLabel2)
-          .add(distancejTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(lightjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabel3)
-          .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jLabel4))
+          .add(lightEnabledjCheckBox))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(globalEnabledjCheckBox)
+        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(touchjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabel4)
+          .add(touchEnabledjCheckBox))
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -368,7 +398,7 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         .add(stopCjButton1)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(motorCjSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(26, Short.MAX_VALUE))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel5Layout.setVerticalGroup(
       jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -421,7 +451,7 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         .add(stopBjButton2)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(motorBjSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(16, Short.MAX_VALUE))
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel6Layout.setVerticalGroup(
       jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -490,33 +520,72 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         .add(0, 0, Short.MAX_VALUE))
     );
 
-    jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Servo180"));
+    jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Multi Actions"));
 
-    backwardGlobaljButton1.setText("Left");
-    backwardGlobaljButton1.addActionListener(new java.awt.event.ActionListener() {
+    multiRotateLjButton.setText("Rotate L");
+    multiRotateLjButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        backwardGlobaljButton1ActionPerformed(evt);
+        multiRotateLjButtonActionPerformed(evt);
       }
     });
 
-    servo180rightjButton.setText("Right");
-    servo180rightjButton.addActionListener(new java.awt.event.ActionListener() {
+    multiRotateRjButton.setText("Rotate R");
+    multiRotateRjButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        servo180rightjButtonActionPerformed(evt);
+        multiRotateRjButtonActionPerformed(evt);
       }
     });
 
-    servo180CenterjButton.setText("Center");
-    servo180CenterjButton.addActionListener(new java.awt.event.ActionListener() {
+    multiLookupjButton.setText("Scan");
+    multiLookupjButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        servo180CenterjButtonActionPerformed(evt);
+        multiLookupjButtonActionPerformed(evt);
       }
     });
 
-    servo180jSlider.setMaximum(255);
-    servo180jSlider.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-      public void propertyChange(java.beans.PropertyChangeEvent evt) {
-        servo180jSliderPropertyChange(evt);
+    multiScanResultsjButton1.setText("Scan Results");
+    multiScanResultsjButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        multiScanResultsjButton1ActionPerformed(evt);
+      }
+    });
+
+    multiScanStopjButton.setText("Scan Stop");
+    multiScanStopjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        multiScanStopjButtonActionPerformed(evt);
+      }
+    });
+
+    multiScanCleanjButton.setText("Scan Clean");
+    multiScanCleanjButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        multiScanCleanjButtonActionPerformed(evt);
+      }
+    });
+
+    jLabel5.setText("Traction:");
+
+    jLabel6.setText("Head:");
+
+    multiRotateLjButton1.setText("B");
+    multiRotateLjButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        multiRotateLjButton1ActionPerformed(evt);
+      }
+    });
+
+    multiRotateLjButton2.setText("F");
+    multiRotateLjButton2.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        multiRotateLjButton2ActionPerformed(evt);
+      }
+    });
+
+    multiRotateLjButton3.setText("180");
+    multiRotateLjButton3.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        multiRotateLjButton3ActionPerformed(evt);
       }
     });
 
@@ -525,26 +594,119 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     jPanel8Layout.setHorizontalGroup(
       jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(jPanel8Layout.createSequentialGroup()
-        .add(servo180rightjButton)
+        .add(15, 15, 15)
+        .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+          .add(jLabel5)
+          .add(jLabel6))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(backwardGlobaljButton1)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(servo180CenterjButton)
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .add(servo180jSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        .add(30, 30, 30))
+        .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel8Layout.createSequentialGroup()
+            .add(multiLookupjButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(multiScanResultsjButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(multiScanStopjButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(multiScanCleanjButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(0, 0, Short.MAX_VALUE))
+          .add(jPanel8Layout.createSequentialGroup()
+            .add(multiRotateRjButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(multiRotateLjButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(multiRotateLjButton2)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(multiRotateLjButton1)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(multiRotateLjButton3)))
+        .addContainerGap())
     );
     jPanel8Layout.setVerticalGroup(
       jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(servo180rightjButton)
-          .add(servo180CenterjButton)
-          .add(backwardGlobaljButton1))
+          .add(multiRotateRjButton)
+          .add(multiRotateLjButton)
+          .add(jLabel5)
+          .add(multiRotateLjButton1)
+          .add(multiRotateLjButton2)
+          .add(multiRotateLjButton3))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(multiLookupjButton)
+          .add(multiScanResultsjButton1)
+          .add(multiScanStopjButton)
+          .add(multiScanCleanjButton)
+          .add(jLabel6))
+        .add(179, 179, 179))
+    );
+
+    jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Servo180"));
+
+    backwardGlobaljButton2.setText("Left");
+    backwardGlobaljButton2.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backwardGlobaljButton2ActionPerformed(evt);
+      }
+    });
+
+    servo180rightjButton1.setText("Right");
+    servo180rightjButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        servo180rightjButton1ActionPerformed(evt);
+      }
+    });
+
+    servo180CenterjButton1.setText("Center");
+    servo180CenterjButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        servo180CenterjButton1ActionPerformed(evt);
+      }
+    });
+
+    servo180jSlider1.setMaximum(180);
+    servo180jSlider1.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseReleased(java.awt.event.MouseEvent evt) {
+        servo180jSlider1MouseReleased(evt);
+      }
+    });
+    servo180jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+      public void stateChanged(javax.swing.event.ChangeEvent evt) {
+        servo180jSlider1StateChanged(evt);
+      }
+    });
+    servo180jSlider1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+      public void propertyChange(java.beans.PropertyChangeEvent evt) {
+        servo180jSlider1PropertyChange(evt);
+      }
+    });
+
+    org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
+    jPanel9.setLayout(jPanel9Layout);
+    jPanel9Layout.setHorizontalGroup(
+      jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(jPanel9Layout.createSequentialGroup()
+        .add(servo180rightjButton1)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(backwardGlobaljButton2)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(servo180CenterjButton1)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(servo180jSlider1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    jPanel9Layout.setVerticalGroup(
+      jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel9Layout.createSequentialGroup()
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(servo180rightjButton1)
+          .add(servo180CenterjButton1)
+          .add(backwardGlobaljButton2))
         .add(214, 214, 214))
-      .add(jPanel8Layout.createSequentialGroup()
-        .add(servo180jSlider, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+      .add(jPanel9Layout.createSequentialGroup()
+        .add(servo180jSlider1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         .add(0, 0, Short.MAX_VALUE))
     );
 
@@ -553,23 +715,24 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-          .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-            .add(layout.createSequentialGroup()
-              .addContainerGap()
-              .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                  .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .addContainerGap()
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(layout.createSequentialGroup()
+            .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(0, 233, Short.MAX_VALUE))
+          .add(layout.createSequentialGroup()
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+              .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+              .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .add(0, 0, 0))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -577,31 +740,31 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
         .add(22, 22, 22)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
           .add(layout.createSequentialGroup()
-            .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(27, 27, 27)
-            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .add(layout.createSequentialGroup()
             .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(16, 16, 16)
             .add(jPanel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
             .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(16, 16, 16)
+            .add(jPanel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 62, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(17, Short.MAX_VALUE))
     );
-
-    jPanel4.getAccessibleContext().setAccessibleName("Sensors");
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
     private void forwardAjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardAjButtonActionPerformed
         roloClientConnector.write("FORWARD-A:"+motorAjSlider.getValue());
+        
     }//GEN-LAST:event_forwardAjButtonActionPerformed
 
     private void backwardAjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardAjButtonActionPerformed
@@ -732,25 +895,85 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
     }
   }//GEN-LAST:event_globalEnabledjCheckBoxActionPerformed
 
-  private void backwardGlobaljButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardGlobaljButton1ActionPerformed
+  private void multiRotateLjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiRotateLjButtonActionPerformed
     // TODO add your handling code here:
-    roloClientConnector.write("SERVO180:LEFT");
-  }//GEN-LAST:event_backwardGlobaljButton1ActionPerformed
+    roloClientConnector.write("MULTI:ROTATE-LEFT");
+  }//GEN-LAST:event_multiRotateLjButtonActionPerformed
 
-  private void servo180rightjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180rightjButtonActionPerformed
+  private void multiRotateRjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiRotateRjButtonActionPerformed
     // TODO add your handling code here:
-    roloClientConnector.write("SERVO180:RIGHT");
-  }//GEN-LAST:event_servo180rightjButtonActionPerformed
+    roloClientConnector.write("MULTI:ROTATE-RIGHT");
+  }//GEN-LAST:event_multiRotateRjButtonActionPerformed
 
-  private void servo180CenterjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180CenterjButtonActionPerformed
+  private void backwardGlobaljButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardGlobaljButton2ActionPerformed
     // TODO add your handling code here:
-    roloClientConnector.write("SERVO180:CENTER");
-  }//GEN-LAST:event_servo180CenterjButtonActionPerformed
+  }//GEN-LAST:event_backwardGlobaljButton2ActionPerformed
 
-  private void servo180jSliderPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_servo180jSliderPropertyChange
+  private void servo180rightjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180rightjButton1ActionPerformed
     // TODO add your handling code here:
-    roloClientConnector.write("SERVO180:"+evt.getNewValue());
-  }//GEN-LAST:event_servo180jSliderPropertyChange
+  }//GEN-LAST:event_servo180rightjButton1ActionPerformed
+
+  private void servo180CenterjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180CenterjButton1ActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_servo180CenterjButton1ActionPerformed
+
+  private void servo180jSlider1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_servo180jSlider1MouseReleased
+    // TODO add your handling code here:
+  }//GEN-LAST:event_servo180jSlider1MouseReleased
+
+  private void servo180jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_servo180jSlider1StateChanged
+    // TODO add your handling code here:
+  }//GEN-LAST:event_servo180jSlider1StateChanged
+
+  private void servo180jSlider1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_servo180jSlider1PropertyChange
+    // TODO add your handling code here:
+  }//GEN-LAST:event_servo180jSlider1PropertyChange
+
+  private void multiLookupjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiLookupjButtonActionPerformed
+    // TODO add your handling code here:
+    roloClientConnector.write("MULTI:SCAN");
+  }//GEN-LAST:event_multiLookupjButtonActionPerformed
+
+  private void multiScanResultsjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiScanResultsjButton1ActionPerformed
+    // TODO add your handling code here:
+    roloClientConnector.write("MULTI:SCAN-RESULTS");
+  }//GEN-LAST:event_multiScanResultsjButton1ActionPerformed
+
+  private void multiScanStopjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiScanStopjButtonActionPerformed
+    // TODO add your handling code here:
+    roloClientConnector.write("MULTI:SCAN-STOP");
+  }//GEN-LAST:event_multiScanStopjButtonActionPerformed
+
+  private void multiScanCleanjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiScanCleanjButtonActionPerformed
+    // TODO add your handling code here:
+    roloClientConnector.write("MULTI:SCAN-CLEAN");
+  }//GEN-LAST:event_multiScanCleanjButtonActionPerformed
+
+  private void monitorMotorAjCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorMotorAjCheckBoxActionPerformed
+    // TODO add your handling code here:
+    if(monitorMotorAjCheckBox.isSelected()){
+      roloClientConnector.write("MONITOR-ON:MOTORA");
+    }else {
+      roloClientConnector.write("MONITOR-OFF:MOTORA");
+    }
+  }//GEN-LAST:event_monitorMotorAjCheckBoxActionPerformed
+
+  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    // TODO add your handling code here:
+    notificationjTextArea.setText("");
+  }//GEN-LAST:event_jButton1ActionPerformed
+
+  private void multiRotateLjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiRotateLjButton1ActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_multiRotateLjButton1ActionPerformed
+
+  private void multiRotateLjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiRotateLjButton2ActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_multiRotateLjButton2ActionPerformed
+
+  private void multiRotateLjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiRotateLjButton3ActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_multiRotateLjButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -791,7 +1014,7 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
   private javax.swing.JButton backwardBjButton2;
   private javax.swing.JButton backwardCjButton1;
   private javax.swing.JButton backwardGlobaljButton;
-  private javax.swing.JButton backwardGlobaljButton1;
+  private javax.swing.JButton backwardGlobaljButton2;
   private javax.swing.JButton connectjButton;
   private javax.swing.JCheckBox distanceEnabledjCheckBox;
   private javax.swing.JTextField distancejTextField;
@@ -800,10 +1023,13 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
   private javax.swing.JButton forwardCjButton1;
   private javax.swing.JButton forwardGlobaljButton;
   private javax.swing.JCheckBox globalEnabledjCheckBox;
+  private javax.swing.JButton jButton1;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
+  private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
   private javax.swing.JPanel jPanel3;
@@ -812,19 +1038,30 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
   private javax.swing.JPanel jPanel6;
   private javax.swing.JPanel jPanel7;
   private javax.swing.JPanel jPanel8;
+  private javax.swing.JPanel jPanel9;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JCheckBox lightEnabledjCheckBox;
   private javax.swing.JTextField lightjTextField;
   private javax.swing.JCheckBox localjCheckBox;
+  private javax.swing.JCheckBox monitorMotorAjCheckBox;
   private javax.swing.JSlider motorAjSlider;
   private javax.swing.JSlider motorBjSlider;
   private javax.swing.JSlider motorCjSlider;
   private javax.swing.JSlider motorGlobaljSlider;
+  private javax.swing.JButton multiLookupjButton;
+  private javax.swing.JButton multiRotateLjButton;
+  private javax.swing.JButton multiRotateLjButton1;
+  private javax.swing.JButton multiRotateLjButton2;
+  private javax.swing.JButton multiRotateLjButton3;
+  private javax.swing.JButton multiRotateRjButton;
+  private javax.swing.JButton multiScanCleanjButton;
+  private javax.swing.JButton multiScanResultsjButton1;
+  private javax.swing.JButton multiScanStopjButton;
   private javax.swing.JTextArea notificationjTextArea;
   private javax.swing.JTextField serverAddressjTextField;
-  private javax.swing.JButton servo180CenterjButton;
-  private javax.swing.JSlider servo180jSlider;
-  private javax.swing.JButton servo180rightjButton;
+  private javax.swing.JButton servo180CenterjButton1;
+  private javax.swing.JSlider servo180jSlider1;
+  private javax.swing.JButton servo180rightjButton1;
   private javax.swing.JLabel statusjLabel;
   private javax.swing.JButton stopAjButton;
   private javax.swing.JButton stopBjButton2;

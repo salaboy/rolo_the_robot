@@ -11,7 +11,7 @@ package com.salaboy.rolo.api;
 public interface Motor {
 
     public enum DIRECTION {
-        FORWARD, BACKWARD
+        FORWARD, BACKWARD, NONE
     };
 
     void setName(String string);
@@ -29,4 +29,6 @@ public interface Motor {
     boolean isRunning();
     
     void setRunning(boolean running);
+    
+    DIRECTION getCurrentDirection();
 }

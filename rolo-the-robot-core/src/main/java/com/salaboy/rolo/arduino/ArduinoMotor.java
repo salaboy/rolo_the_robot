@@ -12,4 +12,7 @@ import com.salaboy.rolo.api.Motor;
  */
 public interface ArduinoMotor extends Motor{
     void setupMotor(int signal1, int signal2, int pwm);
+    int getSignal1();
+    int getSignal2();
+    int getPwm();
 }
