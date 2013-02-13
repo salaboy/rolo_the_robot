@@ -906,19 +906,30 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame {
   }//GEN-LAST:event_multiRotateRjButtonActionPerformed
 
   private void backwardGlobaljButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardGlobaljButton2ActionPerformed
-    // TODO add your handling code here:
+      // TODO add your handling code here:
+    roloClientConnector.write("SERVO180:LEFT");
   }//GEN-LAST:event_backwardGlobaljButton2ActionPerformed
 
   private void servo180rightjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180rightjButton1ActionPerformed
     // TODO add your handling code here:
+    roloClientConnector.write("SERVO180:RIGHT");
   }//GEN-LAST:event_servo180rightjButton1ActionPerformed
 
   private void servo180CenterjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servo180CenterjButton1ActionPerformed
     // TODO add your handling code here:
+    roloClientConnector.write("SERVO180:CENTER");
   }//GEN-LAST:event_servo180CenterjButton1ActionPerformed
 
   private void servo180jSlider1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_servo180jSlider1MouseReleased
     // TODO add your handling code here:
+    int angle = evt.getX();
+    if(angle < 0){
+      angle = 1;
+    }if(angle > 180){
+      angle = 179;
+    }
+    
+    roloClientConnector.write("SERVO180:"+angle);
   }//GEN-LAST:event_servo180jSlider1MouseReleased
 
   private void servo180jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_servo180jSlider1StateChanged

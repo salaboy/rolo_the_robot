@@ -427,9 +427,17 @@ public class HardwareTestCommandServer implements Runnable {
               if (values[1].equals("CENTER")) {
                 servo180.rotate(90);
               } else if (values[1].equals("LEFT")) {
-                servo180.rotate(servo180.getCurrentDegree() - 10);
+                int angle = servo180.getCurrentDegree() - 10;
+                if(angle < 0){
+                  angle = 1;
+                }
+                servo180.rotate(angle);
               } else if (values[1].equals("RIGHT")) {
-                servo180.rotate(servo180.getCurrentDegree() + 10);
+                int angle = servo180.getCurrentDegree() + 10;
+                if(angle > 180){
+                  angle = 179;
+                }
+                servo180.rotate(angle);
               } else {
                 servo180.rotate(Integer.parseInt(values[1]));
               }

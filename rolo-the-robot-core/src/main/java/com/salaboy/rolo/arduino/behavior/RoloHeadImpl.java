@@ -28,7 +28,7 @@ public class RoloHeadImpl implements RoloHead{
             public void run() {
               scanning = true;
               while(scanning){
-                for(int i = 0; i <= 180; i += 10){
+                for(int i = 1; i < 180 && scanning; i += 10){
                   neck.rotate(i);
                   lastScan.put(neck.getCurrentDegree(), distanceSensor.readDistance());
                   try {
