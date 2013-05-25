@@ -56,15 +56,8 @@ import org.hornetq.core.server.HornetQServer;
 import org.hornetq.core.server.HornetQServers;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
-import org.kie.KieBaseConfiguration;
-import org.kie.KnowledgeBase;
-import org.kie.KnowledgeBaseFactory;
-import org.kie.builder.KnowledgeBuilder;
-import org.kie.builder.KnowledgeBuilderFactory;
-import org.kie.conf.EventProcessingOption;
-import org.kie.io.ResourceFactory;
-import org.kie.io.ResourceType;
-import org.kie.runtime.StatefulKnowledgeSession;
+import org.kie.api.cdi.KSession;
+import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,6 +91,11 @@ public class RoloCommandServer implements Runnable {
     @Inject
     @Arduino
     private ArduinoTouchSensor touchSensor;
+    
+    @Inject
+    @KSession("rolo")
+    private KieSession rolo;
+    
     private Configuration configuration;
     private boolean standalone = false;
     private String host;
@@ -187,18 +185,7 @@ public class RoloCommandServer implements Runnable {
     }
 
     public void run() {
-        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-        kbuilder.add(ResourceFactory.newClassPathResource("rolo-main.drl"), ResourceType.DRL);
-
-        if (kbuilder.getErrors().size() > 0) {
-            throw new IllegalStateException(kbuilder.getErrors().toString());
-        }
-        KieBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
-        kBaseConfig.setOption(EventProcessingOption.STREAM);
-        KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase(kBaseConfig);
-        kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-
-        final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+       
         try {
             start();
         } catch (Exception ex) {
@@ -211,7 +198,7 @@ public class RoloCommandServer implements Runnable {
             java.util.logging.Logger.getLogger(RoloCommandServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         final HornetQSessionWriter notifications = new HornetQSessionWriter(session, producer);
-        ksession.setGlobal("notifications", notifications);
+        rolo.setGlobal("notifications", notifications);
         try {
 
             motorA.setupMotor(7, 11, 5);
@@ -230,23 +217,23 @@ public class RoloCommandServer implements Runnable {
             
             ultraSonicSensor.setName("distance-sensor");
 
-            ksession.insert(motorA);
+            rolo.insert(motorA);
 
-            ksession.insert(motorB);
+            rolo.insert(motorB);
             
-            ksession.insert(motorC);
+            rolo.insert(motorC);
             
-            ksession.insert(touchSensor);
+            rolo.insert(touchSensor);
 
-            ksession.insert(ultraSonicSensor);
+            rolo.insert(ultraSonicSensor);
 
-            ksession.insert(servo180);
+            rolo.insert(servo180);
 
-            ksession.insert(lightSensor);
+            rolo.insert(lightSensor);
 
-            ksession.insert(new RoloTheRobot("rolo"));
+            rolo.insert(new RoloTheRobot("rolo"));
 
-            ksession.fireAllRules();
+            rolo.fireAllRules();
 
 
 
@@ -255,8 +242,8 @@ public class RoloCommandServer implements Runnable {
                 public void run() {
                     while (readSensors) {
                         int readDistance = ultraSonicSensor.readDistance();
-                        ksession.getEntryPoint("distance-sensor").insert(new DistanceReport(ultraSonicSensor.getName(), readDistance));
-                        ksession.fireAllRules();
+                        rolo.getEntryPoint("distance-sensor").insert(new DistanceReport(ultraSonicSensor.getName(), readDistance));
+                        rolo.fireAllRules();
                         try {
                             notifications.write("DISTANCE_REPORT:" + readDistance);
                             Thread.sleep(defaultLatency);
@@ -276,8 +263,8 @@ public class RoloCommandServer implements Runnable {
                 public void run() {
                     while (readSensors) {
                         int readLight = lightSensor.readLight();
-                        ksession.getEntryPoint("light-sensor").insert(new LightReport(lightSensor.getName(), readLight));
-                        ksession.fireAllRules();
+                        rolo.getEntryPoint("light-sensor").insert(new LightReport(lightSensor.getName(), readLight));
+                        rolo.fireAllRules();
                         try {
                             notifications.write("LIGHT_REPORT: " + readLight);
                             Thread.sleep(defaultLatency*5);
@@ -321,12 +308,12 @@ public class RoloCommandServer implements Runnable {
                     Object object = readMessage(message);
                     String[] values = object.toString().split(":");
                     if(values.length == 2){
-                        ksession.insert(new RoloCommand(values[0], values[1]));
+                        rolo.insert(new RoloCommand(values[0], values[1]));
                     }else if(values.length == 1){
-                        ksession.insert(new RoloCommand(values[0], "0"));
+                        rolo.insert(new RoloCommand(values[0], "0"));
                     }
                     
-                    ksession.fireAllRules();
+                    rolo.fireAllRules();
 
                     notifications.write(object);
                 }

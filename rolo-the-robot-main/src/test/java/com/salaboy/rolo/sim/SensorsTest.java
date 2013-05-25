@@ -10,8 +10,7 @@ import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.RoloTheRobot;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import org.drools.io.impl.ClassPathResource;
-import org.drools.time.SessionPseudoClock;
+import org.drools.core.time.SessionPseudoClock;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -20,16 +19,9 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.kie.KieBaseConfiguration;
-import org.kie.KnowledgeBaseFactory;
-import org.kie.builder.KnowledgeBuilder;
-import org.kie.builder.KnowledgeBuilderFactory;
-import org.kie.conf.EventProcessingOption;
-import org.kie.io.ResourceType;
-import org.kie.logger.KnowledgeRuntimeLoggerFactory;
-import org.kie.runtime.KieSessionConfiguration;
-import org.kie.runtime.StatefulKnowledgeSession;
-import org.kie.runtime.conf.ClockTypeOption;
+import org.kie.api.cdi.KSession;
+import org.kie.api.runtime.KieSession;
+
 
 /**
  *
@@ -46,18 +38,27 @@ public class SensorsTest {
                 .addPackage("com.salaboy.rolo.api")
                 .addPackage("com.salaboy.rolo.mock")
                 .addPackage("com.salaboy.rolo.internals")
-                .addPackage(" com.salaboy.rolo.model")
-                .addAsManifestResource("META-INF/beans.xml", ArchivePaths.create("beans.xml"));
+                .addPackage("com.salaboy.rolo.model")
+                .addPackage("org.kie.api.cdi")
+                .addPackage("org.kie.api.runtime")
+                .addAsManifestResource("META-INF/beans.xml", ArchivePaths.create("beans.xml"))
+                .addAsManifestResource("META-INF/kmodule.xml", ArchivePaths.create("kmodule.xml"));
 
     }
+    
+    
     @Inject
     @Mock
     private DistanceSensor distanceSensor;
 
+    @Inject
+    @KSession("sensors")
+    private KieSession ksession;
+    
     @Test
     public void oneSensorTest() throws InterruptedException {
         
-        final StatefulKnowledgeSession ksession = createSession();
+        
         
         SessionPseudoClock sessionClock = ksession.getSessionClock();
         
@@ -120,27 +121,4 @@ public class SensorsTest {
 
     }
     
-    private StatefulKnowledgeSession createSession(){
-    
-       
-        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-        kbuilder.add(new ClassPathResource("rolo-sensors.drl"), ResourceType.DRL);
-
-        if (kbuilder.getErrors().size() > 0) {
-            throw new IllegalStateException(kbuilder.getErrors().toString());
-        }
-        KieBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
-        kBaseConfig.setOption(EventProcessingOption.STREAM);
-        org.kie.KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase(kBaseConfig);
-        kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-        KieSessionConfiguration config = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
-        config.setOption(ClockTypeOption.get("pseudo"));
-        StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession(config, null);
-
-        KnowledgeRuntimeLoggerFactory.newConsoleLogger(ksession);
-        
-        
-        return ksession;
-        
-    }
 }

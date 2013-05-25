@@ -10,31 +10,51 @@ import com.salaboy.rolo.model.WorldShape;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.inject.Inject;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.ArchivePaths;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+
+
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kie.KieBaseConfiguration;
-import org.kie.KnowledgeBase;
-import org.kie.KnowledgeBaseFactory;
-import org.kie.builder.KnowledgeBuilder;
-import org.kie.builder.KnowledgeBuilderFactory;
-import org.kie.conf.EventProcessingOption;
-import org.kie.io.ResourceFactory;
-import org.kie.io.ResourceType;
-import org.kie.runtime.StatefulKnowledgeSession;
-import org.kie.runtime.rule.FactHandle;
-import org.kie.runtime.rule.QueryResults;
-import org.kie.runtime.rule.QueryResultsRow;
+import org.junit.runner.RunWith;
+import org.kie.api.cdi.KSession;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.FactHandle;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
+
 
 /**
  *
  * @author salaboy
  */
+@RunWith(Arquillian.class)
 public class RoloLevelsTest {
+    
+    @Deployment()
+    public static Archive<?> createDeployment() {
+        return ShrinkWrap.create(JavaArchive.class, "sim.jar")
+                .addPackage("com.salaboy.rolo.api")
+                .addPackage("com.salaboy.rolo.mock")
+                .addPackage("com.salaboy.rolo.internals")
+                .addPackage(" com.salaboy.rolo.model")
+                .addAsManifestResource("META-INF/beans.xml", ArchivePaths.create("beans.xml"))
+                .addAsManifestResource("META-INF/kmodule.xml", ArchivePaths.create("kmodule.xml"));
 
-    private StatefulKnowledgeSession mind;
+    }
+    
+    @Inject
+    @KSession("levels")
+    private KieSession levels;
 
     public RoloLevelsTest() {
     }
@@ -58,41 +78,29 @@ public class RoloLevelsTest {
     @Test
     public void helloRolo() {
 
-        // This should have the session??
-        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-        kbuilder.add(ResourceFactory.newClassPathResource("levels/level1-rolo.drl"), ResourceType.DRL);
-
-        if (kbuilder.getErrors().size() > 0) {
-            throw new IllegalStateException(kbuilder.getErrors().toString());
-        }
-        KieBaseConfiguration kBaseConfig = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
-        kBaseConfig.setOption(EventProcessingOption.STREAM);
-        KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase(kBaseConfig);
-        kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-
-        mind = kbase.newStatefulKnowledgeSession();
+        
         RoloTheRobot roloTheRobot = new RoloTheRobot("rolo1");
 
-        FactHandle roloFactHandle = mind.insert(roloTheRobot);
+        FactHandle roloFactHandle = levels.insert(roloTheRobot);
         
         roloTheRobot.setPositionX(10);
         
-        mind.update(roloFactHandle, roloTheRobot);
+        levels.update(roloFactHandle, roloTheRobot);
         
 
-        mind.insert(new Wall(100, 100, 10, 0));
+        levels.insert(new Wall(100, 100, 10, 0));
         
         roloTheRobot.setOrientation(90);
         roloTheRobot.setPositionY(20);
-        mind.update(roloFactHandle, roloTheRobot);
+        levels.update(roloFactHandle, roloTheRobot);
         
-        mind.insert(new Wall(100, 100, 10, 20));
+        levels.insert(new Wall(100, 100, 10, 20));
         
         
         
         
 
-        QueryResults queryResults = mind.getQueryResults("getAllWorldShapes");
+        QueryResults queryResults = levels.getQueryResults("getAllWorldShapes");
         Iterator<QueryResultsRow> iterator = queryResults.iterator();
         List<WorldShape> shapes = new ArrayList<WorldShape>(queryResults.size());
         while (iterator.hasNext()) {

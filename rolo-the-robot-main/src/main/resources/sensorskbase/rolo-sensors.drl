@@ -1,17 +1,13 @@
-package com.salaboy.lego.wedo;
+package com.salaboy.rolo;
 
 import com.salaboy.rolo.model.*;
 
 import com.salaboy.rolo.api.*;
 import com.salaboy.rolo.api.Motor.*;
 
-import org.drools.common.*;
-import org.kie.event.rule.*;
-import org.kie.runtime.rule.*;
-import org.kie.runtime.*;
-import org.kie.runtime.KnowledgeRuntime;
 
-declare DistanceReport
+
+declare com.salaboy.rolo.model.DistanceReport
     @role(event)
     @expires(1s)
 end

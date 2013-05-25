@@ -10,7 +10,8 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Arrays;
-import org.kie.runtime.rule.TypedAccumulateFunction;
+import org.drools.runtime.rule.TypedAccumulateFunction;
+
 
 /**
  *

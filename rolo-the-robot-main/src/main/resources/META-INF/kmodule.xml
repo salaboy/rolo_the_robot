@@ -1,0 +1,14 @@
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <kbase name="corekbase" eventProcessingMode="stream">
+        <ksession name="rolo"/>
+    </kbase>
+    <kbase name="levelskbase" eventProcessingMode="stream">
+        <ksession name="levels"/>
+    </kbase>
+    <kbase name="sensorskbase" eventProcessingMode="stream">
+        <ksession name="sensors" clockType="pseudo"/>
+    </kbase>
+    <kbase name="motorskbase" eventProcessingMode="stream">
+        <ksession name="motors"/>
+    </kbase>
+</kmodule>
