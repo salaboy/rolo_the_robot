@@ -1,4 +1,4 @@
-package com.salaboy.lego.wedo;
+package com.salaboy.rolo;
 
 import com.salaboy.rolo.model.*;
 import com.salaboy.rolo.*;
@@ -6,10 +6,12 @@ import com.salaboy.rolo.*;
 import com.salaboy.rolo.api.*;
 import com.salaboy.rolo.api.Motor.*;
 
-//import org.drools.common.*;
-//import org.kie.event.rule.*;
-//import org.kie.api.runtime.rule.*;
-//import org.kie.api.runtime.*;
+import com.salaboy.rolo.transport.*;
+
+import org.kie.internal.event.rule.*;
+import org.kie.api.runtime.rule.*;
+import org.drools.core.common.*;
+
 
 declare com.salaboy.rolo.model.DistanceReport
     @role(event)
@@ -40,37 +42,11 @@ end
 global HornetQSessionWriter notifications;
 
 
-rule "Something too close - Robot Go Back" 
-    when
-        $r: RoloTheRobot()
-        $m: Motor(  )
-        UltraSonicSensor( $sensor: name )
-        $n: Number( doubleValue < 30) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
-        
-    then
-       notifications.write("Process-SOMETHING_TOO_CLOSE:"+$n); 
-       $m.start(120, DIRECTION.BACKWARD);
-       Match item = ( Match ) kcontext.getMatch();
-              final Motor motor = $m;
-              final HornetQSessionWriter notif = notifications;
-              ((AgendaItem)item).setActivationUnMatchListener( new ActivationUnMatchListener() {
-                    
-                    public void unMatch(Session session,
-                                        Match match) {
-                        System.out.println(" Stop Motor");
-                        
-                        motor.stop();
-                        try{
-                            notif.write("Stopping Motor because avg over: 30");
-                        } catch(Exception e){
-                            System.out.println("ERROR sending notification!!!");
-                        }
-                        
-                   }
-                } );
 
 
-end
+
+
+
 
 rule "Too Dark - Look another place" 
     when
@@ -96,95 +72,20 @@ rule "Too Dark - Look another place"
 end
 
 
-rule "Process Forward Command" 
-    when
-        RoloCommand(cmd == "FORWARD", $value: value )
-        $m: Motor( )
-    then
-        $m.start(Integer.valueOf($value), Motor.DIRECTION.FORWARD);
-        notifications.write("Process-FORWARD:"+$value);
-end
-
-rule "Process Backward Command" 
-    when
-        RoloCommand(cmd == "BACKWARD", $value: value)
-        $m: Motor( )
-    then
-        $m.start(Integer.valueOf($value), Motor.DIRECTION.BACKWARD);
-        notifications.write("Process-BACKWARD:"+$value);
-end
-
-rule "Process Stop Command" 
-    when
-        RoloCommand(cmd == "STOP")
-        $m: Motor( )
-    then
-        $m.stop();
-        notifications.write("Process-STOP:");
-end
-
-rule "Process Left Command" 
-    when
-        RoloCommand(cmd == "LEFT", $value: value)
-        $m: Motor( name == "MotorA")
-    then
-        $m.forward(Integer.valueOf($value), 500);
-        notifications.write("Process-LEFT:"+$value);
-end
-
-rule "Process Right Command" 
-    when
-        RoloCommand(cmd == "RIGHT", $value: value)
-        $m: Motor( name == "MotorB")
-    then
-        $m.forward(Integer.valueOf($value), 500);
-        notifications.write("Process-RIGHT:"+$value);
-end
 
 
-rule "Process Rotate Left"
-    when
-       RoloCommand(cmd == "ROTATE LEFT", $value: value)
-       $mA: Motor( name == "MotorA") 
-       $mB: Motor( name == "MotorB") 
-    then
-          System.out.println("########LEFT############### -> MA: "+$mA);
-     System.out.println("########LEFT############### -> MB: "+$mB);
-         $mA.forward(Integer.valueOf($value), 500);
-         $mB.backward(Integer.valueOf($value), 500);
-         notifications.write("Process-ROTATE_LEFT:"+$value);
-end
 
-rule "Process Rotate Right"
-    when
-       RoloCommand(cmd == "ROTATE RIGHT", $value: value)
-       $mA: Motor( name == "MotorA") 
-       $mB: Motor( name == "MotorB") 
-    then
-     System.out.println("########RIGHT############### -> MA: "+$mA);
-     System.out.println("########RIGHT############### -> MB: "+$mB);
-        $mA.backward(Integer.valueOf($value), 500);
-         $mB.forward(Integer.valueOf($value), 500);
-         notifications.write("Process-ROTATE_RIGHT:"+$value);
-end
 
-rule "Process Rotate Head Left"
-    when
-        RoloCommand(cmd == "ROTATE HEAD LEFT", $value: value)
-        $s180: Servo180(name == "Head")
-    then
-        $s180.rotate($s180.getCurrentDegree() + Integer.valueOf($value));
-        notifications.write("Process-ROTATE_HEAD_LEFT:"+ $s180.getCurrentDegree());
-end
 
-rule "Process Rotate Head Right"
-    when
-        RoloCommand(cmd == "ROTATE HEAD RIGHT", $value: value)
-        $s180: Servo180(name == "Head")
-    then
-        $s180.rotate($s180.getCurrentDegree() - Integer.valueOf($value));
-        notifications.write("Process-ROTATE_HEAD_RIGHT:"+ $s180.getCurrentDegree());
-end
+
+
+
+
+
+
+
+
+
 
 
 
