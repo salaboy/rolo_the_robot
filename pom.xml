@@ -13,7 +13,7 @@
     <module>rolo-the-robot-api</module>
     <module>rolo-the-robot-core</module>
     <module>rolo-the-robot-main</module>
-    <module>rolo-the-robot-client</module>
+    <module>rolo-the-robot-client-ui</module>
     <module>rolo-the-robot-hardware-test</module>
     <module>rolo-the-robot-hardware-test-ui</module>
   </modules>
