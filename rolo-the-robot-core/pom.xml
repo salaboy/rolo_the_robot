@@ -46,6 +46,10 @@
             <scope>provided</scope>
         </dependency>
         
+        <dependency>
+            <groupId>com.neuronrobotics</groupId>
+            <artifactId>nrjavaserial</artifactId>
+        </dependency>
        
         
         <!-- Libs not used yet --> 

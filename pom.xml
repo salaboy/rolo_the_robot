@@ -30,6 +30,16 @@
     <arquillian_weld.version>1.0.0.CR3</arquillian_weld.version>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+          <groupId>com.neuronrobotics</groupId>
+          <artifactId>nrjavaserial</artifactId>
+          <version>3.8.8</version>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <pluginRepositories>
     <pluginRepository>
       <id>jboss</id>
@@ -45,6 +55,10 @@
         <id>cytoscape</id>
         <url>http://cytoscape.wodaklab.org/nexus/content/repositories/releases/</url>
     </repository-->
+    <repository>
+        <id>extraLibs</id>
+        <url>file://${project.basedir}/extraLibs</url>
+    </repository>
   </repositories>
 
 </project>
