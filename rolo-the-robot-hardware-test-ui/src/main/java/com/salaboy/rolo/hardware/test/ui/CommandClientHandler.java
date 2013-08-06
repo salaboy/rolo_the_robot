@@ -21,11 +21,11 @@ import org.hornetq.api.core.client.ClientSession;
 public class CommandClientHandler {
     
     
-    private HardwareTestUIJFrame ui;
+    private UIView ui;
     
     
     
-    public CommandClientHandler(HardwareTestUIJFrame ui) {
+    public CommandClientHandler(UIView ui) {
         this.ui = ui;
     }
 
@@ -36,21 +36,34 @@ public class CommandClientHandler {
     }
     
     public void messageReceived(ClientSession session, Object message, String producerId) throws Exception {
-        
         System.out.println(">>> Client Handler Message Recieved = " + message);
         String[] values = message.toString().split(":");
-        if(values[0].equals("DISTANCE_REPORT")){
-            ui.getDistancejTextField().setText(values[1]); 
+        if(ui instanceof HardwareTestUIJFrame){
+            if(values[0].equals("DISTANCE_REPORT")){
+                ((HardwareTestUIJFrame)ui).getDistancejTextField().setText(values[1]); 
+            }
+
+            if(values[0].equals("LIGHT_REPORT")){
+                ((HardwareTestUIJFrame)ui).getLightjTextField().setText(values[1]);
+            }
+
+            if(values[0].equals("TOUCH_REPORT")){
+                ((HardwareTestUIJFrame)ui).getTouchjTextField().setText(values[1]);
+            }
+
+            ((HardwareTestUIJFrame)ui).getNotificationjTextArea().setText(">>> Client Handler Message Recieved = " + message 
+                    + "\n"+((HardwareTestUIJFrame)ui).getNotificationjTextArea().getText());
+        }else if(ui instanceof SimpleMotorTestUIJFrame){
+            
+            if(values[0].equals("SPEED_REPORT")){
+                    ((SimpleMotorTestUIJFrame)ui).getSpeedMonitorjTextField().setText(values[1]);
+            }
+            if(values[0].equals("ANGLE_REPORT")){
+                    ((SimpleMotorTestUIJFrame)ui).getAngleMonitorjTextField().setText(values[1]);
+            }
+            if(values[0].equals("STATUS_REPORT")){
+                    ((SimpleMotorTestUIJFrame)ui).getStatusjTextField().setText(values[1]);
+            }
         }
-        
-        if(values[0].equals("LIGHT_REPORT")){
-            ui.getLightjTextField().setText(values[1]);
-        }
-        
-        if(values[0].equals("TOUCH_REPORT")){
-            ui.getTouchjTextField().setText(values[1]);
-        }
-        
-        ui.getNotificationjTextArea().setText(">>> Client Handler Message Recieved = " + message + "\n"+ui.getNotificationjTextArea().getText());
     }
 }

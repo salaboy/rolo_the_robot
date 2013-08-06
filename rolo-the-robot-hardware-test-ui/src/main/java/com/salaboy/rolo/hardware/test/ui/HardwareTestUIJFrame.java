@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  *
  * @author salaboy
  */
-public class HardwareTestUIJFrame extends javax.swing.JFrame {
+public class HardwareTestUIJFrame extends javax.swing.JFrame implements UIView {
 
     private RoloClientConnector roloClientConnector;
     private boolean connected = false;

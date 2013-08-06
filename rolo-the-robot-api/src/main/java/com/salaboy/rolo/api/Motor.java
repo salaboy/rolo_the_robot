@@ -22,11 +22,25 @@ public interface Motor {
 
     void backward(int speed, long millisec);
 
+    void forward();
+    
+    void backward();
+    
+    void setSpeed(int speed);
+    
+    void getSpeed();
+    
+    void getAngle();
+    
+    void rotate(int degrees,String direction, String brake);
+    
     void start(int speed, DIRECTION dir);
     
     void stop();
     
     boolean isRunning();
+    
+    void isTurning();
     
     void setRunning(boolean running);
     
