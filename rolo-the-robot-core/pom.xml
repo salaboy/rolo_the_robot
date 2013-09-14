@@ -1,43 +1,39 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.salaboy</groupId>
-    <artifactId>rolo_the_robot</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>rolo_the_robot-core</artifactId>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.salaboy</groupId>
+        <artifactId>rolo-the-robot</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>rolo-the-robot-core</artifactId>
   
-  <name>Rolo The Robot Core</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <repositories>
-        <repository>
-            <id>extraLibs</id>
-            <url>file://${project.basedir}/extraLibs</url>
-        </repository>  
-    </repositories>
-  <dependencies>
-    <dependency>
+    <name>Rolo The Robot Core</name>
+    <url>http://salaboy.com</url>
+    
+    <dependencies>
+        <dependency>
             <groupId>com.salaboy</groupId>
-            <artifactId>rolo_the_robot-api</artifactId>
+            <artifactId>rolo-the-robot-api</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>
-    <dependency>
+        <dependency>
+            <groupId>com.salaboy</groupId>
+            <artifactId>rolo-the-robot-comm</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se</artifactId>
             <version>${weld.version}</version>
-            
         </dependency>
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-core</artifactId>
             <version>${weld.version}</version>
-            
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
@@ -51,88 +47,29 @@
             <version>1.0</version>
             <scope>provided</scope>
         </dependency>
-        
         <dependency>
             <groupId>com.neuronrobotics</groupId>
             <artifactId>nrjavaserial</artifactId>
         </dependency>
-       
-        
-        <!-- Libs not used yet --> 
-        <!-- mvn install:install-file  -Dfile=promidi.jar -DgroupId=promidi -DartifactId=promidi -Dversion=1.0.0 -Dpackaging=jar-->
-        <!--dependency>
-            
-            <groupId>promidi</groupId>
-            <artifactId>promidi</artifactId>
-            <version>1.0.0</version>
-            
-        </dependency-->
-        <!-- mvn install:install-file  -Dfile=sprites.jar -DgroupId=processing-sprites -DartifactId=sprites -Dversion=1.0.0 -Dpackaging=jar -->
-        <!--dependency>
-            
-            <groupId>processing-sprites</groupId>
-            <artifactId>sprites</artifactId>
-            <version>1.0.0</version>
-        </dependency-->
-        <!-- mvn install:install-file  -Dfile=verletphysics.jar -DgroupId=toxiclibs -DartifactId=verletphysics -Dversion=1.0.0 -Dpackaging=jar -->
-        <!--dependency>
-            
-            <groupId>toxiclibs</groupId>
-            <artifactId>verletphysics</artifactId>
-            <version>1.0.0</version>
-        </dependency-->
-        <!-- mvn install:install-file  -Dfile=toxiclibscore.jar -DgroupId=toxiclibs -DartifactId=core -Dversion=1.0.0 -Dpackaging=jar -->
-        <!--dependency>
-            
-        <groupId>toxiclibs</groupId>
-        <artifactId>core</artifactId>
-        <version>1.0.0</version>
-    </dependency-->
-       
-       
-    <dependency>
-      <groupId>org.hornetq</groupId>
-      <artifactId>hornetq-core</artifactId>
-      <version>${hornetq.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hornetq</groupId>
-      <artifactId>hornetq-jms</artifactId>
-      <version>${hornetq.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.netty</groupId>
-      <artifactId>netty</artifactId>
-      <version>3.2.3.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.javaee</groupId>
-      <artifactId>jboss-jms-api</artifactId>
-      <version>1.1.0.GA</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.naming</groupId>
-      <artifactId>jnpserver</artifactId>
-      <version>5.0.3.GA</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    </dependencies>
+    
+    <repositories>
+        <repository>
+            <id>extraLibs</id>
+            <url>file://${project.basedir}/extraLibs</url>
+        </repository>  
+    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

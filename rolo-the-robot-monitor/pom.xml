@@ -4,11 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.salaboy</groupId>
-        <artifactId>rolo_the_robot</artifactId>
+        <artifactId>rolo-the-robot</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>rolo-the-robot-monitor</artifactId>
     <name>Rolo The Robot Monitor</name>
+    <url>http://salaboy.com</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

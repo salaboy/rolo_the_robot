@@ -6,7 +6,7 @@ import com.salaboy.rolo.*;
 import com.salaboy.rolo.api.*;
 import com.salaboy.rolo.api.Motor.*;
 
-import com.salaboy.rolo.transport.*;
+import com.salaboy.rolo.the.robot.comm.*;
 
 import org.kie.internal.event.rule.*;
 import org.kie.api.runtime.rule.*;

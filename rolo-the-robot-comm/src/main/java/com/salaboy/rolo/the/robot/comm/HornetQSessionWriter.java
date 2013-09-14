@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.salaboy.rolo.transport;
+package com.salaboy.rolo.the.robot.comm;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -15,7 +15,6 @@
  */
 package com.salaboy.rolo;
 
-import com.salaboy.rolo.transport.HornetQSessionWriter;
 import com.salaboy.rolo.api.Servo180;
 import com.salaboy.rolo.api.UltraSonicSensor;
 import com.salaboy.rolo.arduino.Arduino;
@@ -25,6 +24,7 @@ import com.salaboy.rolo.arduino.ArduinoTouchSensor;
 import com.salaboy.rolo.model.RoloTheRobot;
 import com.salaboy.rolo.model.reports.DistanceReport;
 import com.salaboy.rolo.model.reports.LightReport;
+import com.salaboy.rolo.the.robot.comm.HornetQSessionWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;

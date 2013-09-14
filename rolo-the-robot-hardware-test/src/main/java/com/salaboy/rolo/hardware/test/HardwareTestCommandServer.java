@@ -25,7 +25,7 @@ import com.salaboy.rolo.arduino.ArduinoTouchSensor;
 import com.salaboy.rolo.arduino.behavior.RoloHead;
 import com.salaboy.rolo.arduino.behavior.RoloTractionMotorPair;
 import com.salaboy.rolo.arduino.behavior.RoloTractionMotorPair.ROTATION;
-import com.salaboy.rolo.transport.HornetQSessionWriter;
+import com.salaboy.rolo.the.robot.comm.HornetQSessionWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;

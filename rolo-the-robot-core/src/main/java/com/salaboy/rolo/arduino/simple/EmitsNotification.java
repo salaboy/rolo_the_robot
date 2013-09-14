@@ -4,7 +4,7 @@
  */
 package com.salaboy.rolo.arduino.simple;
 
-import com.salaboy.rolo.transport.HornetQSessionWriter;
+import com.salaboy.rolo.the.robot.comm.HornetQSessionWriter;
 
 /**
  *

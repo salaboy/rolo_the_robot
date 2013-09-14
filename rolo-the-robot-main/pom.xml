@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.salaboy</groupId>
-        <artifactId>rolo_the_robot</artifactId>
+        <artifactId>rolo-the-robot</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>rolo_the_robot-main</artifactId>
+    <artifactId>rolo-the-robot-main</artifactId>
     <packaging>jar</packaging>
 
     <name>Rolo The Robot Server</name>
@@ -15,7 +15,13 @@
     <dependencies>
         <dependency>
             <groupId>com.salaboy</groupId>
-            <artifactId>rolo_the_robot-core</artifactId>
+            <artifactId>rolo-the-robot-core</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.salaboy</groupId>
+            <artifactId>rolo-the-robot-comm</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>

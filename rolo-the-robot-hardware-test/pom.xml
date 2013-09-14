@@ -1,24 +1,27 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.salaboy</groupId>
-    <artifactId>rolo_the_robot</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <groupId>org.jbpm</groupId>
-  <artifactId>rolo_the_robot-hardware-test</artifactId>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.salaboy</groupId>
+        <artifactId>rolo-the-robot</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>rolo-the-robot-hardware-test</artifactId>
   
-  <name>Rolo The Robot Hardware Tests</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-     <dependency>
+    <name>Rolo The Robot Hardware Tests</name>
+    <url>http://salaboy.com</url>
+   
+    <dependencies>
+        <dependency>
             <groupId>com.salaboy</groupId>
-            <artifactId>rolo_the_robot-core</artifactId>
+            <artifactId>rolo-the-robot-core</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.salaboy</groupId>
+            <artifactId>rolo-the-robot-comm</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>
@@ -27,14 +30,14 @@
             <artifactId>commons-cli</artifactId>
             <version>1.2</version>
         </dependency>  
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <build>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

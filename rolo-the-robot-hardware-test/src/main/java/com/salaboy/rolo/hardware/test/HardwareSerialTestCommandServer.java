@@ -17,7 +17,7 @@ package com.salaboy.rolo.hardware.test;
 
 import com.salaboy.rolo.arduino.simple.SimpleSerialFrontWheels;
 import com.salaboy.rolo.arduino.simple.SimpleSerialMotor;
-import com.salaboy.rolo.transport.HornetQSessionWriter;
+import com.salaboy.rolo.the.robot.comm.HornetQSessionWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
