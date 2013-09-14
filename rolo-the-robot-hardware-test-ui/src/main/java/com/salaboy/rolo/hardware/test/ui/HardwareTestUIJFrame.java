@@ -4,11 +4,15 @@
  */
 package com.salaboy.rolo.hardware.test.ui;
 
+import com.salaboy.rolo.the.robot.comm.CommandClientHandler;
+import com.salaboy.rolo.the.robot.comm.RoloClientConnector;
+import com.salaboy.rolo.the.robot.comm.UIView;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import org.hornetq.api.core.client.ClientSession;
 
 /**
  *
@@ -1081,5 +1085,26 @@ public class HardwareTestUIJFrame extends javax.swing.JFrame implements UIView {
   private javax.swing.JCheckBox touchEnabledjCheckBox;
   private javax.swing.JTextField touchjTextField;
   // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void messageReceived(ClientSession session, Object message, String producerId) throws Exception {
+        System.out.println(">>> Client Handler Message Recieved = " + message);
+        String[] values = message.toString().split(":");
+
+            if(values[0].equals("DISTANCE_REPORT")){
+                getDistancejTextField().setText(values[1]); 
+            }
+
+            if(values[0].equals("LIGHT_REPORT")){
+                getLightjTextField().setText(values[1]);
+            }
+
+            if(values[0].equals("TOUCH_REPORT")){
+                getTouchjTextField().setText(values[1]);
+            }
+
+            getNotificationjTextArea().setText(">>> Client Handler Message Recieved = " + message 
+                    + "\n"+getNotificationjTextArea().getText());
+    }
     
 }

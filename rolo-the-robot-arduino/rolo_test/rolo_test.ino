@@ -3,9 +3,17 @@
 #include <NXTShield.h>
 #include <PID.h>
 #include <MsTimer2.h>
+#include <NewPing.h>
+
+#define TRIGGER_PIN  4
+#define ECHO_PIN     13
+#define MAX_DISTANCE 200
 
 Motor1 leftMotor;
 Motor2 rightMotor;
+
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+
 
 //Define Variables we'll be connecting to
 double Setpoint_lm, Setpoint_rm, Input_lm, Input_rm, Output_lm, Output_rm;
@@ -14,7 +22,7 @@ double Setpoint_lm, Setpoint_rm, Input_lm, Input_rm, Output_lm, Output_rm;
 double aggKp_lm=70, aggKi_lm=15, aggKd_lm=0.005;  // Aggressive
 double consKp_lm=50, consKi_lm=8, consKd_lm=0;    // Conservative
 double aggKp_rm=70, aggKi_rm=15, aggKd_rm=0.005;  // Aggressive
-double consKp_rm=40, consKi_rm=8, consKd_rm=0;    // Conservative
+double consKp_rm=50, consKi_rm=8, consKd_rm=0;    // Conservative
  
 //Specify the links and initial tuning parameters
 PID myPID_lm(&Input_lm, &Output_lm, &Setpoint_lm, consKp_lm, consKi_lm, consKd_lm, DIRECT);
@@ -35,7 +43,8 @@ String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 int leftMotorSpeed = 255;
 int rightMotorSpeed = 255;
-String currentDirection = "forward";
+String currentDirectionLeft = "forward";
+String currentDirectionRight = "forward";
 
 float Diam = 43.2 ;// Diametro de las ruedas en mm
 int Dist = 165;    // Separacion entre ruedas en mm
@@ -52,7 +61,10 @@ float val = 0.00;
  int pul_seg_rm = 0;
 
 
+
 void setup() {
+  
+
   // initialize serial:
   Serial.begin(115200);
   // reserve 200 bytes for the inputString:
@@ -70,6 +82,8 @@ void setup() {
   myPID_lm.SetOutputLimits(0, 255);
   myPID_rm.SetMode(AUTOMATIC);
   myPID_rm.SetOutputLimits(0, 255);
+  
+
   
   
 }
@@ -115,9 +129,18 @@ void loop() {
          Dist = args[0].toInt();
       }
     }
-    
-    if(deviceName=="left-motor"){
-          if(commandName=="rotate"){
+    if(deviceName=="sonar1"){
+      if(commandName=="read"){
+        int uS = sonar.ping_median(10);
+        Serial.print("SONAR_REPORT:");
+        Serial.print(uS / US_ROUNDTRIP_CM);
+        Serial.print(";");
+      }
+    }
+   
+    else{
+ //left-motor:rotate:2:90:forward;
+     if(commandName=="rotate"){
             Direction mydirection = forward;
             if( args[1].equals("backward")){
                mydirection = backward;
@@ -126,44 +149,73 @@ void loop() {
             if( args[2].equals("coast")){
               mybrake = coast;
             }
-            leftMotor.move(mydirection, uint8_t(args[0].toInt()), leftMotorSpeed, mybrake);
-            while(leftMotor.isTurning());
+            move_single_motor(deviceName, mydirection, uint8_t(args[0].toInt()), mybrake);
+            while(is_turning_single_motor(deviceName));
       }else if(commandName=="stop"){
-          leftMotor.stop();
+          stop_single_motor(deviceName);
       }else if(commandName=="read"){
           Serial.print("ANGLE_REPORT:");
-          Serial.print(leftMotor.readPosition(),DEC);
+          Serial.print(read_position_single_motor(deviceName),DEC);
           Serial.print(";");
       }else if(commandName=="reset"){
-          leftMotor.resetPosition();
+          reset_position_single_motor(deviceName);
       }else if(commandName=="isturning"){
           Serial.print("STATUS_REPORT:");
-          Serial.print(leftMotor.isTurning()+";");
+          Serial.print(is_turning_single_motor(deviceName)+";");
       }else if(commandName=="forward"){
-          leftMotor.move(forward, uint8_t(leftMotorSpeed));
-          currentDirection = "forward";
+          move_single_motor(deviceName, forward);
+          if(deviceName.startsWith("left")){
+              currentDirectionLeft = "forward";
+          }else{
+              currentDirectionRight = "forward";
+          }
+                      
       }else if(commandName=="backward"){
-          leftMotor.move(backward, uint8_t(leftMotorSpeed));
-          currentDirection = "backward";
+          move_single_motor(deviceName, backward);
+          if(deviceName.startsWith("left")){
+              currentDirectionLeft = "backward";
+          }else{
+              currentDirectionRight = "backward";
+          }
       }else if(commandName=="setSpeed"){
-          leftMotorSpeed = args[0].toInt();
-          if(leftMotor.isTurning()){
-            if(currentDirection == "forward"){
-               leftMotor.move(forward, uint8_t(leftMotorSpeed));
-            }else if( currentDirection == "backward"){
-               leftMotor.move(backward, uint8_t(leftMotorSpeed));
-            }
+         
+          if(is_turning_single_motor(deviceName)){
+            
+           if(deviceName.startsWith("left")){ 
+              if(currentDirectionLeft == "forward"){
+                 move_single_motor(deviceName, forward);
+              }else if( currentDirectionLeft == "backward"){
+                 move_single_motor(deviceName, backward);
+              }
+           }else{
+              if(deviceName.startsWith("left")){ 
+                if(currentDirectionRight == "forward"){
+                   move_single_motor(deviceName, forward);
+                }else if( currentDirectionRight == "backward"){
+                   move_single_motor(deviceName, backward);
+                }
+              }
+           }
+            
+            
           }
       }else if(commandName=="getSpeed"){
-          Serial.print("SPEED_REPORT:"+String(leftMotorSpeed)+";");
+          if(deviceName.startsWith("left")){
+            Serial.print("SPEED_REPORT:"+String(leftMotorSpeed)+";");
+          }else{
+            Serial.print("SPEED_REPORT:"+String(rightMotorSpeed)+";");
+          }
       }
     }
+    
 
     // clear the string:
     inputString = "";
     stringComplete = false;
   }
 }
+
+
 
 
 void move_front_wheels(String dir, float distance)
@@ -270,6 +322,57 @@ void velo()
   myPID_rm.Compute(); //necesario para corregir la velocidad lo pone en las variables Output_lm y Output_rm
   analogWrite(9,Output_lm ); // reescribo directamente en el pin PWM (4) del motor izquierdo para cambiar la potencia
   analogWrite(10,Output_rm);  // reescribo directamente en el pin PWM (7) del motor derecho para cambiar la potencia
+}
+
+
+
+// FIXING NXT SHIELD sh1t
+void move_single_motor(String motorName, Direction direction, int rotation, Brake brake){
+   if(motorName.startsWith("left")){
+      leftMotor.move(direction, leftMotorSpeed, rotation, brake );
+   } else {
+      rightMotor.move(direction, rightMotorSpeed, rotation, brake );
+   }
+} 
+
+void move_single_motor(String motorName, Direction direction){
+   if(motorName.startsWith("left")){
+      leftMotor.move( direction, leftMotorSpeed );
+   } else {
+      rightMotor.move( direction, rightMotorSpeed );
+   }
+} 
+
+bool is_turning_single_motor(String motorName){
+  if(motorName.startsWith("left")){
+      return leftMotor.isTurning();
+   } else {
+      return rightMotor.isTurning();
+   }
+}
+
+void stop_single_motor(String motorName){
+  if(motorName.startsWith("left")){
+      leftMotor.stop();
+   } else {
+      rightMotor.stop();
+   }
+}
+
+long read_position_single_motor(String motorName){
+  if(motorName.startsWith("left")){
+      return leftMotor.readPosition();
+   } else {
+      return rightMotor.readPosition();
+   }
+}
+
+void reset_position_single_motor(String motorName){
+  if(motorName.startsWith("left")){
+      leftMotor.resetPosition();
+   } else {
+      rightMotor.resetPosition();
+   }
 }
 
 /*

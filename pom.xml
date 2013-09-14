@@ -16,11 +16,13 @@
     <module>rolo-the-robot-client-ui</module>
     <module>rolo-the-robot-hardware-test</module>
     <module>rolo-the-robot-hardware-test-ui</module>
+    <module>rolo-the-robot-monitor</module>
+    <module>rolo-the-robot-comm</module>
   </modules>
 
   <properties>
-    <jbpm.version>6.0.0-SNAPSHOT</jbpm.version>
-    <drools.version>6.0.0-SNAPSHOT</drools.version>
+    <jbpm.version>6.1.0-SNAPSHOT</jbpm.version>
+    <drools.version>6.1.0-SNAPSHOT</drools.version>
     <hibernate.em.version>3.4.0.GA</hibernate.em.version>
     <hibernate.core.version>3.3.2.GA</hibernate.core.version>
     <seam.version>3.1.0.Final</seam.version>
@@ -37,6 +39,26 @@
           <artifactId>nrjavaserial</artifactId>
           <version>3.8.8</version>
         </dependency>
+        <dependency>
+          <groupId>org.processing</groupId>
+          <artifactId>processing-core</artifactId>
+          <version>2.0.2</version>
+        </dependency>
+        <dependency>
+          <groupId>org.processing</groupId>
+           <artifactId>processing-jogl-all</artifactId>
+          <version>2.0.2</version>
+        </dependency>
+        <dependency>
+          <groupId>org.processing</groupId>
+           <artifactId>processing-gluegen-rt</artifactId>
+          <version>2.0.2</version>
+        </dependency>
+        <dependency>
+          <groupId>org.processing</groupId>
+           <artifactId>processing-peasycam</artifactId>
+          <version>2.0.2</version>
+        </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -50,14 +72,6 @@
     <repository>
       <id>jboss</id>
       <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-    </repository>
-    <!--repository>
-        <id>cytoscape</id>
-        <url>http://cytoscape.wodaklab.org/nexus/content/repositories/releases/</url>
-    </repository-->
-    <repository>
-        <id>extraLibs</id>
-        <url>file://${project.basedir}/extraLibs</url>
     </repository>
   </repositories>
 

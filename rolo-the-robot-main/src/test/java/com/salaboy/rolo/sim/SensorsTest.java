@@ -6,8 +6,8 @@ package com.salaboy.rolo.sim;
 
 import com.salaboy.rolo.api.DistanceSensor;
 import com.salaboy.rolo.mock.Mock;
-import com.salaboy.rolo.model.DistanceReport;
 import com.salaboy.rolo.model.RoloTheRobot;
+import com.salaboy.rolo.model.reports.DistanceReport;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import org.drools.core.time.SessionPseudoClock;

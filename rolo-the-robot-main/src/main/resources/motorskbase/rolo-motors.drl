@@ -9,11 +9,6 @@ import com.salaboy.rolo.api.Motor.DIRECTION.*;
 
 
 
-declare com.salaboy.rolo.model.DistanceReport
-    @role(event)
-    @expires(1s)
-end
-
 
 rule "test motor"
     

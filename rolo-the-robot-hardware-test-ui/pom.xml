@@ -17,51 +17,16 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hornetq</groupId>
-      <artifactId>hornetq-core-client</artifactId>
-      <version>${hornetq.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hornetq</groupId>
-      <artifactId>hornetq-jms-client</artifactId>
-      <version>${hornetq.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty</artifactId>
-      <version>3.4.5.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.javaee</groupId>
-      <artifactId>jboss-jms-api</artifactId>
-      <version>1.1.0.GA</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.naming</groupId>
-      <artifactId>jnp-client</artifactId>
-      <version>5.0.5.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.spec.javax.jms</groupId>
-      <artifactId>jboss-jms-api_1.1_spec</artifactId>
-      <version>1.0.1.Final</version>
+      <groupId>com.salaboy</groupId>
+      <artifactId>rolo-the-robot-comm</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.swinglabs</groupId>
       <artifactId>swing-layout</artifactId>
       <version>1.0.3</version>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.1</version>
-      <scope>test</scope>
-    </dependency>
+    
   </dependencies>
   <build>
     <plugins>

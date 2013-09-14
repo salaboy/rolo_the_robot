@@ -29,7 +29,7 @@ rule "Something too close - Robot Go Back"
               final Motor motor = $m;
               final HornetQSessionWriter notif = notifications;
               ((AgendaItem)item).setActivationUnMatchListener( new ActivationUnMatchListener() {
-                    public void unMatch(Session session,
+                    public void unMatch(RuleRuntime session,
                                         Match match) {
                         System.out.println(" >>> Stopping Motor because avg over: 30");                
                         motor.stop();

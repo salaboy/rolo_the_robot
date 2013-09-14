@@ -217,11 +217,20 @@ public class HardwareSerialTestCommandServer implements Runnable {
                 motorA.rotate(Integer.valueOf(values[1]), values[2], values[3]);
               }
             } 
-            else if (values[0].equals("FORWARD-B")) {
-              motorB.forward(100, 100);
+            
+            if (values[0].equals("FORWARD-B")) {
+              motorB.forward();
             } else if (values[0].equals("BACKWARD-B")) {
-              motorB.backward(100, 100);
+              motorB.backward();
+            } else if(values[0].equals("SETSPEED-B")) {
+              motorB.setSpeed(Integer.valueOf(values[1]));
+            } else if(values[0].equals("ROTATE-B")) {
+              System.out.println("Values lenght: "+values.length);
+              if(values.length == 4){
+                motorB.rotate(Integer.valueOf(values[1]), values[2], values[3]);
+              }
             } 
+           
  
           } else if (values.length == 1) {
 
@@ -236,6 +245,18 @@ public class HardwareSerialTestCommandServer implements Runnable {
               motorA.getAngle();
             } else if(values[0].equals("RESET-A")) {
               motorA.resetAngle();
+            } 
+            
+            if (values[0].equals("STOP-B")) {
+              motorB.stop();
+            } else if (values[0].equals("GETSPEED-B")) {
+              motorB.getSpeed();
+            } else if(values[0].equals("STATUS-B")) {
+              motorB.isTurning();
+            } else if(values[0].equals("READ-B")) {
+              motorB.getAngle();
+            } else if(values[0].equals("RESET-B")) {
+              motorB.resetAngle();
             } 
 
           }

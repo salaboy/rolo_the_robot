@@ -4,11 +4,15 @@
  */
 package com.salaboy.rolo.hardware.test.ui;
 
+import com.salaboy.rolo.the.robot.comm.CommandClientHandler;
+import com.salaboy.rolo.the.robot.comm.RoloClientConnector;
+import com.salaboy.rolo.the.robot.comm.UIView;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import org.hornetq.api.core.client.ClientSession;
 
 /**
  *
@@ -31,7 +35,6 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
         return statusjTextField;
     }
 
-    
     public JTextField getRotateDegreesjTextField() {
         return rotateDegreesjTextField;
     }
@@ -55,8 +58,6 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
     public JLabel getStatusjLabel() {
         return statusjLabel;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,22 +72,26 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
         breakButtonGroup = new javax.swing.ButtonGroup();
         pidDirectionButtonGroup = new javax.swing.ButtonGroup();
         pidRotateButtonGroup = new javax.swing.ButtonGroup();
+        leftRightMotorSelectionbuttonGroup = new javax.swing.ButtonGroup();
         jTabbedPane = new javax.swing.JTabbedPane();
         controljPanel = new javax.swing.JPanel();
         jPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         forwardjButton = new javax.swing.JButton();
         backwardjButton = new javax.swing.JButton();
-        speedjTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        rotatejButton = new javax.swing.JButton();
-        rotateDegreesjTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         stopjButton = new javax.swing.JButton();
-        setSpeedjButton = new javax.swing.JButton();
-        rotateForwardjRadioButton = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
         rotateBackwardjRadioButton = new javax.swing.JRadioButton();
+        rotateForwardjRadioButton = new javax.swing.JRadioButton();
         breakjRadioButton = new javax.swing.JRadioButton();
         coastjRadioButton = new javax.swing.JRadioButton();
+        rotateDegreesjTextField = new javax.swing.JTextField();
+        rotatejButton = new javax.swing.JButton();
+        leftMotorjRadioButton = new javax.swing.JRadioButton();
+        rightMotorjRadioButton = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        speedjTextField = new javax.swing.JTextField();
+        setSpeedjButton = new javax.swing.JButton();
         monitorjPanel = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -130,6 +135,8 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
 
         jPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Controls"));
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Individual Motor"));
+
         forwardjButton.setText("Forward");
         forwardjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,19 +151,6 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
             }
         });
 
-        speedjTextField.setText("255");
-
-        jLabel1.setText("Speed");
-
-        rotatejButton.setText("Rotate");
-        rotatejButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rotatejButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Degrees");
-
         stopjButton.setText("Stop");
         stopjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,19 +158,14 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
             }
         });
 
-        setSpeedjButton.setText("Set Speed");
-        setSpeedjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setSpeedjButtonActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Degrees");
+
+        directionButtonGroup.add(rotateBackwardjRadioButton);
+        rotateBackwardjRadioButton.setText("Backward");
 
         directionButtonGroup.add(rotateForwardjRadioButton);
         rotateForwardjRadioButton.setSelected(true);
         rotateForwardjRadioButton.setText("Forward");
-
-        directionButtonGroup.add(rotateBackwardjRadioButton);
-        rotateBackwardjRadioButton.setText("Backward");
 
         breakButtonGroup.add(breakjRadioButton);
         breakjRadioButton.setSelected(true);
@@ -190,72 +179,122 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
         breakButtonGroup.add(coastjRadioButton);
         coastjRadioButton.setText("Coast");
 
+        rotateDegreesjTextField.setText("90");
+
+        rotatejButton.setText("Rotate");
+        rotatejButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rotatejButtonActionPerformed(evt);
+            }
+        });
+
+        leftRightMotorSelectionbuttonGroup.add(leftMotorjRadioButton);
+        leftMotorjRadioButton.setSelected(true);
+        leftMotorjRadioButton.setText("Left Motor");
+
+        leftRightMotorSelectionbuttonGroup.add(rightMotorjRadioButton);
+        rightMotorjRadioButton.setText("Right Motor");
+
+        jLabel1.setText("Speed");
+
+        speedjTextField.setText("255");
+
+        setSpeedjButton.setText("Set Speed");
+        setSpeedjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setSpeedjButtonActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(forwardjButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(backwardjButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(stopjButton))
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(leftMotorjRadioButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(rightMotorjRadioButton))
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(6, 6, 6)
+                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel3Layout.createSequentialGroup()
+                                .add(jLabel1)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(speedjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(setSpeedjButton)
+                                .add(0, 0, Short.MAX_VALUE))
+                            .add(jPanel3Layout.createSequentialGroup()
+                                .add(jLabel2)
+                                .add(18, 18, 18)
+                                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(rotateForwardjRadioButton)
+                                    .add(breakjRadioButton))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(coastjRadioButton)
+                                    .add(jPanel3Layout.createSequentialGroup()
+                                        .add(rotateBackwardjRadioButton)
+                                        .add(8, 8, 8)
+                                        .add(rotateDegreesjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                        .add(rotatejButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))))))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(leftMotorjRadioButton)
+                    .add(rightMotorjRadioButton))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(forwardjButton)
+                    .add(backwardjButton)
+                    .add(stopjButton))
+                .add(2, 2, 2)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(rotateForwardjRadioButton)
+                    .add(rotateBackwardjRadioButton)
+                    .add(rotatejButton)
+                    .add(rotateDegreesjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(breakjRadioButton)
+                    .add(coastjRadioButton))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel1)
+                    .add(speedjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(setSpeedjButton))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout jPanelLayout = new org.jdesktop.layout.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelLayout.createSequentialGroup()
-                .add(34, 34, 34)
-                .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jPanelLayout.createSequentialGroup()
-                        .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(jPanelLayout.createSequentialGroup()
-                                .add(backwardjButton)
-                                .add(0, 0, Short.MAX_VALUE))
-                            .add(jPanelLayout.createSequentialGroup()
-                                .add(forwardjButton)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 125, Short.MAX_VALUE)
-                                .add(jLabel1)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(speedjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jPanelLayout.createSequentialGroup()
-                        .add(stopjButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanelLayout.createSequentialGroup()
-                                .add(jLabel2)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(rotateDegreesjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(jPanelLayout.createSequentialGroup()
-                                .add(rotateForwardjRadioButton)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(rotateBackwardjRadioButton))
-                            .add(jPanelLayout.createSequentialGroup()
-                                .add(breakjRadioButton)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(coastjRadioButton)))))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(setSpeedjButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(rotatejButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelLayout.createSequentialGroup()
-                .add(20, 20, 20)
-                .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(forwardjButton)
-                    .add(speedjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel1)
-                    .add(setSpeedjButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(backwardjButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rotatejButton)
-                    .add(jLabel2)
-                    .add(rotateDegreesjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(stopjButton))
-                .add(18, 18, 18)
-                .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rotateForwardjRadioButton)
-                    .add(rotateBackwardjRadioButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(breakjRadioButton)
-                    .add(coastjRadioButton))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 188, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout controljPanelLayout = new org.jdesktop.layout.GroupLayout(controljPanel);
@@ -364,7 +403,7 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
                     .add(angleMonitorjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(resetAnglejButton)
                     .add(getAnglejButton))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout monitorjPanelLayout = new org.jdesktop.layout.GroupLayout(monitorjPanel);
@@ -537,7 +576,7 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
         pidjPanelLayout.setVerticalGroup(
             pidjPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, pidjPanelLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -613,7 +652,7 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
             .add(connectionjPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Connection", connectionjPanel);
@@ -640,25 +679,37 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
 
     private void forwardjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("FORWARD-A:"+speedjTextField.getText());
+        if (leftMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("FORWARD-A:" + speedjTextField.getText());
+        } else if (rightMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("FORWARD-B:" + speedjTextField.getText());
+        }
     }//GEN-LAST:event_forwardjButtonActionPerformed
 
     private void backwardjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardjButtonActionPerformed
-            // TODO add your handling code here:
-        roloClientConnector.write("BACKWARD-A:"+speedjTextField.getText());
+        // TODO add your handling code here:
+        if (leftMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("BACKWARD-A:" + speedjTextField.getText());
+        } else if (rightMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("BACKWARD-B:" + speedjTextField.getText());
+        }
     }//GEN-LAST:event_backwardjButtonActionPerformed
 
     private void rotatejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotatejButtonActionPerformed
         // TODO add your handling code here:
         String direction = "forward";
         String breaking = "break";
-        if(rotateBackwardjRadioButton.isSelected()){
+        if (rotateBackwardjRadioButton.isSelected()) {
             direction = "backward";
         }
-        if(coastjRadioButton.isSelected()){
+        if (coastjRadioButton.isSelected()) {
             breaking = "coast";
         }
-        roloClientConnector.write("ROTATE-A:"+rotateDegreesjTextField.getText()+":"+direction+":"+breaking);
+        if (leftMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("ROTATE-A:" + rotateDegreesjTextField.getText() + ":" + direction + ":" + breaking);
+        } else if (rightMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("ROTATE-B:" + rotateDegreesjTextField.getText() + ":" + direction + ":" + breaking);
+        }
     }//GEN-LAST:event_rotatejButtonActionPerformed
 
     private void connectjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectjButtonActionPerformed
@@ -693,12 +744,22 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
 
     private void stopjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("STOP-A:");
+
+        if (leftMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("STOP-A:");
+        } else if (rightMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("STOP-B:");
+        }
+
     }//GEN-LAST:event_stopjButtonActionPerformed
 
     private void setSpeedjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setSpeedjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("SETSPEED-A:"+speedjTextField.getText());
+        if (leftMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("SETSPEED-A:" + speedjTextField.getText());
+        } else if (rightMotorjRadioButton.isSelected()) {
+            roloClientConnector.write("SETSPEED-B:" + speedjTextField.getText());
+        }
     }//GEN-LAST:event_setSpeedjButtonActionPerformed
 
     private void getSpeedjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getSpeedjButtonActionPerformed
@@ -728,29 +789,29 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
     private void rotatePIDjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotatePIDjButtonActionPerformed
         // TODO add your handling code here:
         String direction = "right";
-        if(pidRotateLeftjRadioButton.isSelected()){
+        if (pidRotateLeftjRadioButton.isSelected()) {
             direction = "left";
         }
-        roloClientConnector.write("ROTATE-FRONT_WHEELS:"+direction+":"+pidDegresjTextField.getText());
+        roloClientConnector.write("ROTATE-FRONT_WHEELS:" + direction + ":" + pidDegresjTextField.getText());
     }//GEN-LAST:event_rotatePIDjButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String direction = "forward";
-        if(moveBackwardjRadioButton.isSelected()){
+        if (moveBackwardjRadioButton.isSelected()) {
             direction = "backward";
         }
-        roloClientConnector.write("MOVE-FRONT_WHEELS:"+direction+":"+pidDistancejTextField.getText());
+        roloClientConnector.write("MOVE-FRONT_WHEELS:" + direction + ":" + pidDistancejTextField.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void setDiamjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setDiamjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("SETDIAM-FRONT_WHEELS:"+wheelsDiamjTextField.getText());
+        roloClientConnector.write("SETDIAM-FRONT_WHEELS:" + wheelsDiamjTextField.getText());
     }//GEN-LAST:event_setDiamjButtonActionPerformed
 
     private void setDistjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setDistjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("SETDIST-FRONT_WHEELS:"+wheelDistancejTextField.getText());
+        roloClientConnector.write("SETDIST-FRONT_WHEELS:" + wheelDistancejTextField.getText());
     }//GEN-LAST:event_setDistjButtonActionPerformed
 
     /**
@@ -814,9 +875,12 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JRadioButton leftMotorjRadioButton;
+    private javax.swing.ButtonGroup leftRightMotorSelectionbuttonGroup;
     private javax.swing.JCheckBox localjCheckBox;
     private javax.swing.JPanel monitorjPanel;
     private javax.swing.JRadioButton moveBackwardjRadioButton;
@@ -829,6 +893,7 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
     private javax.swing.JRadioButton pidRotateRightjRadioButton;
     private javax.swing.JPanel pidjPanel;
     private javax.swing.JButton resetAnglejButton;
+    private javax.swing.JRadioButton rightMotorjRadioButton;
     private javax.swing.JRadioButton rotateBackwardjRadioButton;
     private javax.swing.JTextField rotateDegreesjTextField;
     private javax.swing.JRadioButton rotateForwardjRadioButton;
@@ -847,4 +912,19 @@ public class SimpleMotorTestUIJFrame extends javax.swing.JFrame implements UIVie
     private javax.swing.JTextField wheelDistancejTextField;
     private javax.swing.JTextField wheelsDiamjTextField;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void messageReceived(ClientSession session, Object message, String producerId) throws Exception {
+        System.out.println(">>> Client Handler Message Recieved = " + message);
+        String[] values = message.toString().split(":");
+        if (values[0].equals("SPEED_REPORT")) {
+            getSpeedMonitorjTextField().setText(values[1]);
+        }
+        if (values[0].equals("ANGLE_REPORT")) {
+            getAngleMonitorjTextField().setText(values[1]);
+        }
+        if (values[0].equals("STATUS_REPORT")) {
+            getStatusjTextField().setText(values[1]);
+        }
+    }
 }

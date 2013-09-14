@@ -13,12 +13,12 @@ import org.kie.api.runtime.rule.*;
 import org.drools.core.common.*;
 
 
-declare com.salaboy.rolo.model.DistanceReport
+declare com.salaboy.rolo.model.reports.DistanceReport
     @role(event)
     @expires(1s)
 end
 
-declare com.salaboy.rolo.model.LightReport
+declare com.salaboy.rolo.model.reports.LightReport
     @role(event)
     @expires(2s)
 end
@@ -43,17 +43,12 @@ global HornetQSessionWriter notifications;
 
 
 
-
-
-
-
-
 rule "Too Dark - Look another place" 
     when
         $r: RoloTheRobot()
         $s180: Servo180(name == "Head")
         LightSensor( $sensor: name )
-        $n: Number( doubleValue < 300) from accumulate (LightReport( sensorName == $sensor, $l: light ) over window:time( 10s ) from entry-point "light-sensor", average($l))
+        $n: Number( doubleValue < 300) from accumulate (LightReport( sensorName == $sensor, $l: lightIntensity ) over window:time( 10s ) from entry-point "light-sensor", average($l))
         
     then
        notifications.write("Process-TOO_DARK:"+$n); 

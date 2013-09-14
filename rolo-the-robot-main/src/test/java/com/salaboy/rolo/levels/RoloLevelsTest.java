@@ -86,15 +86,15 @@ public class RoloLevelsTest {
         roloTheRobot.setPositionX(10);
         
         levels.update(roloFactHandle, roloTheRobot);
+        Wall wall = new Wall();
         
-
-        levels.insert(new Wall(100, 100, 10, 0));
+        levels.insert(wall);
         
         roloTheRobot.setOrientation(90);
         roloTheRobot.setPositionY(20);
         levels.update(roloFactHandle, roloTheRobot);
-        
-        levels.insert(new Wall(100, 100, 10, 20));
+        Wall wall2 = new Wall();
+        levels.insert(wall2);
         
         
         

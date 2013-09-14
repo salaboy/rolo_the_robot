@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.salaboy</groupId>
+        <artifactId>rolo_the_robot</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>rolo-the-robot-monitor</artifactId>
+    <name>Rolo The Robot Monitor</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.salaboy</groupId>
+            <artifactId>rolo-the-robot-comm</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>processing-core</artifactId>
+        </dependency>    
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>processing-jogl-all</artifactId>
+           
+        </dependency>  
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>processing-jogl-all</artifactId>
+            <classifier>natives-macosx-universal</classifier>
+            <!--classifier>natives-linux-amd64</classifier-->
+            <!--classifier>natives-linux-i586</classifier-->
+            <!--classifier>natives-linux-armv6hf</classifier-->
+            <!--classifier>natives-windows-amd64</classifier-->
+            <!--classifier>natives-windows-i586</classifier-->
+            <version>2.0.2</version>
+        </dependency>   
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>processing-gluegen-rt</artifactId>
+           
+        </dependency>
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>processing-gluegen-rt</artifactId>
+            <classifier>natives-macosx-universal</classifier>
+            <!--classifier>natives-linux-amd64</classifier-->
+            <!--classifier>natives-linux-i586</classifier-->
+            <!--classifier>natives-linux-armv6hf</classifier-->
+            <!--classifier>natives-windows-amd64</classifier-->
+            <!--classifier>natives-windows-i586</classifier-->
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>processing-peasycam</artifactId>
+           
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <id>extraLibs</id>
+            <url>file://${project.basedir}/extraLibs</url>
+        </repository>  
+    </repositories>
+</project>

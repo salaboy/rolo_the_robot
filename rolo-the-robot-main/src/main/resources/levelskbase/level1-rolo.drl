@@ -7,28 +7,6 @@ import com.salaboy.rolo.api.Motor.*;
 
 
 
-
-declare com.salaboy.rolo.model.DistanceReport
-    @role(event)
-    @expires(1s)
-end
-
-query getAllMotors()
-    Motor()
-end
-
-query getAllSensors()
-    Sensor()
-end
-
-query getAllDistanceSensors()
-    DistanceSensor()
-end
-
-query getAllTiltSensors()
-    TiltSensor()
-end
-
 query getAllWorldShapes()
     $ws: WorldShape()
 end
