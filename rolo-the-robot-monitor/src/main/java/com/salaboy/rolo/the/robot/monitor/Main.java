@@ -8,7 +8,6 @@ package com.salaboy.rolo.the.robot.monitor;
 import com.salaboy.rolo.the.robot.comm.CommandClientHandler;
 import com.salaboy.rolo.the.robot.comm.RoloClientConnector;
 import com.salaboy.rolo.the.robot.comm.UIView;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;

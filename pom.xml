@@ -19,7 +19,8 @@
         <module>rolo-the-robot-hardware-test-ui</module>
         <module>rolo-the-robot-monitor</module>
         <module>rolo-the-robot-comm</module>
-    </modules>
+    <module>rolo-the-robot-mind</module>
+  </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

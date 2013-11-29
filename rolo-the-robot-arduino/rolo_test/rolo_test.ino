@@ -39,6 +39,12 @@ PID myPID_rm(&Input_rm, &Output_rm, &Setpoint_rm, consKp_rm, consKi_rm, consKd_r
 // left-motor:start:4:forward:255:90:brake;
 // left-motor:read:0;
 
+//Devices name:
+// - front-wheels
+// - sonar1
+// - left-motor
+// - rightMotor
+
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 int leftMotorSpeed = 255;

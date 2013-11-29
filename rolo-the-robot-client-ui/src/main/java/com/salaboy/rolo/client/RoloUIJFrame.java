@@ -372,22 +372,22 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     private void forwardjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardjButtonActionPerformed
         // TODO add your handling code here:
         
-        roloClientConnector.write("FORWARD:126");
+        roloClientConnector.write("WHEELS-FORWARD:126");
     }//GEN-LAST:event_forwardjButtonActionPerformed
 
     private void rightjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("RIGHT:126");
+        roloClientConnector.write("WHEEL-RIGHT:126");
     }//GEN-LAST:event_rightjButtonActionPerformed
 
     private void leftjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftjButtonActionPerformed
         
-        roloClientConnector.write("LEFT:126");
+        roloClientConnector.write("WHEEL-LEFT:126");
     }//GEN-LAST:event_leftjButtonActionPerformed
 
     private void backwardjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardjButtonActionPerformed
         
-        roloClientConnector.write("BACKWARD:126");
+        roloClientConnector.write("WHEELS-BACKWARD:126");
     }//GEN-LAST:event_backwardjButtonActionPerformed
 
     private void rotateRightjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotateRightjButtonActionPerformed

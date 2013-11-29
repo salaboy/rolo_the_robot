@@ -1,0 +1,120 @@
+package com.salaboy.rolo;
+
+import com.salaboy.rolo.model.*;
+import com.salaboy.rolo.model.reports.*;
+import com.salaboy.rolo.*;
+
+import com.salaboy.rolo.body.api.*;
+
+import com.salaboy.rolo.events.*;
+
+import com.salaboy.rolo.the.robot.comm.*;
+
+import org.kie.internal.event.rule.*;
+import org.kie.api.runtime.rule.*;
+import org.drools.core.common.*;
+
+import javax.enterprise.event.*;
+
+declare DistanceReport
+    @role(event)
+    @expires(1s)
+end
+
+global Event notifications;
+
+global Event external;
+
+rule "robot part logger"
+    when
+       $rP: RobotPart()
+    then
+        System.out.println(">>> A new robot part was added: "+ $rP);
+end
+
+rule "poll distance sensors every 10s"
+    timer ( int: 0s 10s )
+    when
+        $dS: RobotSonar()
+    then
+        System.out.println(">>> I'm polling the Distance Sensor Now");
+        $dS.readDistance();
+        external.fire(new ExternalNotificationEvent("Trying to read the distance from the remote sensor!!"));
+end
+
+
+rule "simple distance-sensor entry point"
+    when
+        $dR: DistanceReport() from entry-point "distance-sensor"
+    then
+        System.out.println(">>> Log Event: "+$dR);
+        external.fire(new ExternalNotificationEvent("DISTANCE-REPORT: "+$dR.getDistance()));
+end
+
+rule "simple mind notification"
+    when
+        $dR: DistanceReport() from entry-point "distance-sensor"
+    then
+        notifications.fire(new MindNotificationEvent("Hmmm.. nice I'm a "+$dR.getDistance()+" of something!"));
+end
+
+
+
+
+
+rule "correlate reports with body parts"
+    salience -10
+    when
+        $dR: DistanceReport() from entry-point "distance-sensor"
+        $fW: RobotFrontWheels()
+    then
+        $fW.move("backward", 10);
+
+end
+
+
+
+
+
+
+
+
+
+
+/*rule "Something is getting Closer" 
+    when
+        $r: RoloTheRobot()
+        RobotSonar( $sensor: name )
+        $n: Number( doubleValue < 0.5 ) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 1000ms ) from entry-point "distance-sensor", tendency($d))
+        
+    then
+       System.out.println("WARN: Something is getting closer" + $n);
+end
+
+rule "Something is going away" 
+    when
+        $r: RoloTheRobot()
+        RobotSonar( $sensor: name )
+        $n: Number( doubleValue > 0.5 ) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 1000ms ) from entry-point "distance-sensor", tendency($d))
+        
+    then
+       System.out.println("WARN: Something is going away" + $n);
+end*/
+
+
+
+/*rule " Robot log" 
+    when
+        
+        $n: Number( doubleValue > 50) from accumulate (DistanceReport( $d: distance ) over window:time( 300ms ) from entry-point "distance-sensor", average($d))
+    then
+       System.out.println("Current avg: "+$n);
+       
+
+end*/
+
+
+
+
+
+

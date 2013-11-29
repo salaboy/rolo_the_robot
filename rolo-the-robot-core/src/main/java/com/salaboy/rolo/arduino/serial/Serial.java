@@ -662,4 +662,8 @@ public class Serial implements SerialPortEventListener {
         e.printStackTrace();
         throw new RuntimeException("Error inside Serial." + where + "()");
     }
+    
+    public boolean isOutputNull(){
+        return !(output == null);
+    }
 }
