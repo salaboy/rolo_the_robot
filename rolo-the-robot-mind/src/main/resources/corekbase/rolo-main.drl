@@ -46,7 +46,7 @@ end
 rule "poll distance sensors every 1s"
     timer ( int: 0s 1s )
     when
-        $dS: RobotSonar()
+        $dS: RobotSonar(name == "sonar-front")
     then
         $dS.readDistance();
 end
