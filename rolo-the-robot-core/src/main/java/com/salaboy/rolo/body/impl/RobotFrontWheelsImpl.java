@@ -92,5 +92,15 @@ public class RobotFrontWheelsImpl implements RobotFrontWheels{
     public void stopAll() {
         messageEvents.fire(new BodyEvent(name+":stop-all:0"));
     }
+
+    @Override
+    public void forward() {
+        messageEvents.fire(new BodyEvent(name+":forward:0"));
+    }
+
+    @Override
+    public void backward() {
+        messageEvents.fire(new BodyEvent(name+":backward:0"));
+    }
     
 }

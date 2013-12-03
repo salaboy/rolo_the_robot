@@ -33,45 +33,25 @@ rule "robot part logger"
         external.fire(new ExternalNotificationEvent(">>> A new robot part was added: "+ $rP));
 end
 
-/*rule "poll distance sensors every 10s"
-    timer ( int: 0s 10s )
+rule "poll distance sensors every 1s"
+    timer ( int: 0s 1s )
     when
         $dS: RobotSonar()
     then
-        System.out.println(">>> I'm polling the Distance Sensor Now");
         $dS.readDistance();
-        external.fire(new ExternalNotificationEvent(" XXXX Trying to read the distance from the remote sensor!!"));
 end
 
 
-rule "simple distance-sensor entry point"
-    when
-        $dR: DistanceReport() from entry-point "distance-sensor"
-    then
-        System.out.println(">>> Log Event: "+$dR);
-        external.fire(new ExternalNotificationEvent("DISTANCE-REPORT: "+$dR.getDistance()));
-end
-
-rule "simple mind notification"
-    when
-        $dR: DistanceReport() from entry-point "distance-sensor"
-    then
-        notifications.fire(new MindNotificationEvent("Hmmm.. nice I'm a "+$dR.getDistance()+" of something!"));
-end
-
-
-
-
-
-rule "correlate reports with body parts"
+rule "If there is something closer than 30 cm turn left 90 degrees"
     salience -10
     when
-        $dR: DistanceReport() from entry-point "distance-sensor"
+        $n: Number( doubleValue < 30.0 ) from accumulate (DistanceReport(sensorName == "SONAR_FRONT", $distance: distance) from entry-point "distance-sensor", average($distance))
         $fW: RobotFrontWheels()
     then
-        $fW.move("backward", 10);
-
-end*/
+        $fW.stopAll();
+        $fW.rotate("left", 90);
+        $fW.forward();
+end
 
 
 

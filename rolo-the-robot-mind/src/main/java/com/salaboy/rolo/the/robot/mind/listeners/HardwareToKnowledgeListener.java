@@ -37,17 +37,17 @@ public class HardwareToKnowledgeListener {
             if(data.length > 0){
                 System.out.println("DATA IN HARDWARE EVENT: "+data[0] + " data 1 =" + data[1]);
                 if(data[0].equalsIgnoreCase("SONAR_FRONT_REPORT")){
-                    sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_FRONT_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
-                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_FRONT_REPORT = "+data[1]));
+                    sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_FRONT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_FRONT = "+data[1]));
                 }else if(data[0].equalsIgnoreCase("SONAR_BACK_REPORT")){
                     sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_BACK_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
-                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_BACK_REPORT = "+data[1]));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_BACK = "+data[1]));
                 }else if(data[0].equalsIgnoreCase("SONAR_RIGHT_REPORT")){
                     sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_RIGHT_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
-                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_RIGHT_REPORT = "+data[1]));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_RIGHT = "+data[1]));
                 }else if(data[0].equalsIgnoreCase("SONAR_LEFT_REPORT")){
                     sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_LEFT_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
-                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_LEFT_REPORT = "+data[1]));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_LEFT = "+data[1]));
                 }
             }
             
