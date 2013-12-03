@@ -1,4 +1,4 @@
-<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
     <kbase name="corekbase" eventProcessingMode="stream">
         <ksession name="rolo"/>
     </kbase>

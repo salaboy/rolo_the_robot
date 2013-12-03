@@ -52,17 +52,18 @@ public class SimpleRoloMindTest {
   
         rolo.addRobotPart(roloFrontWheels);
         
-        roloDistanceSensor1.setName("sonar1");
+        roloDistanceSensor1.setName("SONAR_FRONT");
         rolo.addRobotPart(roloDistanceSensor1);
         
+        roloDistanceSensor1.readDistance();
+        roloDistanceSensor1.readDistance();
+        Thread.sleep(1000);
+        
+       // roloFrontWheels.move("backward", 100);
         
         Thread.sleep(1000);
         
-        roloFrontWheels.move("backward", 100);
-        
-        Thread.sleep(1000);
-        
-        roloFrontWheels.move("forward", 100);
+       // roloFrontWheels.move("forward", 100);
        
         Thread.sleep(1000);
         

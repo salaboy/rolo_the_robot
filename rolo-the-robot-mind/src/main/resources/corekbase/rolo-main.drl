@@ -33,6 +33,16 @@ rule "robot part logger"
         external.fire(new ExternalNotificationEvent(">>> A new robot part was added: "+ $rP));
 end
 
+rule "looking for something to do"
+    salience 10
+    when
+        $fW: RobotFrontWheels()
+    then
+        $fW.forward();
+        notifications.fire(new MindNotificationEvent(" Looking for something to do!"));
+end
+
+
 rule "poll distance sensors every 1s"
     timer ( int: 0s 1s )
     when
@@ -43,14 +53,15 @@ end
 
 
 rule "If there is something closer than 30 cm turn left 90 degrees"
-    salience -10
+    
     when
-        $n: Number( doubleValue < 30.0 ) from accumulate (DistanceReport(sensorName == "SONAR_FRONT", $distance: distance) from entry-point "distance-sensor", average($distance))
+        $n: Number( doubleValue < 30.0 ) from accumulate (DistanceReport(sensorName == "SONAR_FRONT", $distance: distance) over window:time( 500ms ) from entry-point "distance-sensor", average($distance))
         $fW: RobotFrontWheels()
     then
         $fW.stopAll();
         $fW.rotate("left", 90);
         $fW.forward();
+        notifications.fire(new MindNotificationEvent(" Rotating 90 degrees left because there is something in front of me"));
 end
 
 
