@@ -30,16 +30,17 @@ rule "robot part logger"
        $rP: RobotPart()
     then
         System.out.println(">>> A new robot part was added: "+ $rP);
+        external.fire(new ExternalNotificationEvent(">>> A new robot part was added: "+ $rP));
 end
 
-rule "poll distance sensors every 10s"
+/*rule "poll distance sensors every 10s"
     timer ( int: 0s 10s )
     when
         $dS: RobotSonar()
     then
         System.out.println(">>> I'm polling the Distance Sensor Now");
         $dS.readDistance();
-        external.fire(new ExternalNotificationEvent("Trying to read the distance from the remote sensor!!"));
+        external.fire(new ExternalNotificationEvent(" XXXX Trying to read the distance from the remote sensor!!"));
 end
 
 
@@ -70,7 +71,7 @@ rule "correlate reports with body parts"
     then
         $fW.move("backward", 10);
 
-end
+end*/
 
 
 

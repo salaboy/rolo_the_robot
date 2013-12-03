@@ -39,16 +39,6 @@ public class RobotMotorImpl implements RobotMotor {
     }
 
     @Override
-    public void forward(int speed, long millisec) {
-        messageEvents.fire(new BodyEvent(name+":start:4:forward:"+speed+":90:brake"));
-    }
-
-    @Override
-    public void backward(int speed, long millisec) {
-        messageEvents.fire(new BodyEvent(name+":start:4:backward:"+speed+":90:brake"));
-    }
-
-    @Override
     public void stop() {
         messageEvents.fire(new BodyEvent(name+":stop:0"));
     }
@@ -92,5 +82,9 @@ public class RobotMotorImpl implements RobotMotor {
     public void rotate(int degrees, String direction, String brake) {
         messageEvents.fire(new BodyEvent(name+":rotate:3:"+degrees+":"+direction+":"+brake));
     }
-    
+
+    @Override
+    public String toString() {
+        return "RobotMotorImpl{" + "name=" + name + '}';
+    }
 }

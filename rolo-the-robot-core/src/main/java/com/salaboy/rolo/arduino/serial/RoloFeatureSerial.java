@@ -25,13 +25,24 @@ public class RoloFeatureSerial {
     private Event<HardwareNotificationEvent> hardwareNotificationEvent;
 
     public RoloFeatureSerial() {
-        this("/dev/tty.usbmodemfa131", 115200);
-        
+        this( 115200);
+    }
+    
+    private String resolveSerialPort(){
+        String[] list = list();
+        for(String s : list){
+            if(s.startsWith("/dev/tty.usbmodem")){
+                System.out.println("Selected Serial Port: "+s);
+                return s;
+            }
+        }
+        System.out.println("No Serial Port Found! ");
+        return "";
     }
     
     
-    
-    public RoloFeatureSerial(String iname, int irate) {
+    public RoloFeatureSerial( int irate) {
+        String iname = resolveSerialPort();
         serialProxy = new SerialProxy();
         this.serial = new Serial(serialProxy, iname, irate);
         this.serial.bufferUntil(";".charAt(0));
@@ -74,13 +85,10 @@ public class RoloFeatureSerial {
      * Get a list of the available Arduino boards; currently all serial devices
      * (i.e. the same as Serial.list()). In theory, this should figure out
      * what's an Arduino board and what's not.
+     * @return the list of Serial devices
      */
     public static String[] list() {
-        String[] list = Serial.list();
-        for(String item : list){
-            System.out.println("Serial things: "+item);
-        }
-        return list;
+        return Serial.list();
     }
     
     private int available() {

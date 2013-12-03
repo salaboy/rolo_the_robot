@@ -5,6 +5,7 @@
  */
 package com.salaboy.rolo.the.robot.mind.listeners;
 
+import com.salaboy.rolo.events.ExternalNotificationEvent;
 import com.salaboy.rolo.events.HardwareNotificationEvent;
 import com.salaboy.rolo.events.ReadDistanceSensorEvent;
 import javax.enterprise.event.Event;
@@ -22,18 +23,33 @@ public class HardwareToKnowledgeListener {
     @Inject
     private Event<ReadDistanceSensorEvent> sonarEvent;
 
+    @Inject
+    private Event<ExternalNotificationEvent> externalEvent;
+    
     public HardwareToKnowledgeListener() {
-        System.out.println(" >>> ROLO HARDWARE TO KNOWLEDGE LISTENER CREATED! " +this.hashCode());
     }
     
     
     
     public void onHardwareEvent(@Observes HardwareNotificationEvent event){
             String[] data = event.getData().split(":");
+            
             if(data.length > 0){
-                if(data[0].equalsIgnoreCase("sonar-report")){
-                    sonarEvent.fire(new ReadDistanceSensorEvent(data[1], Integer.valueOf(data[2])));
+                System.out.println("DATA IN HARDWARE EVENT: "+data[0] + " data 1 =" + data[1]);
+                if(data[0].equalsIgnoreCase("SONAR_FRONT_REPORT")){
+                    sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_FRONT_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_FRONT_REPORT = "+data[1]));
+                }else if(data[0].equalsIgnoreCase("SONAR_BACK_REPORT")){
+                    sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_BACK_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_BACK_REPORT = "+data[1]));
+                }else if(data[0].equalsIgnoreCase("SONAR_RIGHT_REPORT")){
+                    sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_RIGHT_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_RIGHT_REPORT = "+data[1]));
+                }else if(data[0].equalsIgnoreCase("SONAR_LEFT_REPORT")){
+                    sonarEvent.fire(new ReadDistanceSensorEvent("SONAR_LEFT_REPORT", Integer.valueOf(data[1].substring(0, data[1].length() -1))));
+                    externalEvent.fire(new ExternalNotificationEvent(">>>SONAR_LEFT_REPORT = "+data[1]));
                 }
             }
+            
     }
 }

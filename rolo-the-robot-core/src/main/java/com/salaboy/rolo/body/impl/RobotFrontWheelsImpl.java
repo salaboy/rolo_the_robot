@@ -34,8 +34,8 @@ public class RobotFrontWheelsImpl implements RobotFrontWheels{
     
     @PostConstruct
     public void init(){
-        rightMotor.setName("motor-right");
-        leftMotor.setName("motor-left");
+        rightMotor.setName("right-motor");
+        leftMotor.setName("left-motor");
     }
 
     public RobotFrontWheelsImpl(String name) {
@@ -88,5 +88,9 @@ public class RobotFrontWheelsImpl implements RobotFrontWheels{
         return leftMotor;
     }
     
+    @Override
+    public void stopAll() {
+        messageEvents.fire(new BodyEvent(name+":stop-all:0"));
+    }
     
 }

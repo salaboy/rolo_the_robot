@@ -76,7 +76,10 @@ public class RobotSonarsImpl implements RobotSonars {
     public RobotSonar getRightSonar() {
         return rightSonar;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "RobotSonarsImpl{" + "name=" + name + ", frontSonar=" + frontSonar + ", backSonar=" + backSonar + ", leftSonar=" + leftSonar + ", rightSonar=" + rightSonar + '}';
+    }
     
 }

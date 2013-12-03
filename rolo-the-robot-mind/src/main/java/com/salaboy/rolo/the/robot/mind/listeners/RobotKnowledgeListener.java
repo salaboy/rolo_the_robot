@@ -43,7 +43,6 @@ public class RobotKnowledgeListener {
     private Event<ExternalNotificationEvent> externalNotifications;
     
     public RobotKnowledgeListener() {
-        System.out.println(">>> ROLO MIND WAS CONSTRUCTED!!! " +this.hashCode() );
     }
     
     @PostConstruct

@@ -15,11 +15,11 @@
         <module>rolo-the-robot-core</module>
         <module>rolo-the-robot-main</module>
         <module>rolo-the-robot-client-ui</module>
-        <module>rolo-the-robot-hardware-test</module>
-        <module>rolo-the-robot-hardware-test-ui</module>
+        <!--module>rolo-the-robot-hardware-test</module>
+        <module>rolo-the-robot-hardware-test-ui</module-->
         <module>rolo-the-robot-monitor</module>
         <module>rolo-the-robot-comm</module>
-    <module>rolo-the-robot-mind</module>
+        <module>rolo-the-robot-mind</module>
   </modules>
 
     <properties>

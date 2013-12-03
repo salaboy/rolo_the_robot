@@ -5,14 +5,26 @@
 #include <MsTimer2.h>
 #include <NewPing.h>
 
-#define TRIGGER_PIN  4
-#define ECHO_PIN     13
+#define TRIGGER_PIN_FRONT  44
+#define ECHO_PIN_FRONT     45
+#define TRIGGER_PIN_BACK  46
+#define ECHO_PIN_BACK     47
+#define TRIGGER_PIN_LEFT  40
+#define ECHO_PIN_LEFT     41
+#define TRIGGER_PIN_RIGHT  42
+#define ECHO_PIN_RIGHT     43
 #define MAX_DISTANCE 200
 
 Motor1 leftMotor;
 Motor2 rightMotor;
 
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+NewPing sonar_front(TRIGGER_PIN_FRONT, ECHO_PIN_FRONT, MAX_DISTANCE);
+
+NewPing sonar_back(TRIGGER_PIN_BACK, ECHO_PIN_BACK, MAX_DISTANCE);
+
+NewPing sonar_right(TRIGGER_PIN_RIGHT, ECHO_PIN_RIGHT, MAX_DISTANCE);
+
+NewPing sonar_left(TRIGGER_PIN_LEFT, ECHO_PIN_LEFT, MAX_DISTANCE);
 
 
 //Define Variables we'll be connecting to
@@ -53,24 +65,22 @@ String currentDirectionLeft = "forward";
 String currentDirectionRight = "forward";
 
 float Diam = 43.2 ;// Diametro de las ruedas en mm
-int Dist = 165;    // Separacion entre ruedas en mm
+int Dist = 166;    // Separacion entre ruedas en mm
 float val = 0.00;
- int pot_lm = 120;
- int pot_rm = 120;
- int lm_old = 0;
- int rm_old = 0;
- int lm_new = 0;
- int rm_new = 0;
- int desp_lm = 0;
- int desp_rm = 0;
- int pul_seg_lm = 0;
- int pul_seg_rm = 0;
+int pot_lm = 120;
+int pot_rm = 120;
+int lm_old = 0;
+int rm_old = 0;
+int lm_new = 0;
+int rm_new = 0;
+int desp_lm = 0;
+int desp_rm = 0;
+int pul_seg_lm = 0;
+int pul_seg_rm = 0;
 
 
 
 void setup() {
-  
-
   // initialize serial:
   Serial.begin(115200);
   // reserve 200 bytes for the inputString:
@@ -88,10 +98,6 @@ void setup() {
   myPID_lm.SetOutputLimits(0, 255);
   myPID_rm.SetMode(AUTOMATIC);
   myPID_rm.SetOutputLimits(0, 255);
-  
-
-  
-  
 }
 
 void loop() {
@@ -114,7 +120,7 @@ void loop() {
     
     String args[numberOfArguments];
     for(int i=0; i < numberOfArguments; i ++){
-    //  Serial.println("Args now: "+cleanArguments);
+     // Serial.println("Args now: "+cleanArguments);
       int currentArgDelimiter = cleanArguments.indexOf(':');
       String currentArg = cleanArguments.substring(0, currentArgDelimiter);
       args[i] = currentArg;
@@ -133,88 +139,107 @@ void loop() {
          Diam = (float)args[0].toInt();
       }else if(commandName=="setDist"){
          Dist = args[0].toInt();
+      }else if(commandName=="stop-all"){
+         stop_single_motor("right-motor");
+         stop_single_motor("left-motor");
       }
-    }
-    if(deviceName=="sonar1"){
+    }else if(deviceName=="sonar-front"){
       if(commandName=="read"){
-        int uS = sonar.ping_median(10);
-        Serial.print("SONAR_REPORT:");
+        int uS = sonar_front.ping_median(10);
+        Serial.print("SONAR_FRONT_REPORT:");
         Serial.print(uS / US_ROUNDTRIP_CM);
         Serial.print(";");
       }
-    }
-   
-    else{
- //left-motor:rotate:2:90:forward;
-     if(commandName=="rotate"){
-            Direction mydirection = forward;
-            if( args[1].equals("backward")){
-               mydirection = backward;
-            }
-            Brake mybrake = brake;
-            if( args[2].equals("coast")){
-              mybrake = coast;
-            }
-            move_single_motor(deviceName, mydirection, uint8_t(args[0].toInt()), mybrake);
-            while(is_turning_single_motor(deviceName));
-      }else if(commandName=="stop"){
-          stop_single_motor(deviceName);
-      }else if(commandName=="read"){
-          Serial.print("ANGLE_REPORT:");
-          Serial.print(read_position_single_motor(deviceName),DEC);
-          Serial.print(";");
-      }else if(commandName=="reset"){
-          reset_position_single_motor(deviceName);
-      }else if(commandName=="isturning"){
-          Serial.print("STATUS_REPORT:");
-          Serial.print(is_turning_single_motor(deviceName)+";");
-      }else if(commandName=="forward"){
-          move_single_motor(deviceName, forward);
-          if(deviceName.startsWith("left")){
-              currentDirectionLeft = "forward";
-          }else{
-              currentDirectionRight = "forward";
-          }
-                      
-      }else if(commandName=="backward"){
-          move_single_motor(deviceName, backward);
-          if(deviceName.startsWith("left")){
-              currentDirectionLeft = "backward";
-          }else{
-              currentDirectionRight = "backward";
-          }
-      }else if(commandName=="setSpeed"){
-         
-          if(is_turning_single_motor(deviceName)){
-            
-           if(deviceName.startsWith("left")){ 
-              if(currentDirectionLeft == "forward"){
-                 move_single_motor(deviceName, forward);
-              }else if( currentDirectionLeft == "backward"){
-                 move_single_motor(deviceName, backward);
+    }else if(deviceName=="sonar-back"){
+      if(commandName=="read"){
+        int uS = sonar_back.ping_median(10);
+        Serial.print("SONAR_BACK_REPORT:");
+        Serial.print(uS / US_ROUNDTRIP_CM);
+        Serial.print(";");
+      }
+    }else if(deviceName=="sonar-left"){
+      if(commandName=="read"){
+        int uS = sonar_left.ping_median(10);
+        Serial.print("SONAR_LEFT_REPORT:");
+        Serial.print(uS / US_ROUNDTRIP_CM);
+        Serial.print(";");
+      }
+    }else if(deviceName=="sonar-right"){
+      if(commandName=="read"){
+        int uS = sonar_right.ping_median(10);
+        Serial.print("SONAR_RIGHT_REPORT:");
+        Serial.print(uS / US_ROUNDTRIP_CM);
+        Serial.print(";");
+      }
+    } else{
+       //left-motor:rotate:2:90:forward;
+       if(commandName=="rotate"){
+              Direction mydirection = forward;
+              if( args[1].equals("backward")){
+                 mydirection = backward;
               }
-           }else{
-              if(deviceName.startsWith("left")){ 
-                if(currentDirectionRight == "forward"){
+              Brake mybrake = brake;
+              if( args[2].equals("coast")){
+                mybrake = coast;
+              }
+              move_single_motor(deviceName, mydirection, uint8_t(args[0].toInt()), mybrake);
+              while(is_turning_single_motor(deviceName));
+        }else if(commandName=="stop"){
+            stop_single_motor(deviceName);
+        }else if(commandName=="read"){
+            Serial.print("ANGLE_REPORT:");
+            Serial.print(read_position_single_motor(deviceName),DEC);
+            Serial.print(";");
+        }else if(commandName=="reset"){
+            reset_position_single_motor(deviceName);
+        }else if(commandName=="isturning"){
+            Serial.print("STATUS_REPORT:");
+            Serial.print(is_turning_single_motor(deviceName)+";");
+        }else if(commandName=="forward"){
+            move_single_motor(deviceName, forward);
+            if(deviceName.startsWith("left")){
+                currentDirectionLeft = "forward";
+            }else{
+                currentDirectionRight = "forward";
+            }
+                        
+        }else if(commandName=="backward"){
+            move_single_motor(deviceName, backward);
+            if(deviceName.startsWith("left")){
+                currentDirectionLeft = "backward";
+            }else{
+                currentDirectionRight = "backward";
+            }
+        }else if(commandName=="setSpeed"){
+           
+            if(is_turning_single_motor(deviceName)){
+              
+             if(deviceName.startsWith("left")){ 
+                if(currentDirectionLeft == "forward"){
                    move_single_motor(deviceName, forward);
-                }else if( currentDirectionRight == "backward"){
+                }else if( currentDirectionLeft == "backward"){
                    move_single_motor(deviceName, backward);
                 }
-              }
-           }
-            
-            
-          }
-      }else if(commandName=="getSpeed"){
-          if(deviceName.startsWith("left")){
-            Serial.print("SPEED_REPORT:"+String(leftMotorSpeed)+";");
-          }else{
-            Serial.print("SPEED_REPORT:"+String(rightMotorSpeed)+";");
-          }
-      }
+             }else{
+                if(deviceName.startsWith("left")){ 
+                  if(currentDirectionRight == "forward"){
+                     move_single_motor(deviceName, forward);
+                  }else if( currentDirectionRight == "backward"){
+                     move_single_motor(deviceName, backward);
+                  }
+                }
+             }
+              
+              
+            }
+        }else if(commandName=="getSpeed"){
+            if(deviceName.startsWith("left")){
+              Serial.print("SPEED_REPORT:"+String(leftMotorSpeed)+";");
+            }else{
+              Serial.print("SPEED_REPORT:"+String(rightMotorSpeed)+";");
+            }
+        }
     }
-    
-
     // clear the string:
     inputString = "";
     stringComplete = false;

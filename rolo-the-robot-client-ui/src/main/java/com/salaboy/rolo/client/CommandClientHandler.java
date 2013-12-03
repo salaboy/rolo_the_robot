@@ -39,18 +39,7 @@ public class CommandClientHandler {
         
         System.out.println(">>> Client Handler Message Recieved = " + message);
         String[] values = message.toString().split(":");
-        if(values[0].equals("DISTANCE_REPORT")){
-            ui.getDistancejTextField().setText(values[1]); 
-        }
         
-        if(values[0].equals("LIGHT_REPORT")){
-            ui.getLightjTextField().setText(values[1]);
-        }
-        
-        if(values[0].equals("TOUCH_REPORT")){
-            ui.getTouchjTextField().setText(values[1]);
-        }
-        
-        ui.getNotificationjTextArea().setText(">>> Client Handler Message Recieved = " + message + "\n"+ui.getNotificationjTextArea().getText());
+        ui.getNotificationjTextArea().setText(">>> Message Recieved = " + message + "\n"+ui.getNotificationjTextArea().getText());
     }
 }

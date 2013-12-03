@@ -9,11 +9,7 @@ package com.salaboy.rolo.body.api;
  * @author salaboy
  */
 public interface RobotMotor extends RobotPart {
-    
-    void forward(int speed, long millisec);
-
-    void backward(int speed, long millisec);
-
+  
     void forward();
     
     void backward();

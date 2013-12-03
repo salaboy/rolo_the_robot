@@ -18,5 +18,6 @@ public interface RobotFrontWheels extends RobotPart{
     RobotMotor getRightMotor();
     RobotMotor getLeftMotor();
     
+    void stopAll();
    
 }
