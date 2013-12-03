@@ -30,14 +30,18 @@ public class RoloFeatureSerial {
     
     private String resolveSerialPort(){
         String[] list = list();
+        String selectedPort = "";
         for(String s : list){
+            // Resolving for Mac OSX
             if(s.startsWith("/dev/tty.usbmodem")){
-                System.out.println("Selected Serial Port: "+s);
-                return s;
+                selectedPort = s;
             }
         }
-        System.out.println("No Serial Port Found! ");
-        return "";
+        if(selectedPort.equals("")){
+            selectedPort = list[0];
+        }
+        System.out.println("Selected Serial Port: "+selectedPort);
+        return selectedPort;
     }
     
     
