@@ -55,13 +55,13 @@ end
 rule "If there is something closer than 30 cm turn left 90 degrees"
     
     when
-        $n: Number( doubleValue < 30.0 ) from accumulate (DistanceReport(sensorName == "SONAR_FRONT", $distance: distance) over window:time( 3s ) from entry-point "distance-sensor", average($distance))
+        $n: Number( doubleValue < 30 ) from accumulate (DistanceReport(sensorName == "SONAR_FRONT", $distance: distance) over window:time( 3s ) from entry-point "distance-sensor", average($distance))
         $fW: RobotFrontWheels()
     then
      //   $fW.stopAll();
         $fW.rotate("left", 90);
      //   $fW.forward();
-        notifications.fire(new MindNotificationEvent(" Rotating 90 degrees left because there is something in front of me"));
+        notifications.fire(new MindNotificationEvent(" Rotating 90 degrees left because there is something in front of me ->" + $n));
 end
 
 
