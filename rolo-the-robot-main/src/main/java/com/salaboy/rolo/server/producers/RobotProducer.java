@@ -8,6 +8,7 @@ package com.salaboy.rolo.server.producers;
 import com.salaboy.rolo.body.api.Robot;
 import com.salaboy.rolo.body.api.RobotFrontWheels;
 import com.salaboy.rolo.body.api.RobotSonars;
+import com.salaboy.rolo.events.MindNotificationEvent;
 import com.salaboy.rolo.server.CompleteRobot;
 import com.salaboy.rolo.server.events.IncomingActionEvent;
 import javax.enterprise.event.Observes;
@@ -43,6 +44,10 @@ public class RobotProducer {
         robot.addRobotPart(roloSonars.getRightSonar());
         robot.addRobotPart(roloSonars.getLeftSonar());
         return robot;
+    }
+    
+    public void onMindNotification(@Observes MindNotificationEvent event){
+        System.out.println(">> I'm getting a mind suggestion: "+ event);
     }
     
     public void onIncomingActionEvent(@Observes IncomingActionEvent event){
