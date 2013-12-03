@@ -587,7 +587,7 @@ public class Serial implements SerialPortEventListener {
     public void write(byte bytes[]) {
         try {
             output.write(bytes);
-            output.flush();   // hmm, not sure if a good idea
+           // output.flush();   // hmm, not sure if a good idea
 
         } catch (Exception e) { // null pointer or serial port dead
             //errorMessage("write", e);
