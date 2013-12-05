@@ -13,10 +13,9 @@
     <modules>
         <module>rolo-the-robot-api</module>
         <module>rolo-the-robot-core</module>
-        <module>rolo-the-robot-main</module>
-        
         <module>rolo-the-robot-comm</module>
         <module>rolo-the-robot-mind</module>
+        <module>rolo-the-robot-main</module>
   </modules>
   <profiles>
       <profile>
