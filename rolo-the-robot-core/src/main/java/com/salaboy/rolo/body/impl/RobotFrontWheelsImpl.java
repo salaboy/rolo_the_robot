@@ -52,12 +52,17 @@ public class RobotFrontWheelsImpl implements RobotFrontWheels{
         return this.name;
     }
 
-
     @Override
     public void rotate(String direction, int degrees) {
         messageEvents.fire(new BodyEvent(name+":rotate:2:"+direction+":"+degrees));
     }
 
+    @Override
+    public void rotateAndMove(String direction, int degrees, String moveDirection) {
+        messageEvents.fire(new BodyEvent(name+":rotate-move:3:"+direction+":"+degrees+":"+moveDirection));
+    }
+
+    
     @Override
     public void move(String direction, int distance) {
         messageEvents.fire(new BodyEvent(name+":move:2:"+direction+":"+distance));

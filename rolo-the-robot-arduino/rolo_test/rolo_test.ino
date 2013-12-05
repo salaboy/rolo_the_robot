@@ -135,6 +135,15 @@ void loop() {
          rotate_front_wheels( args[0], args[1].toInt());
       }else if(commandName=="move"){
          move_front_wheels( args[0], args[1].toInt());
+      }if(commandName=="rotate-move"){
+         rotate_front_wheels( args[0], args[1].toInt());
+         if(args[2] == "forward"){
+           move_single_motor("right-motor", forward );
+           move_single_motor("left-motor", forward );
+         }else{
+           move_single_motor("right-motor", backward );
+           move_single_motor("left-motor", backward );
+         }
       }else if(commandName=="setDiam"){
          Diam = (float)args[0].toInt();
       }else if(commandName=="setDist"){
@@ -142,6 +151,12 @@ void loop() {
       }else if(commandName=="stop-all"){
          stop_single_motor("right-motor");
          stop_single_motor("left-motor");
+      }else if(commandName=="forward"){
+         move_single_motor("right-motor", forward);
+         move_single_motor("left-motor", forward);
+      }else if(commandName=="backward"){
+         move_single_motor("right-motor", backward);
+         move_single_motor("left-motor", backward);
       }
     }else if(deviceName=="sonar-front"){
       if(commandName=="read"){

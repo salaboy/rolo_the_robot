@@ -10,7 +10,10 @@ package com.salaboy.rolo.body.api;
  */
 public interface RobotFrontWheels extends RobotPart{
     void move(String direction, int distance);
+    
     void rotate(String direction, int degrees);
+    
+    void rotateAndMove(String direction, int degrees, String moveDirection);
     
     void setWheelsDistance(int distance);
     void setWheelsDiameter(int diameter);
