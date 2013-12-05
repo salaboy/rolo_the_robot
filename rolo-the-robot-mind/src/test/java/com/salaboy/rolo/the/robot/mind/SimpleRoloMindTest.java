@@ -6,8 +6,8 @@ package com.salaboy.rolo.the.robot.mind;
  * and open the template in the editor.
  */
 import com.salaboy.rolo.body.api.Robot;
-import com.salaboy.rolo.body.api.RobotSonar;
 import com.salaboy.rolo.body.api.RobotFrontWheels;
+import com.salaboy.rolo.body.api.RobotSonars;
 import com.salaboy.rolo.events.MindNotificationEvent;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -44,7 +44,7 @@ public class SimpleRoloMindTest {
    private RobotFrontWheels roloFrontWheels;
    
    @Inject 
-   private RobotSonar roloDistanceSensor1;
+   private RobotSonars roloSonars;
 
     @Test
     public void helloRolo() throws InterruptedException {
@@ -52,18 +52,15 @@ public class SimpleRoloMindTest {
   
         rolo.addRobotPart(roloFrontWheels);
         
-        roloDistanceSensor1.setName("sonar_front");
-        rolo.addRobotPart(roloDistanceSensor1);
         
-        roloDistanceSensor1.readDistance();
-        roloDistanceSensor1.readDistance();
-        Thread.sleep(1000);
+        rolo.addRobotPart(roloSonars);
         
-       // roloFrontWheels.move("backward", 100);
+         Thread.sleep(1000);
         
-        Thread.sleep(1000);
+       
+        roloSonars.readAll();
         
-       // roloFrontWheels.move("forward", 100);
+       
        
         Thread.sleep(1000);
         

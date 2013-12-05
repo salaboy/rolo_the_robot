@@ -6,11 +6,10 @@
 
 package com.salaboy.rolo.body.impl;
 
-import com.salaboy.rolo.body.api.RobotSonar;
 import com.salaboy.rolo.body.api.RobotSonars;
-import java.util.ArrayList;
-import java.util.List;
+import com.salaboy.rolo.events.BodyEvent;
 import javax.annotation.PostConstruct;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 /**
@@ -20,14 +19,10 @@ import javax.inject.Inject;
 public class RobotSonarsImpl implements RobotSonars {
     private String name;
     
+   
+    
     @Inject
-    private RobotSonar frontSonar;
-    @Inject
-    private RobotSonar backSonar;
-    @Inject
-    private RobotSonar leftSonar;
-    @Inject
-    private RobotSonar rightSonar;
+    private Event<BodyEvent> messageEvents;
 
     public RobotSonarsImpl() {
         this.name = "sonars";
@@ -35,22 +30,9 @@ public class RobotSonarsImpl implements RobotSonars {
     }
     @PostConstruct
     public void init(){
-        frontSonar.setName("sonar-front");
-        backSonar.setName("sonar-back");
-        leftSonar.setName("sonar-left");
-        rightSonar.setName("sonar-right");
+        
     }
     
-    @Override
-    public List<RobotSonar> getSonars() {
-        List<RobotSonar> sonars = new ArrayList<RobotSonar>(4);
-        sonars.add(frontSonar);
-        sonars.add(backSonar);
-        sonars.add(rightSonar);
-        sonars.add(leftSonar);
-        return sonars;
-    }
-
     @Override
     public String getName() {
         return name;
@@ -61,25 +43,13 @@ public class RobotSonarsImpl implements RobotSonars {
         this.name = name;
     }
 
-    public RobotSonar getFrontSonar() {
-        return frontSonar;
-    }
-
-    public RobotSonar getBackSonar() {
-        return backSonar;
-    }
-
-    public RobotSonar getLeftSonar() {
-        return leftSonar;
-    }
-
-    public RobotSonar getRightSonar() {
-        return rightSonar;
-    }
-
+   
     @Override
-    public String toString() {
-        return "RobotSonarsImpl{" + "name=" + name + ", frontSonar=" + frontSonar + ", backSonar=" + backSonar + ", leftSonar=" + leftSonar + ", rightSonar=" + rightSonar + '}';
+    public void readAll(){
+         messageEvents.fire(new BodyEvent(name+":read:0"));
     }
+
+    
+    
     
 }

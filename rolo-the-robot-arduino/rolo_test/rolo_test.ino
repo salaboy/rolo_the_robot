@@ -129,6 +129,10 @@ void loop() {
     }
   
     commandName.trim();
+    // clear the string before continue
+    inputString = "";
+    stringComplete = false;
+    
     //front-wheels:rotate:2:left:90;
     if(deviceName=="front-wheels"){
       if(commandName=="rotate"){
@@ -158,106 +162,93 @@ void loop() {
          move_single_motor("right-motor", backward);
          move_single_motor("left-motor", backward);
       }
-    }else if(deviceName=="sonar-front"){
+    }else if(deviceName=="sonars"){
       if(commandName=="read"){
         int uS = sonar_front.ping_median(10);
-        Serial.print("SONAR_FRONT_REPORT:");
+        Serial.print("SONARS_REPORT:");
+        Serial.print(uS / US_ROUNDTRIP_CM);
+        Serial.print("-");
+        uS = sonar_right.ping_median(10);
+        Serial.print(uS / US_ROUNDTRIP_CM);
+        Serial.print("-");
+        uS = sonar_left.ping_median(10);
+        Serial.print(uS / US_ROUNDTRIP_CM);
+        Serial.print("-");
+        uS = sonar_back.ping_median(10);
         Serial.print(uS / US_ROUNDTRIP_CM);
         Serial.print(";");
       }
-    }else if(deviceName=="sonar-back"){
-      if(commandName=="read"){
-        int uS = sonar_back.ping_median(10);
-        Serial.print("SONAR_BACK_REPORT:");
-        Serial.print(uS / US_ROUNDTRIP_CM);
-        Serial.print(";");
-      }
-    }else if(deviceName=="sonar-left"){
-      if(commandName=="read"){
-        int uS = sonar_left.ping_median(10);
-        Serial.print("SONAR_LEFT_REPORT:");
-        Serial.print(uS / US_ROUNDTRIP_CM);
-        Serial.print(";");
-      }
-    }else if(deviceName=="sonar-right"){
-      if(commandName=="read"){
-        int uS = sonar_right.ping_median(10);
-        Serial.print("SONAR_RIGHT_REPORT:");
-        Serial.print(uS / US_ROUNDTRIP_CM);
-        Serial.print(";");
-      }
-    } else{
-       //left-motor:rotate:2:90:forward;
-       if(commandName=="rotate"){
-              Direction mydirection = forward;
-              if( args[1].equals("backward")){
-                 mydirection = backward;
-              }
-              Brake mybrake = brake;
-              if( args[2].equals("coast")){
-                mybrake = coast;
-              }
-              move_single_motor(deviceName, mydirection, uint8_t(args[0].toInt()), mybrake);
-              while(is_turning_single_motor(deviceName));
-        }else if(commandName=="stop"){
-            stop_single_motor(deviceName);
-        }else if(commandName=="read"){
-            Serial.print("ANGLE_REPORT:");
-            Serial.print(read_position_single_motor(deviceName),DEC);
-            Serial.print(";");
-        }else if(commandName=="reset"){
-            reset_position_single_motor(deviceName);
-        }else if(commandName=="isturning"){
-            Serial.print("STATUS_REPORT:");
-            Serial.print(is_turning_single_motor(deviceName)+";");
-        }else if(commandName=="forward"){
-            move_single_motor(deviceName, forward);
-            if(deviceName.startsWith("left")){
-                currentDirectionLeft = "forward";
-            }else{
-                currentDirectionRight = "forward";
-            }
-                        
-        }else if(commandName=="backward"){
-            move_single_motor(deviceName, backward);
-            if(deviceName.startsWith("left")){
-                currentDirectionLeft = "backward";
-            }else{
-                currentDirectionRight = "backward";
-            }
-        }else if(commandName=="setSpeed"){
-           
-            if(is_turning_single_motor(deviceName)){
-              
-             if(deviceName.startsWith("left")){ 
-                if(currentDirectionLeft == "forward"){
-                   move_single_motor(deviceName, forward);
-                }else if( currentDirectionLeft == "backward"){
-                   move_single_motor(deviceName, backward);
-                }
-             }else{
-                if(deviceName.startsWith("left")){ 
-                  if(currentDirectionRight == "forward"){
-                     move_single_motor(deviceName, forward);
-                  }else if( currentDirectionRight == "backward"){
-                     move_single_motor(deviceName, backward);
-                  }
-                }
-             }
-              
-              
-            }
-        }else if(commandName=="getSpeed"){
-            if(deviceName.startsWith("left")){
-              Serial.print("SPEED_REPORT:"+String(leftMotorSpeed)+";");
-            }else{
-              Serial.print("SPEED_REPORT:"+String(rightMotorSpeed)+";");
-            }
-        }
     }
-    // clear the string:
-    inputString = "";
-    stringComplete = false;
+   // else{
+       //left-motor:rotate:2:90:forward;
+//       if(commandName=="rotate"){
+//              Direction mydirection = forward;
+//              if( args[1].equals("backward")){
+//                 mydirection = backward;
+//              }
+//              Brake mybrake = brake;
+//              if( args[2].equals("coast")){
+//                mybrake = coast;
+//              }
+//              move_single_motor(deviceName, mydirection, uint8_t(args[0].toInt()), mybrake);
+//              while(is_turning_single_motor(deviceName));
+//        }else if(commandName=="stop"){
+//            stop_single_motor(deviceName);
+//        }else if(commandName=="read"){
+//            Serial.print("ANGLE_REPORT:");
+//            Serial.print(read_position_single_motor(deviceName),DEC);
+//            Serial.print(";");
+//        }else if(commandName=="reset"){
+//            reset_position_single_motor(deviceName);
+//        }else if(commandName=="isturning"){
+//            Serial.print("STATUS_REPORT:");
+//            Serial.print(is_turning_single_motor(deviceName)+";");
+//        }else if(commandName=="forward"){
+//            move_single_motor(deviceName, forward);
+//            if(deviceName.startsWith("left")){
+//                currentDirectionLeft = "forward";
+//            }else{
+//                currentDirectionRight = "forward";
+//            }
+//                        
+//        }else if(commandName=="backward"){
+//            move_single_motor(deviceName, backward);
+//            if(deviceName.startsWith("left")){
+//                currentDirectionLeft = "backward";
+//            }else{
+//                currentDirectionRight = "backward";
+//            }
+//        }else if(commandName=="setSpeed"){
+//           
+//            if(is_turning_single_motor(deviceName)){
+//              
+//             if(deviceName.startsWith("left")){ 
+//                if(currentDirectionLeft == "forward"){
+//                   move_single_motor(deviceName, forward);
+//                }else if( currentDirectionLeft == "backward"){
+//                   move_single_motor(deviceName, backward);
+//                }
+//             }else{
+//                if(deviceName.startsWith("left")){ 
+//                  if(currentDirectionRight == "forward"){
+//                     move_single_motor(deviceName, forward);
+//                  }else if( currentDirectionRight == "backward"){
+//                     move_single_motor(deviceName, backward);
+//                  }
+//                }
+//             }
+//              
+//              
+//            }
+//        }else if(commandName=="getSpeed"){
+//            if(deviceName.startsWith("left")){
+//              Serial.print("SPEED_REPORT:"+String(leftMotorSpeed)+";");
+//            }else{
+//              Serial.print("SPEED_REPORT:"+String(rightMotorSpeed)+";");
+//            }
+//        }
+//    }
+
   }
 }
 

@@ -7,9 +7,9 @@ package com.salaboy.rolo.the.robot.mind.listeners;
 
 import com.salaboy.rolo.events.ExternalNotificationEvent;
 import com.salaboy.rolo.events.MindNotificationEvent;
-import com.salaboy.rolo.events.ReadDistanceSensorEvent;
+import com.salaboy.rolo.events.ReadSonarsEvent;
 import com.salaboy.rolo.events.RobotPartAddedEvent;
-import com.salaboy.rolo.model.reports.DistanceReport;
+import com.salaboy.rolo.model.reports.SonarsReport;
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
@@ -62,10 +62,10 @@ public class RobotKnowledgeListener {
         
     }
     
-    public void onReadSensor(@Observes ReadDistanceSensorEvent event){
+    public void onReadSensor(@Observes ReadSonarsEvent event){
         EntryPoint entryPoint = rolo.getEntryPoint("distance-sensor");
         if(entryPoint != null){
-            entryPoint.insert(new DistanceReport(event.getSensorName(), event.getDistance()));
+            entryPoint.insert(new SonarsReport(event.getFront(), event.getRight(), event.getLeft(), event.getBack()));
             
         }else{
             System.out.println(">>> Rolo Mind: I've recieved a "+ event + "but I don't know what to do with it");

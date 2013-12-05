@@ -16,6 +16,8 @@
 package com.salaboy.rolo.server;
 
 import com.salaboy.rolo.body.api.Robot;
+import com.salaboy.rolo.body.api.RobotFrontWheels;
+import com.salaboy.rolo.body.api.RobotPart;
 import com.salaboy.rolo.server.events.IncomingActionEvent;
 import com.salaboy.rolo.events.ExternalNotificationEvent;
 import com.salaboy.rolo.the.robot.comm.HornetQSessionWriter;
@@ -89,7 +91,7 @@ public class RoloCommandServer implements Runnable {
     private HornetQSessionWriter notifications;
     
     public static void main(String[] args) throws Exception {
-        Weld weld = new Weld();
+        final Weld weld = new Weld();
 
         WeldContainer container = weld.initialize();
 
@@ -142,6 +144,7 @@ public class RoloCommandServer implements Runnable {
             public void run() {
                 System.out.println("Shutdown Hook is running !");
                 readSensors = false;
+                weld.shutdown();
             }
         });
 
@@ -157,6 +160,12 @@ public class RoloCommandServer implements Runnable {
         this.standalone = standalone;
         this.host = host;
     }
+
+    public Robot getRolo() {
+        return rolo;
+    }
+    
+    
 
     @Override
     public void run() {

@@ -6,21 +6,12 @@
 
 package com.salaboy.rolo.body.api;
 
-import java.util.List;
-
 /**
  *
  * @author salaboy
  */
 public interface RobotSonars extends RobotPart{
-    List<RobotSonar> getSonars();
-    
-    RobotSonar getFrontSonar();
-    
-    RobotSonar getBackSonar();
-    
-    RobotSonar getRightSonar();
-    
-    RobotSonar getLeftSonar();
+
+    void readAll();
 
 }

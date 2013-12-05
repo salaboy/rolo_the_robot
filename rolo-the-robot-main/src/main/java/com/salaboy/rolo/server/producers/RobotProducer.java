@@ -39,10 +39,7 @@ public class RobotProducer {
         robot.addRobotPart(roloFrontWheels.getLeftMotor());
         robot.addRobotPart(roloFrontWheels.getRightMotor());
         robot.addRobotPart(roloSonars);
-        robot.addRobotPart(roloSonars.getFrontSonar());
-        robot.addRobotPart(roloSonars.getBackSonar());
-        robot.addRobotPart(roloSonars.getRightSonar());
-        robot.addRobotPart(roloSonars.getLeftSonar());
+       
         return robot;
     }
     
@@ -74,14 +71,8 @@ public class RobotProducer {
             roloFrontWheels.getRightMotor().backward();
         }else if(values[0].equals("WHEEL-LEFT-BACKWARD")){
             roloFrontWheels.getLeftMotor().backward();
-        }else if(values[0].equals("SONAR-FRONT")){
-            roloSonars.getFrontSonar().readDistance();
-        }else if(values[0].equals("SONAR-BACK")){
-            roloSonars.getBackSonar().readDistance();
-        }else if(values[0].equals("SONAR-LEFT")){
-            roloSonars.getLeftSonar().readDistance();
-        }else if(values[0].equals("SONAR-RIGHT")){
-            roloSonars.getRightSonar().readDistance();
+        }else if(values[0].equals("SONARS")){
+            roloSonars.readAll();
         }else if(values[0].equals("STOP-ALL")){
             roloFrontWheels.stopAll();
         }

@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 import com.salaboy.rolo.body.api.Robot;
-import com.salaboy.rolo.body.api.RobotSonar;
 import com.salaboy.rolo.body.api.RobotFrontWheels;
+import com.salaboy.rolo.body.api.RobotSonars;
 import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 
@@ -39,7 +39,7 @@ public class SimpleRoloTest {
    private RobotFrontWheels roloFrontWheels;
    
    @Inject 
-   private RobotSonar roloDistanceSensor1;
+   private RobotSonars roloSonars;
    
    
     @Test
@@ -48,33 +48,24 @@ public class SimpleRoloTest {
         
         rolo.addRobotPart(roloFrontWheels);
         
-        roloDistanceSensor1.setName("sonar1");
-        rolo.addRobotPart(roloDistanceSensor1);
+        rolo.addRobotPart(roloSonars);
         
         //roloFrontWheels.move("backward", 100);
         
-        roloDistanceSensor1.readDistance();
+        roloSonars.readAll();
         
         Thread.sleep(500);
         
-        roloDistanceSensor1.readDistance();
+        roloSonars.readAll();
         
         Thread.sleep(500);
         
-        roloDistanceSensor1.readDistance();
+        roloSonars.readAll();
         
         Thread.sleep(500);
         
-        roloDistanceSensor1.readDistance();
-        
-        Thread.sleep(500);
-        
-        roloDistanceSensor1.readDistance();
-        
-       // roloFrontWheels.move("forward", 100);
        
-        
-        Thread.sleep(5000);
+     
         
         
     }

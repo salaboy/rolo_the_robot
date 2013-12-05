@@ -8,6 +8,7 @@ import com.salaboy.rolo.body.api.RobotFrontWheels;
 import com.salaboy.rolo.body.api.RobotMotor;
 import com.salaboy.rolo.events.BodyEvent;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
