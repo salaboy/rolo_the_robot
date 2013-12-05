@@ -35,7 +35,7 @@ public class RobotKnowledgeListener {
     @Inject
     @KSession("rolo")
     private KieSession rolo;
-
+ 
     @Inject
     private Event<MindNotificationEvent> mindNotifications;
     
