@@ -10,14 +10,14 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Arrays;
-import org.drools.runtime.rule.TypedAccumulateFunction;
+import  org.kie.api.runtime.rule.AccumulateFunction;
 
 
 /**
  *
  * @author salaboy
  */
-public class TendencyAccumulateFunction implements TypedAccumulateFunction {
+public class TendencyAccumulateFunction implements AccumulateFunction {
 
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
@@ -113,8 +113,8 @@ public class TendencyAccumulateFunction implements TypedAccumulateFunction {
         }
         
         TendencyData.history[TendencyData.current] = (Long) value;
-        System.out.println("Current Pointer - "+TendencyData.current);
-        System.out.println("Data History = "+Arrays.toString(TendencyData.history));
+//        System.out.println("Current Pointer - "+TendencyData.current);
+//        System.out.println("Data History = "+Arrays.toString(TendencyData.history));
     }
 
 

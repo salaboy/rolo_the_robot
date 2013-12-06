@@ -44,7 +44,7 @@ end
 
 
 rule "poll front sonar every 2s"
-    timer ( int: 0s 3s )
+    timer ( int: 0s 2s )
     when
         $dS: RobotSonars(name == "sonars")
     then
@@ -57,7 +57,7 @@ end
 rule "If there is something closer than 40 cm turn left 90 degrees"
     
     when
-        $n: Number( doubleValue < 40 && doubleValue > 0 ) from accumulate (SonarsReport( $distance: front) over window:time( 1s ) from entry-point "distance-sensor", average($distance))
+        $n: Number( doubleValue < 30 && doubleValue > 0 ) from accumulate (SonarsReport( $distance: front) over window:time( 1s ) from entry-point "distance-sensor", min($distance))
         $fW: RobotFrontWheels()
     then
         $fW.rotateAndMove("left", 90, "forward");
@@ -67,7 +67,7 @@ end
 
 rule "If there is something on the left closer than 25 cm turn 5 degrees right"
     when
-        $n: Number( doubleValue < 25 && doubleValue > 0 ) from accumulate (SonarsReport($distance: left) over window:time( 2s ) from entry-point "distance-sensor", average($distance))
+        $n: Number( doubleValue < 20 && doubleValue > 0) from accumulate (SonarsReport($distance: left) over window:time( 1s ) from entry-point "distance-sensor", min($distance))
         $fW: RobotFrontWheels()
     then
         $fW.rotateAndMove("right", 5, "forward");
@@ -76,7 +76,7 @@ end
 
 rule "If there is something on the right closer than 25 cm turn 5 degrees left"
     when
-        $n: Number( doubleValue < 25 && doubleValue > 0 ) from accumulate (SonarsReport( $distance: right) over window:time( 2s ) from entry-point "distance-sensor", average($distance))
+        $n: Number( doubleValue < 20  && doubleValue > 0) from accumulate (SonarsReport( $distance: right) over window:time( 1s ) from entry-point "distance-sensor", min($distance))
         $fW: RobotFrontWheels()
     then
         $fW.rotateAndMove("left", 5, "forward");

@@ -103,7 +103,7 @@ public class RoloFeatureSerial {
     private void processInput() {
         String data = serial.readStringUntil(";".charAt(0));
         if(data != null && !data.equals("")){
-            System.out.println("DATA: '"+data+"'");
+            //System.out.println("DATA: '"+data+"'");
             if(hardwareNotificationEvent != null){
                 hardwareNotificationEvent.fire(new HardwareNotificationEvent(data));
             }
@@ -118,10 +118,10 @@ public class RoloFeatureSerial {
     
     public synchronized void sendMessage(String msg){
         if(serial.isOutputNull()){
-            System.out.println("Serial ON -> Sending Message: "+msg+";");
+            //System.out.println("Serial ON -> Sending Message: "+msg+";");
             serial.write(msg+";");
         }else{
-            System.out.println("Serial OFF -> Sending Message: "+msg+";");
+            //System.out.println("Serial OFF -> Sending Message: "+msg+";");
         }
     }
     

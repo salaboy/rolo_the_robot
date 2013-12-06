@@ -164,19 +164,23 @@ void loop() {
       }
     }else if(deviceName=="sonars"){
       if(commandName=="read"){
-        int uS = sonar_front.ping_median(10);
-        Serial.print("SONARS_REPORT:");
-        Serial.print(uS / US_ROUNDTRIP_CM);
-        Serial.print("-");
-        uS = sonar_right.ping_median(10);
-        Serial.print(uS / US_ROUNDTRIP_CM);
-        Serial.print("-");
-        uS = sonar_left.ping_median(10);
-        Serial.print(uS / US_ROUNDTRIP_CM);
-        Serial.print("-");
-        uS = sonar_back.ping_median(10);
-        Serial.print(uS / US_ROUNDTRIP_CM);
-        Serial.print(";");
+        int uSfront = sonar_front.ping_median(10);
+        int uSright = sonar_right.ping_median(10);
+        int uSleft = sonar_left.ping_median(10);
+        int uSback = sonar_back.ping_median(10);
+        int front = uSfront / US_ROUNDTRIP_CM;
+        int right = uSright / US_ROUNDTRIP_CM;
+        int left = uSleft / US_ROUNDTRIP_CM;
+        int back = uSback / US_ROUNDTRIP_CM;
+        String report = String(front);
+              report.concat("-");
+              report.concat(right);
+              report.concat("-");
+              report.concat(left);
+              report.concat("-");
+              report.concat(back);
+             report.concat(";");
+        Serial.print("SONARS_REPORT:"+report);
       }
     }
    // else{
