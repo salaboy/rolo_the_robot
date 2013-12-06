@@ -43,8 +43,8 @@ rule "looking for something to do"
 end
 
 
-rule "poll front sonar every 2s"
-    timer ( int: 0s 2s )
+rule "poll front sonar every 1s"
+    timer ( int: 0s 500ms )
     when
         $dS: RobotSonars(name == "sonars")
     then
