@@ -102,6 +102,8 @@ void setup() {
 
 void loop() {
   // print the string when a newline arrives:
+  
+  
   if (stringComplete) {
     int deviceNameDelimiter = inputString.indexOf(':');
     String deviceName = inputString.substring(0, deviceNameDelimiter);
@@ -133,56 +135,80 @@ void loop() {
     inputString = "";
     stringComplete = false;
     
-    //front-wheels:rotate:2:left:90;
-    if(deviceName=="front-wheels"){
-      if(commandName=="rotate"){
-         rotate_front_wheels( args[0], args[1].toInt());
-      }else if(commandName=="move"){
-         move_front_wheels( args[0], args[1].toInt());
-      }if(commandName=="rotate-move"){
-         rotate_front_wheels( args[0], args[1].toInt());
-         if(args[2] == "forward"){
-           move_single_motor("right-motor", forward );
-           move_single_motor("left-motor", forward );
-         }else{
-           move_single_motor("right-motor", backward );
-           move_single_motor("left-motor", backward );
-         }
-      }else if(commandName=="setDiam"){
-         Diam = (float)args[0].toInt();
-      }else if(commandName=="setDist"){
-         Dist = args[0].toInt();
-      }else if(commandName=="stop-all"){
-         stop_single_motor("right-motor");
-         stop_single_motor("left-motor");
-      }else if(commandName=="forward"){
-         move_single_motor("right-motor", forward);
-         move_single_motor("left-motor", forward);
-      }else if(commandName=="backward"){
-         move_single_motor("right-motor", backward);
-         move_single_motor("left-motor", backward);
+  
+      
+      
+      //front-wheels:rotate:2:left:90;
+      if(deviceName=="front-wheels"){
+        if(commandName=="rotate"){
+           rotate_front_wheels( args[0], args[1].toInt());
+        }else if(commandName=="move"){
+           move_front_wheels( args[0], args[1].toInt());
+        }if(commandName=="rotate-move"){
+           rotate_front_wheels( args[0], args[1].toInt());
+           if(args[2] == "forward"){
+             move_single_motor("right-motor", forward );
+             move_single_motor("left-motor", forward );
+           }else{
+             move_single_motor("right-motor", backward );
+             move_single_motor("left-motor", backward );
+           }
+        }else if(commandName=="setDiam"){
+           Diam = (float)args[0].toInt();
+        }else if(commandName=="setDist"){
+           Dist = args[0].toInt();
+        }else if(commandName=="stop-all"){
+           stop_single_motor("right-motor");
+           stop_single_motor("left-motor");
+        }else if(commandName=="forward"){
+           move_single_motor("right-motor", forward);
+           move_single_motor("left-motor", forward);
+        }else if(commandName=="backward"){
+           move_single_motor("right-motor", backward);
+           move_single_motor("left-motor", backward);
+        }
+      }else if(deviceName=="sonars"){
+        if(commandName=="read"){
+          int uSfront = sonar_front.ping_median(10);
+          int uSright = sonar_right.ping_median(10);
+          int uSleft = sonar_left.ping_median(10);
+          int uSback = sonar_back.ping_median(10);
+          int front = uSfront / US_ROUNDTRIP_CM;
+          int right = uSright / US_ROUNDTRIP_CM;
+          int left = uSleft / US_ROUNDTRIP_CM;
+          int back = uSback / US_ROUNDTRIP_CM;
+          String report = String("SONARS_REPORT:");
+                report.concat(front);
+                report.concat("-");
+                report.concat(right);
+                report.concat("-");
+                report.concat(left);
+                report.concat("-");
+                report.concat(back);
+               report.concat(";");
+          Serial.print(report);
+        }
       }
-    }else if(deviceName=="sonars"){
-      if(commandName=="read"){
-        int uSfront = sonar_front.ping_median(10);
-        int uSright = sonar_right.ping_median(10);
-        int uSleft = sonar_left.ping_median(10);
-        int uSback = sonar_back.ping_median(10);
-        int front = uSfront / US_ROUNDTRIP_CM;
-        int right = uSright / US_ROUNDTRIP_CM;
-        int left = uSleft / US_ROUNDTRIP_CM;
-        int back = uSback / US_ROUNDTRIP_CM;
-        String report = String(front);
-              report.concat("-");
-              report.concat(right);
-              report.concat("-");
-              report.concat(left);
-              report.concat("-");
-              report.concat(back);
-             report.concat(";");
-        Serial.print("SONARS_REPORT:"+report);
-      }
-    }
+  
+      delay(300);
+      int uSfront = sonar_front.ping_median(10);
+          int uSright = sonar_right.ping_median(10);
+          int uSleft = sonar_left.ping_median(10);
+          int uSback = sonar_back.ping_median(10);
+          int front = uSfront / US_ROUNDTRIP_CM;
+          int right = uSright / US_ROUNDTRIP_CM;
+          int left = uSleft / US_ROUNDTRIP_CM;
+          int back = uSback / US_ROUNDTRIP_CM;
+          String report = String("SONARS_REPORT:");
+                report.concat(front);
+                report.concat("-");
+                report.concat(right);
+                report.concat("-");
+                report.concat(left);
+                report.concat("-");
+                report.concat(back);
+               report.concat(";");
+          Serial.print(report);
    // else{
        //left-motor:rotate:2:90:forward;
 //       if(commandName=="rotate"){
