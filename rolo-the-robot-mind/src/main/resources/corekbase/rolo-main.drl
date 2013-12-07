@@ -36,7 +36,7 @@ end
 
 
 rule "looking for something to do"
-    salience 10
+    salience 10  
     when
         $fW: RobotFrontWheels()
     then
@@ -58,7 +58,6 @@ rule "If there is something closer than 40 cm turn left 90 degrees"
                                                  $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft > $avgRight)
         
     then
-        
         $fW.rotateAndMove("left", 90, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 90 degrees left because there is something in front of me \n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
         
@@ -68,7 +67,6 @@ rule "If there is something closer than 40 cm turn right 90 degrees"
     
     when
         $fW: RobotFrontWheels()
-        
         accumulate (SonarsReport( $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point "distance-sensor";
                                                  $avg: average($front),
                                                  $avgRight: average($right),
@@ -76,15 +74,49 @@ rule "If there is something closer than 40 cm turn right 90 degrees"
                                                  $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft < $avgRight)
         
     then
-        
+       
         $fW.rotateAndMove("right", 90, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 90 degrees right because there is something in front of me /n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
         
 end
 
+rule "If there is something in the back than 40 cm turn right 90 degrees"
+    
+    when
+        $fW: RobotFrontWheels()
+        
+        accumulate (SonarsReport( $back: back, $right: right, $left: left) over window:time( 300ms ) from entry-point "distance-sensor";
+                                                 $avg: average($back),
+                                                 $avgRight: average($right),
+                                                 $avgLeft: average($left);
+                                                 $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft < $avgRight)
+        
+    then
+        $fW.rotateAndMove("right", 90, "forward");
+        notifications.fire(new MindNotificationEvent(" Rotating 90 degrees right because there is something in the back of me /n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
+        
+end
+
+rule "If there is something in the back than 40 cm turn left 90 degrees"
+    
+    when
+        $fW: RobotFrontWheels()
+        
+        accumulate (SonarsReport( $back: back, $right: right, $left: left) over window:time( 300ms ) from entry-point "distance-sensor";
+                                                 $avg: average($back),
+                                                 $avgRight: average($right),
+                                                 $avgLeft: average($left);
+                                                 $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft > $avgRight)
+        
+    then
+        $fW.rotateAndMove("left", 90, "forward");
+        notifications.fire(new MindNotificationEvent(" Rotating 90 degrees left because there is something in the back of me /n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
+        
+end
+
 rule "If there is something on the left closer than 25 cm turn 5 degrees right"
     when
-        $n: Number( doubleValue < 20 && doubleValue > 0) from accumulate (SonarsReport($distance: left) over window:time( 300ms ) from entry-point "distance-sensor", average($distance))
+        $n: Number( doubleValue < 10 && doubleValue > 0) from accumulate (SonarsReport($distance: left) over window:time( 300ms ) from entry-point "distance-sensor", average($distance))
         $fW: RobotFrontWheels()
     then
         $fW.rotateAndMove("right", 5, "forward");
@@ -93,7 +125,7 @@ end
 
 rule "If there is something on the right closer than 25 cm turn 5 degrees left"
     when
-        $n: Number( doubleValue < 20  && doubleValue > 0) from accumulate (SonarsReport( $distance: right) over window:time( 300ms ) from entry-point "distance-sensor", average($distance))
+        $n: Number( doubleValue < 10  && doubleValue > 0) from accumulate (SonarsReport( $distance: right) over window:time( 300ms ) from entry-point "distance-sensor", average($distance))
         $fW: RobotFrontWheels()
     then
         $fW.rotateAndMove("left", 5, "forward");
