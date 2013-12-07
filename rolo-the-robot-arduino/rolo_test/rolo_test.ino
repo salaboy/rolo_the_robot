@@ -59,7 +59,6 @@ PID myPID_rm(&Input_rm, &Output_rm, &Setpoint_rm, consKp_rm, consKi_rm, consKd_r
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
-boolean executing = false;
 int leftMotorSpeed = 255;
 int rightMotorSpeed = 255;
 String currentDirectionLeft = "forward";
@@ -105,8 +104,7 @@ void loop() {
   // print the string when a newline arrives:
   
   
-  if (stringComplete && !executing) {
-    executing = true;
+  if (stringComplete ) {
     stringComplete = false;
     int deviceNameDelimiter = inputString.indexOf(':');
     String deviceName = inputString.substring(0, deviceNameDelimiter);
@@ -174,12 +172,11 @@ void loop() {
   
       
         
-        executing= false;
+
 
   }else{
   
-  
-    
+
     int uSfront = sonar_front.ping_median(2);
             int uSright = sonar_right.ping_median(2);
             int uSleft = sonar_left.ping_median(2);
@@ -198,7 +195,7 @@ void loop() {
                   report.concat(back);
                  report.concat(";");
             Serial.print(report);
-            delay(200);
+            delay(300);
   }
 
   

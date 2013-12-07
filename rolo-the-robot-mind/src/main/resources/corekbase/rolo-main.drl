@@ -33,6 +33,14 @@ rule "robot part logger"
         external.fire(new ExternalNotificationEvent(">>> A new robot part was added: "+ $rP));
 end
 
+rule "robot fact logger"
+    when
+       accumulate ($r: SonarsReport( )  from entry-point "distance-sensor";
+                $count: count($r))
+    then
+       notifications.fire(new MindNotificationEvent(" Number of Reports "+  $count)); 
+        
+end
 
 
 rule "looking for something to do"
@@ -55,7 +63,7 @@ rule "If there is something closer than 40 cm turn left 90 degrees"
                                                  $avg: average($front),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
-                                                 $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft > $avgRight)
+                                                 $avg < 40, $avg > 0, ($avgLeft > 0 || $avgRight > 0), $avgLeft > $avgRight)
         
     then
         $fW.rotateAndMove("left", 90, "forward");
@@ -71,7 +79,7 @@ rule "If there is something closer than 40 cm turn right 90 degrees"
                                                  $avg: average($front),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
-                                                 $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft < $avgRight)
+                                                 $avg < 40, $avg > 0, ($avgLeft > 0 || $avgRight > 0), $avgLeft < $avgRight)
         
     then
        
@@ -89,7 +97,7 @@ rule "If there is something in the back than 40 cm turn right 90 degrees"
                                                  $avg: average($back),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
-                                                 $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft < $avgRight)
+                                                 $avg < 20, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft < $avgRight)
         
     then
         $fW.rotateAndMove("right", 90, "forward");
@@ -106,7 +114,7 @@ rule "If there is something in the back than 40 cm turn left 90 degrees"
                                                  $avg: average($back),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
-                                                 $avg < 30, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft > $avgRight)
+                                                 $avg < 20, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft > $avgRight)
         
     then
         $fW.rotateAndMove("left", 90, "forward");
