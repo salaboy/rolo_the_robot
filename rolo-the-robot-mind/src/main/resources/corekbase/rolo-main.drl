@@ -18,7 +18,7 @@ import javax.enterprise.event.*;
 
 declare SonarsReport
     @role(event)
-    @expires(1s)
+    @expires(500ms)
 end
 
 global Event notifications;
@@ -31,6 +31,14 @@ rule "robot part logger"
     then
         System.out.println(">>> A new robot part was added: "+ $rP);
         external.fire(new ExternalNotificationEvent(">>> A new robot part was added: "+ $rP));
+end
+
+rule "robot fact logger"
+    when
+       $count: Number() from accumulate( $o: SonarsReport() from entry-point "distance-sensor", count($o) )
+    then
+       notifications.fire(new MindNotificationEvent(" Number of Facts: "+$count));
+        
 end
 
 rule "looking for something to do"
@@ -74,9 +82,6 @@ rule "If there is something on the right closer than 25 cm turn 5 degrees left"
         $fW.rotateAndMove("left", 5, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 5 degrees left to move away from the object on the right ->" + $n));   
 end
-
-
-
 
 
 

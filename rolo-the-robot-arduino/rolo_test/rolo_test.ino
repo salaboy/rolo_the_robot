@@ -190,25 +190,7 @@ void loop() {
         }
       }
   
-      delay(300);
-      int uSfront = sonar_front.ping_median(10);
-          int uSright = sonar_right.ping_median(10);
-          int uSleft = sonar_left.ping_median(10);
-          int uSback = sonar_back.ping_median(10);
-          int front = uSfront / US_ROUNDTRIP_CM;
-          int right = uSright / US_ROUNDTRIP_CM;
-          int left = uSleft / US_ROUNDTRIP_CM;
-          int back = uSback / US_ROUNDTRIP_CM;
-          String report = String("SONARS_REPORT:");
-                report.concat(front);
-                report.concat("-");
-                report.concat(right);
-                report.concat("-");
-                report.concat(left);
-                report.concat("-");
-                report.concat(back);
-               report.concat(";");
-          Serial.print(report);
+      
    // else{
        //left-motor:rotate:2:90:forward;
 //       if(commandName=="rotate"){
@@ -279,7 +261,31 @@ void loop() {
 //        }
 //    }
 
+  }else{
+  
+  
+    
+    int uSfront = sonar_front.ping_median(10);
+            int uSright = sonar_right.ping_median(10);
+            int uSleft = sonar_left.ping_median(10);
+            int uSback = sonar_back.ping_median(10);
+            int front = uSfront / US_ROUNDTRIP_CM;
+            int right = uSright / US_ROUNDTRIP_CM;
+            int left = uSleft / US_ROUNDTRIP_CM;
+            int back = uSback / US_ROUNDTRIP_CM;
+            String report = String("SONARS_REPORT:");
+                  report.concat(front);
+                  report.concat("-");
+                  report.concat(right);
+                  report.concat("-");
+                  report.concat(left);
+                  report.concat("-");
+                  report.concat(back);
+                 report.concat(";");
+            Serial.print(report);
+            delay(200);
   }
+  
 }
 
 
