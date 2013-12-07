@@ -15,6 +15,8 @@ public class SonarsReport {
     private int right;
     private int left;
     private int back;
+    
+    private boolean processed = false;
 
     public SonarsReport(int front, int right, int left, int back) {
         this.front = front;
@@ -39,11 +41,18 @@ public class SonarsReport {
         return back;
     }
 
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
+
     @Override
     public String toString() {
-        return "SonarsReport{" + "front=" + front + ", right=" + right + ", left=" + left + ", back=" + back + '}';
+        return "SonarsReport{" + "front=" + front + ", right=" + right + ", left=" + left + ", back=" + back + ", processed=" + processed + '}';
     }
-    
-    
+
     
 }
