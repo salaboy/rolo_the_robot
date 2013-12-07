@@ -265,10 +265,10 @@ void loop() {
   
   
     
-    int uSfront = sonar_front.ping_median(10);
-            int uSright = sonar_right.ping_median(10);
-            int uSleft = sonar_left.ping_median(10);
-            int uSback = sonar_back.ping_median(10);
+    int uSfront = sonar_front.ping_median(2);
+            int uSright = sonar_right.ping_median(2);
+            int uSleft = sonar_left.ping_median(2);
+            int uSback = sonar_back.ping_median(2);
             int front = uSfront / US_ROUNDTRIP_CM;
             int right = uSright / US_ROUNDTRIP_CM;
             int left = uSleft / US_ROUNDTRIP_CM;
