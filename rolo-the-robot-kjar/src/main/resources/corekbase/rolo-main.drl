@@ -39,7 +39,6 @@ rule "robot fact logger"
                 $count: count($r))
     then
        notifications.fire(new MindNotificationEvent(" Number of Reports "+  $count)); 
-        
 end
 
 
@@ -55,17 +54,18 @@ end
 
 
 rule "If there is something closer than 40 cm turn left 90 degrees"
-    
     when
         $fW: RobotFrontWheels()
-        
-        accumulate (SonarsReport( $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point "distance-sensor";
+        $sr: SonarsReport()
+        accumulate (SonarsReport( this != $sr, $front: front, $right: right, $left: left, processed == false, this after $sr) over window:time( 300ms ) from entry-point "distance-sensor";
                                                  $avg: average($front),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
                                                  $avg < 40, $avg > 0, ($avgLeft > 0 || $avgRight > 0), $avgLeft > $avgRight)
         
     then
+        $sr.setProcessed(true);
+        update($sr);
         $fW.rotateAndMove("left", 90, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 90 degrees left because there is something in front of me \n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
         
@@ -75,14 +75,16 @@ rule "If there is something closer than 40 cm turn right 90 degrees"
     
     when
         $fW: RobotFrontWheels()
-        accumulate (SonarsReport( $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point "distance-sensor";
+        $sr: SonarsReport()
+        accumulate (SonarsReport( this != $sr, $front: front, $right: right, $left: left, processed == false, this after $sr) over window:time( 300ms ) from entry-point "distance-sensor";
                                                  $avg: average($front),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
                                                  $avg < 40, $avg > 0, ($avgLeft > 0 || $avgRight > 0), $avgLeft < $avgRight)
         
     then
-       
+        $sr.setProcessed(true);
+        update($sr);
         $fW.rotateAndMove("right", 90, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 90 degrees right because there is something in front of me /n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
         
@@ -92,14 +94,16 @@ rule "If there is something in the back than 40 cm turn right 90 degrees"
     
     when
         $fW: RobotFrontWheels()
-        
-        accumulate (SonarsReport( $back: back, $right: right, $left: left) over window:time( 300ms ) from entry-point "distance-sensor";
+        $sr: SonarsReport()
+        accumulate (SonarsReport(this != $sr, $back: back, $right: right, $left: left, processed == false, this after $sr) over window:time( 300ms ) from entry-point "distance-sensor";
                                                  $avg: average($back),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
                                                  $avg < 20, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft < $avgRight)
         
     then
+        $sr.setProcessed(true);
+        update($sr);
         $fW.rotateAndMove("right", 90, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 90 degrees right because there is something in the back of me /n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
         
@@ -109,14 +113,16 @@ rule "If there is something in the back than 40 cm turn left 90 degrees"
     
     when
         $fW: RobotFrontWheels()
-        
-        accumulate (SonarsReport( $back: back, $right: right, $left: left) over window:time( 300ms ) from entry-point "distance-sensor";
+        $sr: SonarsReport()
+        accumulate (SonarsReport(this != $sr, $back: back, $right: right, $left: left, processed == false, this after $sr) over window:time( 300ms ) from entry-point "distance-sensor";
                                                  $avg: average($back),
                                                  $avgRight: average($right),
                                                  $avgLeft: average($left);
                                                  $avg < 20, $avg > 0, $avgLeft > 0, $avgRight > 0, $avgLeft > $avgRight)
         
     then
+        $sr.setProcessed(true);
+        update($sr);
         $fW.rotateAndMove("left", 90, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 90 degrees left because there is something in the back of me /n -> AVG: " + $avg + " - RIGHT AVG: "+$avgRight + " - LEFT AVG: "+$avgLeft ));
         
@@ -139,25 +145,3 @@ rule "If there is something on the right closer than 25 cm turn 5 degrees left"
         $fW.rotateAndMove("left", 5, "forward");
         notifications.fire(new MindNotificationEvent(" Rotating 5 degrees left to move away from the object on the right ->" + $n));   
 end
-
-
-
-/*rule "Something is getting Closer" 
-    when
-        $r: RoloTheRobot()
-        RobotSonar( $sensor: name )
-        $n: Number( doubleValue < 0.5 ) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 1000ms ) from entry-point "distance-sensor", tendency($d))
-        
-    then
-       System.out.println("WARN: Something is getting closer" + $n);
-end
-
-rule "Something is going away" 
-    when
-        $r: RoloTheRobot()
-        RobotSonar( $sensor: name )
-        $n: Number( doubleValue > 0.5 ) from accumulate (DistanceReport( sensorName == $sensor, $d: distance ) over window:time( 1000ms ) from entry-point "distance-sensor", tendency($d))
-        
-    then
-       System.out.println("WARN: Something is going away" + $n);
-end*/

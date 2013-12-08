@@ -21,7 +21,11 @@
             <artifactId>rolo-the-robot-core</artifactId>
             <version>${project.version}</version>
         </dependency>  
-        
+        <dependency>
+            <groupId>com.salaboy</groupId>
+            <artifactId>rolo-the-robot-kjar</artifactId>
+            <version>${project.version}</version>
+        </dependency>  
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>

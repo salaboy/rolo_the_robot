@@ -15,6 +15,7 @@ import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.kie.api.cdi.KReleaseId;
 import org.kie.api.cdi.KSession;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.EntryPoint;
@@ -34,6 +35,7 @@ public class RobotKnowledgeListener {
     
     @Inject
     @KSession("rolo")
+    @KReleaseId( groupId = "com.salaboy", artifactId = "rolo-the-robot-kjar", version = "1.0-SNAPSHOT")
     private KieSession rolo;
  
     @Inject
