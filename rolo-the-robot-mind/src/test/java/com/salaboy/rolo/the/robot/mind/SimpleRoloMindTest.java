@@ -9,6 +9,8 @@ import com.salaboy.rolo.body.api.Robot;
 import com.salaboy.rolo.body.api.RobotFrontWheels;
 import com.salaboy.rolo.body.api.RobotSonars;
 import com.salaboy.rolo.events.MindNotificationEvent;
+import com.salaboy.rolo.events.MindUpdateEvent;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -28,7 +30,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 public class SimpleRoloMindTest {
-    
+
     @Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(JavaArchive.class, "hello-rolo.jar")
@@ -37,37 +39,57 @@ public class SimpleRoloMindTest {
                 .addAsManifestResource("META-INF/kmodule.xml", ArchivePaths.create("kmodule.xml"));
 
     }
-   @Inject
-   private Robot rolo;
-   
-   @Inject
-   private RobotFrontWheels roloFrontWheels;
-   
-   @Inject 
-   private RobotSonars roloSonars;
+    @Inject
+    private Robot rolo;
+
+    @Inject
+    private RobotFrontWheels roloFrontWheels;
+
+    @Inject
+    private RobotSonars roloSonars;
+
+    @Inject
+    private Event<MindUpdateEvent> mindEvents;
 
     @Test
     public void helloRolo() throws InterruptedException {
         rolo.setName("Rolo!");
-  
+
         rolo.addRobotPart(roloFrontWheels);
-        
-        
+
+        rolo.addRobotPart(roloSonars);
+
+        Thread.sleep(1000);
+
+        roloSonars.readAll();
+
+        Thread.sleep(1000);
+
+        String newRules = "rule \"looking for something to do\"\n"
+                + "    salience 10  \n"
+                + "    when\n"
+                + "        $fW: RobotFrontWheels()\n"
+                + "    then\n"
+                + "        $fW.forward();\n"
+                + "        notifications.fire(new MindNotificationEvent(\" Looking for something to do!\"));\n"
+                + "end";
+
+        mindEvents.fire(new MindUpdateEvent(newRules));
+
+        rolo.addRobotPart(roloFrontWheels);
+
         rolo.addRobotPart(roloSonars);
         
-         Thread.sleep(1000);
-        
-       
-        roloSonars.readAll();
-        
-       
-       
         Thread.sleep(1000);
-        
+
+        roloSonars.readAll();
+
+        Thread.sleep(1000);
+
     }
-    
-    public void onMindNotification(@Observes MindNotificationEvent event){
-        System.out.println(">> I'm getting a mind suggestion: "+ event);
+
+    public void onMindNotification(@Observes MindNotificationEvent event) {
+        System.out.println(">> I'm getting a mind suggestion: " + event);
 
     }
 }

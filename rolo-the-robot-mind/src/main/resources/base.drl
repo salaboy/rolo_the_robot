@@ -1,0 +1,43 @@
+package com.salaboy.rolo;
+
+import com.salaboy.rolo.model.*;
+import com.salaboy.rolo.model.reports.*;
+import com.salaboy.rolo.*;
+
+import com.salaboy.rolo.body.api.*;
+
+import com.salaboy.rolo.events.*;
+
+import com.salaboy.rolo.the.robot.comm.*;
+
+import org.kie.internal.event.rule.*;
+import org.kie.api.runtime.rule.*;
+import org.drools.core.common.*;
+
+import javax.enterprise.event.*;
+
+declare SonarsReport
+    @role(event)
+    @expires(500ms)
+end
+
+global Event notifications;
+
+global Event external;
+
+rule "robot part logger"
+    when
+       $rP: RobotPart()
+    then
+        System.out.println(">>> A new robot part was added: "+ $rP);
+        external.fire(new ExternalNotificationEvent(">>> A new robot part was added: "+ $rP));
+end
+
+rule "robot fact logger"
+    when
+       accumulate ($r: SonarsReport( )  from entry-point "distance-sensor";
+                $count: count($r))
+    then
+       notifications.fire(new MindNotificationEvent(" Number of Reports "+  $count)); 
+end
+

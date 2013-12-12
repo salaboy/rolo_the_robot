@@ -149,11 +149,10 @@ void loop() {
            if(args[2] == "forward"){
              move_single_motor("right-motor", forward );
              move_single_motor("left-motor", forward );
+           }else{
+             move_single_motor("right-motor", backward );
+             move_single_motor("left-motor", backward );
            }
-//           else{
-//             move_single_motor("right-motor", backward );
-//             move_single_motor("left-motor", backward );
-//           }
         }else if(commandName=="setDiam"){
            Diam = (float)args[0].toInt();
         }else if(commandName=="setDist"){
@@ -175,7 +174,6 @@ void loop() {
 
 
   }else{
-  
 
     int uSfront = sonar_front.ping_median(2);
             int uSright = sonar_right.ping_median(2);
