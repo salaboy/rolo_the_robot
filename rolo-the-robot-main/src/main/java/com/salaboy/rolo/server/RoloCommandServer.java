@@ -16,8 +16,6 @@
 package com.salaboy.rolo.server;
 
 import com.salaboy.rolo.body.api.Robot;
-import com.salaboy.rolo.body.api.RobotFrontWheels;
-import com.salaboy.rolo.body.api.RobotPart;
 import com.salaboy.rolo.server.events.IncomingActionEvent;
 import com.salaboy.rolo.events.ExternalNotificationEvent;
 import com.salaboy.rolo.the.robot.comm.HornetQSessionWriter;
@@ -189,7 +187,7 @@ public class RoloCommandServer implements Runnable {
                 if (message != null) {
 
                     Object object = readMessage(message);
-                    String[] values = object.toString().split(":");
+                    String[] values = object.toString().split("~");
                     incomingActions.fire(new IncomingActionEvent(values));
 
                    // notifications.write(object);

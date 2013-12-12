@@ -9,8 +9,10 @@ import com.salaboy.rolo.body.api.Robot;
 import com.salaboy.rolo.body.api.RobotFrontWheels;
 import com.salaboy.rolo.body.api.RobotSonars;
 import com.salaboy.rolo.events.MindNotificationEvent;
+import com.salaboy.rolo.events.MindUpdateEvent;
 import com.salaboy.rolo.server.CompleteRobot;
 import com.salaboy.rolo.server.events.IncomingActionEvent;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -31,13 +33,13 @@ public class RobotProducer {
     @Inject
     private RobotSonars roloSonars;
 
+    @Inject
+    private Event<MindUpdateEvent> mindUpdateEvent;
     
     @Produces
     @CompleteRobot
     public Robot getRobot(){
         robot.addRobotPart(roloFrontWheels);
-        robot.addRobotPart(roloFrontWheels.getLeftMotor());
-        robot.addRobotPart(roloFrontWheels.getRightMotor());
         robot.addRobotPart(roloSonars);
        
         return robot;
@@ -71,10 +73,12 @@ public class RobotProducer {
             roloFrontWheels.getRightMotor().backward();
         }else if(values[0].equals("WHEEL-LEFT-BACKWARD")){
             roloFrontWheels.getLeftMotor().backward();
-        }else if(values[0].equals("SONARS")){
+        }else if(values[0].equals("SONARS-READ")){
             roloSonars.readAll();
         }else if(values[0].equals("STOP-ALL")){
             roloFrontWheels.stopAll();
+        }else if(values[0].equals("MIND-UPDATE")){
+            mindUpdateEvent.fire(new MindUpdateEvent(values[1]));
         }
         
        

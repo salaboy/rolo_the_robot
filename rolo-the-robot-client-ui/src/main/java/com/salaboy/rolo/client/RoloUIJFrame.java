@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 /**
  *
@@ -58,6 +57,8 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         stopjButton = new javax.swing.JButton();
         rightBackjButton = new javax.swing.JButton();
         leftBackjButton = new javax.swing.JButton();
+        updateMindjButton = new javax.swing.JButton();
+        pollFrontjButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         notificationjTextArea = new javax.swing.JTextArea();
@@ -68,10 +69,8 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         statusjLabel = new javax.swing.JLabel();
         localjCheckBox = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
-        pollFrontjButton = new javax.swing.JButton();
-        pollRightjButton = new javax.swing.JButton();
-        pollBackjButton = new javax.swing.JButton();
-        pollLeftjButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        mindjTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +139,20 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             }
         });
 
+        updateMindjButton.setText("Update Mind");
+        updateMindjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMindjButtonActionPerformed(evt);
+            }
+        });
+
+        pollFrontjButton1.setText("Poll Sensors");
+        pollFrontjButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pollFrontjButton1ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,7 +173,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
                             .add(stopjButton)
                             .add(backwardjButton))))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+            .add(jPanel1Layout.createSequentialGroup()
                 .add(14, 14, 14)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(leftFWjButton)
@@ -170,6 +183,12 @@ public class RoloUIJFrame extends javax.swing.JFrame {
                     .add(rightFWjButton)
                     .add(rightBackjButton))
                 .add(17, 17, 17))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .add(pollFrontjButton1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(updateMindjButton)
+                .add(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -191,7 +210,11 @@ public class RoloUIJFrame extends javax.swing.JFrame {
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(rightBackjButton)
                     .add(leftBackjButton))
-                .add(56, 56, 56))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(pollFrontjButton1)
+                    .add(updateMindjButton))
+                .add(21, 21, 21))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Notifications"));
@@ -206,7 +229,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -246,86 +269,55 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
-                .add(18, 18, 18)
-                .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(connectjButton)
-                .add(18, 18, 18)
-                .add(localjCheckBox)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 290, Short.MAX_VALUE)
-                .add(jLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(statusjLabel)
-                .add(67, 67, 67))
+                .addContainerGap()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(connectjButton))
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(localjCheckBox)
+                        .add(46, 46, 46)
+                        .add(jLabel1)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(statusjLabel)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
-                .add(26, 26, 26)
+                .add(28, 28, 28)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(connectjButton)
                     .add(jLabel1)
                     .add(statusjLabel)
                     .add(localjCheckBox))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
+            .add(jPanel3Layout.createSequentialGroup()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(connectjButton))
+                .add(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Reports"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Mind"));
 
-        pollFrontjButton.setText("Poll Front");
-        pollFrontjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pollFrontjButtonActionPerformed(evt);
-            }
-        });
-
-        pollRightjButton.setText("Poll Right");
-        pollRightjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pollRightjButtonActionPerformed(evt);
-            }
-        });
-
-        pollBackjButton.setText("Poll Back");
-        pollBackjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pollBackjButtonActionPerformed(evt);
-            }
-        });
-
-        pollLeftjButton.setText("Poll Left");
-        pollLeftjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pollLeftjButtonActionPerformed(evt);
-            }
-        });
+        mindjTextArea.setColumns(20);
+        mindjTextArea.setRows(5);
+        mindjTextArea.setText("rule \"looking for something to do\"\n    salience 10  \n    when\n        $fW: RobotFrontWheels()\n    then\n        $fW.forward();\n        notifications.fire(new MindNotificationEvent(\" Looking for something to do!\"));\nend\n\nrule \"If there is something closer than 40 cm turn left 90 degrees\"\n    when\n        $fW: RobotFrontWheels()\n        \n        accumulate (SonarsReport(  $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point \"distance-sensor\";\n                                                 $avg: average($front),\n                                                 $avgRight: average($right),\n                                                 $avgLeft: average($left);\n                                                 $avg < 40, $avg > 0, ($avgLeft > 0 || $avgRight > 0), $avgLeft > $avgRight)\n        \n    then\n       \n        $fW.rotateAndMove(\"left\", 90, \"forward\");\n        notifications.fire(new MindNotificationEvent(\" Rotating 90 degrees left because there is something in front of me \\n -> AVG: \" + $avg + \" - RIGHT AVG: \"+$avgRight + \" - LEFT AVG: \"+$avgLeft ));\n        \nend\n\nrule \"If there is something closer than 40 cm turn right 90 degrees\"\n    \n    when\n        $fW: RobotFrontWheels()\n        \n        accumulate (SonarsReport(  $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point \"distance-sensor\";\n                                                 $avg: average($front),\n                                                 $avgRight: average($right),\n                                                 $avgLeft: average($left);\n                                                 $avg < 40, $avg > 0, ($avgLeft > 0 || $avgRight > 0), $avgLeft < $avgRight)\n        \n    then\n       \n        $fW.rotateAndMove(\"right\", 90, \"forward\");\n        notifications.fire(new MindNotificationEvent(\" Rotating 90 degrees right because there is something in front of me /n -> AVG: \" + $avg + \" - RIGHT AVG: \"+$avgRight + \" - LEFT AVG: \"+$avgLeft ));\n        \nend\n\n");
+        jScrollPane2.setViewportView(mindjTextArea);
 
         org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(pollFrontjButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(pollBackjButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(pollRightjButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(pollLeftjButton)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(jScrollPane2)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .add(17, 17, 17)
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(pollFrontjButton)
-                    .add(pollRightjButton)
-                    .add(pollBackjButton)
-                    .add(pollLeftjButton))
-                .addContainerGap(21, Short.MAX_VALUE))
+            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -334,65 +326,62 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(19, 19, 19)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .add(22, 22, 22)
-                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
+                        .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(16, 16, 16)
                         .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .add(12, 12, 12))
+                .add(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void forwardjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardjButtonActionPerformed
-        // TODO add your handling code here:
-        
-        roloClientConnector.write("WHEELS-FORWARD:126");
+        // TODO add your handling code here:   
+        roloClientConnector.write("WHEELS-FORWARD~126");
     }//GEN-LAST:event_forwardjButtonActionPerformed
 
     private void rightFWjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightFWjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("WHEEL-RIGHT-FORWARD:126");
+        roloClientConnector.write("WHEEL-RIGHT-FORWARD~126");
     }//GEN-LAST:event_rightFWjButtonActionPerformed
 
     private void leftFWjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftFWjButtonActionPerformed
         
-        roloClientConnector.write("WHEEL-LEFT-FORWARD:126");
+        roloClientConnector.write("WHEEL-LEFT-FORWARD~126");
     }//GEN-LAST:event_leftFWjButtonActionPerformed
 
     private void backwardjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backwardjButtonActionPerformed
         
-        roloClientConnector.write("WHEELS-BACKWARD:126");
+        roloClientConnector.write("WHEELS-BACKWARD~126");
     }//GEN-LAST:event_backwardjButtonActionPerformed
 
     private void rotateRightjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotateRightjButtonActionPerformed
         
-        roloClientConnector.write("WHEELS-ROTATERIGHT:90");
+        roloClientConnector.write("WHEELS-ROTATERIGHT~90");
     }//GEN-LAST:event_rotateRightjButtonActionPerformed
 
     private void rotateLeftjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotateLeftjButtonActionPerformed
         
-        roloClientConnector.write("WHEELS-ROTATELEFT:90");
+        roloClientConnector.write("WHEELS-ROTATELEFT~90");
     }//GEN-LAST:event_rotateLeftjButtonActionPerformed
 
     private void connectjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectjButtonActionPerformed
@@ -431,35 +420,25 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     }
   }//GEN-LAST:event_localjCheckBoxActionPerformed
 
-    private void pollFrontjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pollFrontjButtonActionPerformed
+    private void updateMindjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMindjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("SONAR-FRONT");
-    }//GEN-LAST:event_pollFrontjButtonActionPerformed
+        roloClientConnector.write("MIND-UPDATE~"+mindjTextArea.getText());
+    }//GEN-LAST:event_updateMindjButtonActionPerformed
 
     private void rightBackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightBackjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("WHEEL-RIGHT-BACKWARD:126");
+        roloClientConnector.write("WHEEL-RIGHT-BACKWARD~126");
     }//GEN-LAST:event_rightBackjButtonActionPerformed
 
     private void leftBackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftBackjButtonActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("WHEEL-LEFT-BACKWARD:126");
+        roloClientConnector.write("WHEEL-LEFT-BACKWARD~126");
     }//GEN-LAST:event_leftBackjButtonActionPerformed
 
-    private void pollRightjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pollRightjButtonActionPerformed
+    private void pollFrontjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pollFrontjButton1ActionPerformed
         // TODO add your handling code here:
-        roloClientConnector.write("SONAR-RIGHT");
-    }//GEN-LAST:event_pollRightjButtonActionPerformed
-
-    private void pollBackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pollBackjButtonActionPerformed
-        // TODO add your handling code here:
-        roloClientConnector.write("SONAR-BACK");
-    }//GEN-LAST:event_pollBackjButtonActionPerformed
-
-    private void pollLeftjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pollLeftjButtonActionPerformed
-        // TODO add your handling code here:
-        roloClientConnector.write("SONAR-LEFT");
-    }//GEN-LAST:event_pollLeftjButtonActionPerformed
+        roloClientConnector.write("SONARS-READ");
+    }//GEN-LAST:event_pollFrontjButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -505,14 +484,13 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton leftBackjButton;
     private javax.swing.JButton leftFWjButton;
     private javax.swing.JCheckBox localjCheckBox;
+    private javax.swing.JTextArea mindjTextArea;
     private javax.swing.JTextArea notificationjTextArea;
-    private javax.swing.JButton pollBackjButton;
-    private javax.swing.JButton pollFrontjButton;
-    private javax.swing.JButton pollLeftjButton;
-    private javax.swing.JButton pollRightjButton;
+    private javax.swing.JButton pollFrontjButton1;
     private javax.swing.JButton rightBackjButton;
     private javax.swing.JButton rightFWjButton;
     private javax.swing.JButton rotateLeftjButton;
@@ -520,6 +498,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField serverAddressjTextField;
     private javax.swing.JLabel statusjLabel;
     private javax.swing.JButton stopjButton;
+    private javax.swing.JButton updateMindjButton;
     // End of variables declaration//GEN-END:variables
     
 }

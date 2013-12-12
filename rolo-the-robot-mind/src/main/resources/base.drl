@@ -33,11 +33,3 @@ rule "robot part logger"
         external.fire(new ExternalNotificationEvent(">>> A new robot part was added: "+ $rP));
 end
 
-rule "robot fact logger"
-    when
-       accumulate ($r: SonarsReport( )  from entry-point "distance-sensor";
-                $count: count($r))
-    then
-       notifications.fire(new MindNotificationEvent(" Number of Reports "+  $count)); 
-end
-
