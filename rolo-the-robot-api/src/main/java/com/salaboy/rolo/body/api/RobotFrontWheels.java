@@ -13,6 +13,8 @@ public interface RobotFrontWheels extends RobotPart{
     
     void rotate(String direction, int degrees);
     
+    void setWheelSpeed(String wheel, int speed);
+    
     void rotateAndMove(String direction, int degrees, String moveDirection);
     
     void setWheelsDistance(int distance);

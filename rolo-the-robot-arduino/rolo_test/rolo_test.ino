@@ -59,8 +59,8 @@ PID myPID_rm(&Input_rm, &Output_rm, &Setpoint_rm, consKp_rm, consKi_rm, consKd_r
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
-int leftMotorSpeed = 255;
-int rightMotorSpeed = 255;
+int leftMotorSpeed = 200;
+int rightMotorSpeed = 200;
 String currentDirectionLeft = "forward";
 String currentDirectionRight = "forward";
 
@@ -153,9 +153,15 @@ void loop() {
              move_single_motor("right-motor", backward );
              move_single_motor("left-motor", backward );
            }
-        }else if(commandName=="setDiam"){
+        }else if(commandName=="set-right-speed"){
+           rightMotorSpeed = args[0].toInt();
+           move_single_motor("right-motor", forward );
+        }else if(commandName=="set-left-speed"){
+           leftMotorSpeed = args[0].toInt();
+           move_single_motor("left-motor", forward );
+        }else if(commandName=="set-diam"){
            Diam = (float)args[0].toInt();
-        }else if(commandName=="setDist"){
+        }else if(commandName=="set-dist"){
            Dist = args[0].toInt();
         }else if(commandName=="stop-all"){
            stop_single_motor("right-motor");

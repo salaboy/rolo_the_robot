@@ -8,7 +8,6 @@ import com.salaboy.rolo.body.api.RobotFrontWheels;
 import com.salaboy.rolo.body.api.RobotMotor;
 import com.salaboy.rolo.events.BodyEvent;
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
@@ -63,7 +62,6 @@ public class RobotFrontWheelsImpl implements RobotFrontWheels{
         messageEvents.fire(new BodyEvent(name+":rotate-move:3:"+direction+":"+degrees+":"+moveDirection));
     }
 
-    
     @Override
     public void move(String direction, int distance) {
         messageEvents.fire(new BodyEvent(name+":move:2:"+direction+":"+distance));
@@ -71,12 +69,17 @@ public class RobotFrontWheelsImpl implements RobotFrontWheels{
 
     @Override
     public void setWheelsDistance(int distance) {
-        messageEvents.fire(new BodyEvent(name+":setDist:1:"+distance));
+        messageEvents.fire(new BodyEvent(name+":set-dist:1:"+distance));
     }
 
     @Override
     public void setWheelsDiameter(int diameter) {
-        messageEvents.fire(new BodyEvent(name+":setDiam:1:"+diameter));
+        messageEvents.fire(new BodyEvent(name+":set-diam:1:"+diameter));
+    }
+    
+    @Override
+    public void setWheelSpeed(String wheel, int speed) {
+        messageEvents.fire(new BodyEvent(name+":set-"+wheel+"-speed:1:"+speed));
     }
 
     @Override
