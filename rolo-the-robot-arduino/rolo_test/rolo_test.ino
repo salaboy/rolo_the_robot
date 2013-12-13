@@ -59,8 +59,8 @@ PID myPID_rm(&Input_rm, &Output_rm, &Setpoint_rm, consKp_rm, consKi_rm, consKd_r
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
-int leftMotorSpeed = 200;
-int rightMotorSpeed = 200;
+int leftMotorSpeed = 50;
+int rightMotorSpeed = 50;
 String currentDirectionLeft = "forward";
 String currentDirectionRight = "forward";
 
@@ -154,10 +154,10 @@ void loop() {
              move_single_motor("left-motor", backward );
            }
         }else if(commandName=="set-right-speed"){
-           rightMotorSpeed = args[0].toInt();
+           Setpoint_rm = args[0].toInt();
            move_single_motor("right-motor", forward );
         }else if(commandName=="set-left-speed"){
-           leftMotorSpeed = args[0].toInt();
+           Setpoint_lm = args[0].toInt();
            move_single_motor("left-motor", forward );
         }else if(commandName=="set-diam"){
            Diam = (float)args[0].toInt();
@@ -310,6 +310,7 @@ void velo()
   Input_rm = pul_seg_rm;
   myPID_lm.Compute(); //realiza el calculo para la correccion del error y el resultado que es un valor entre 0 y 255
   myPID_rm.Compute(); //necesario para corregir la velocidad lo pone en las variables Output_lm y Output_rm
+  Serial.println(Output_lm);
   analogWrite(9,Output_lm ); // reescribo directamente en el pin PWM (4) del motor izquierdo para cambiar la potencia
   analogWrite(10,Output_rm);  // reescribo directamente en el pin PWM (7) del motor derecho para cambiar la potencia
 }
