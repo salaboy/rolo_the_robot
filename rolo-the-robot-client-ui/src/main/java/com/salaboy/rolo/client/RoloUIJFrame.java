@@ -59,6 +59,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         leftBackjButton = new javax.swing.JButton();
         updateMindjButton = new javax.swing.JButton();
         pollFrontjButton1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         notificationjTextArea = new javax.swing.JTextArea();
@@ -153,68 +154,71 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Clear Notif");
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(rotateLeftjButton)
-                        .add(18, 18, 18)
-                        .add(rotateRightjButton))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(81, 81, 81)
-                        .add(forwardjButton))
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(78, 78, 78)
-                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(stopjButton)
-                            .add(backwardjButton))))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(jPanel1Layout.createSequentialGroup()
                 .add(14, 14, 14)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(leftFWjButton)
-                    .add(leftBackjButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(rightFWjButton)
-                    .add(rightBackjButton))
-                .add(17, 17, 17))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .add(pollFrontjButton1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(updateMindjButton)
-                .add(12, 12, 12))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(forwardjButton)
+                            .add(rotateLeftjButton))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(rotateRightjButton)
+                            .add(backwardjButton))
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel1Layout.createSequentialGroup()
+                                .add(leftFWjButton)
+                                .add(18, 18, 18)
+                                .add(rightFWjButton))
+                            .add(jPanel1Layout.createSequentialGroup()
+                                .add(stopjButton)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(pollFrontjButton1))
+                            .add(jPanel1Layout.createSequentialGroup()
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(leftBackjButton)
+                                    .add(jButton1))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(updateMindjButton)
+                                    .add(rightBackjButton))))
+                        .add(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .add(forwardjButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(forwardjButton)
+                    .add(backwardjButton))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(rotateLeftjButton)
                     .add(rotateRightjButton))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(backwardjButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(stopjButton)
-                .add(18, 18, 18)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(stopjButton)
+                    .add(pollFrontjButton1))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(leftFWjButton)
                     .add(rightFWjButton))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rightBackjButton)
-                    .add(leftBackjButton))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                    .add(leftBackjButton)
+                    .add(rightBackjButton))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(pollFrontjButton1)
-                    .add(updateMindjButton))
-                .add(21, 21, 21))
+                    .add(updateMindjButton)
+                    .add(jButton1))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Notifications"));
@@ -229,7 +233,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+                .add(jScrollPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -269,19 +273,19 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(localjCheckBox)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jLabel1)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(statusjLabel))
                     .add(jPanel3Layout.createSequentialGroup()
                         .add(serverAddressjTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 163, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(connectjButton))
-                    .add(jPanel3Layout.createSequentialGroup()
-                        .add(localjCheckBox)
-                        .add(46, 46, 46)
-                        .add(jLabel1)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(statusjLabel)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(connectjButton)))
+                .add(68, 68, 68))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -302,7 +306,9 @@ public class RoloUIJFrame extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Mind"));
 
         mindjTextArea.setColumns(20);
+        mindjTextArea.setLineWrap(true);
         mindjTextArea.setRows(5);
+        mindjTextArea.setTabSize(2);
         mindjTextArea.setText("rule \"looking for something to do\"\n    salience 10  \n    when\n        $fW: RobotFrontWheels()\n    then\n        $fW.forward();\n        notifications.fire(new MindNotificationEvent(\" Looking for something to do!\"));\nend\n\nrule \"If there is something closer than 40 cm turn left 90 degrees\"\n    when\n        $fW: RobotFrontWheels()\n        \n        accumulate (SonarsReport(  $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point \"distance-sensor\";\n                                                 $avg: average($front),\n                                                 $avgRight: average($right),\n                                                 $avgLeft: average($left);\n                                                 $avg < 50, $avg > 0, $avgRight > 0, $avgLeft > $avgRight)\n        \n    then\n       \n        $fW.rotateAndMove(\"left\", 90, \"forward\");\n        notifications.fire(new MindNotificationEvent(\" Rotating 90 degrees left because there is something in front of me \\n -> AVG: \" + $avg + \" - RIGHT AVG: \"+$avgRight + \" - LEFT AVG: \"+$avgLeft ));\n        \nend\n\nrule \"If there is something closer than 40 cm turn right 90 degrees\"\n    \n    when\n        $fW: RobotFrontWheels()\n        \n        accumulate (SonarsReport(  $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point \"distance-sensor\";\n                                                 $avg: average($front),\n                                                 $avgRight: average($right),\n                                                 $avgLeft: average($left);\n                                                 $avg < 50, $avg > 0, $avgLeft > 0, $avgLeft < $avgRight)\n        \n    then\n       \n        $fW.rotateAndMove(\"right\", 90, \"forward\");\n        notifications.fire(new MindNotificationEvent(\" Rotating 90 degrees right because there is something in front of me /n -> AVG: \" + $avg + \" - RIGHT AVG: \"+$avgRight + \" - LEFT AVG: \"+$avgLeft ));\n        \nend\n\ndeclare SlowDownRight\n\nend\n\nrule \"slow down on something too close on the left\"\n    \n    when\n        $fW: RobotFrontWheels()\n        \n        accumulate (SonarsReport(   $left: left) over window:time( 300ms ) from entry-point \"distance-sensor\";\n                                                 $avgLeft: average($left);\n                                                 $avgLeft > 0, $avgLeft < 20)\n        \n    then\n        insertLogical(new SlowDownRight());\n        \nend\n\nrule \"slow down right\"\n  when\n     SlowDownRight()\n    $fW: RobotFrontWheels()\nthen\n\n$fW.setWheelSpeed(\"right\", 20);\n        notifications.fire(new MindNotificationEvent(\" slowing down the right wheel \"));\n        \nend\n\nrule \"anti slow down right\"\n  when\n     not(SlowDownRight())\n    $fW: RobotFrontWheels()\nthen\n\n$fW.setWheelSpeed(\"right\", 35);\n        notifications.fire(new MindNotificationEvent(\" slowing down the right wheel \"));\n        \nend\n\n\n\n\n");
         jScrollPane2.setViewportView(mindjTextArea);
 
@@ -312,12 +318,12 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane2)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+            .add(jScrollPane2)
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -326,13 +332,13 @@ public class RoloUIJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(19, 19, 19)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 281, Short.MAX_VALUE)
-                    .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 271, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 279, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -345,9 +351,9 @@ public class RoloUIJFrame extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(34, 34, 34))
         );
 
@@ -478,6 +484,7 @@ public class RoloUIJFrame extends javax.swing.JFrame {
     private javax.swing.JButton backwardjButton;
     private javax.swing.JButton connectjButton;
     private javax.swing.JButton forwardjButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

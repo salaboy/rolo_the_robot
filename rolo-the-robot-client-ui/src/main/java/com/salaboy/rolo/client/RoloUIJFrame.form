@@ -25,14 +25,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jPanel3" pref="281" max="32767" attributes="0"/>
-                  <Component id="jPanel1" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel2" max="32767" attributes="0"/>
+                  <Component id="jPanel1" min="-2" pref="271" max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" pref="279" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel4" max="32767" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -43,15 +43,15 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel1" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jPanel4" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -72,79 +72,84 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="rotateLeftjButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="rotateRightjButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                          <Component id="forwardjButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="stopjButton" min="-2" max="-2" attributes="0"/>
-                              <Component id="backwardjButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="leftFWjButton" min="-2" max="-2" attributes="0"/>
-                      <Component id="leftBackjButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="rightFWjButton" min="-2" max="-2" attributes="0"/>
-                      <Component id="rightBackjButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="forwardjButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rotateLeftjButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="rotateRightjButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="backwardjButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="leftFWjButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="rightFWjButton" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="stopjButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="pollFrontjButton1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="leftBackjButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="updateMindjButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rightBackjButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="8" max="32767" attributes="0"/>
-                  <Component id="pollFrontjButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="updateMindjButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="forwardjButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="forwardjButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="backwardjButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="rotateLeftjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rotateRightjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="backwardjButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="stopjButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="stopjButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pollFrontjButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="leftFWjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rightFWjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="rightBackjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="leftBackjButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rightBackjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="pollFrontjButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="updateMindjButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace pref="182" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -238,6 +243,11 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pollFrontjButton1ActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Clear Notif"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
@@ -254,7 +264,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="860" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -300,22 +310,22 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="localjCheckBox" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="statusjLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="serverAddressjTextField" min="-2" pref="163" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="connectjButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="localjCheckBox" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="statusjLabel" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -394,14 +404,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="868" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane2" alignment="0" pref="157" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -416,7 +426,9 @@
             <Component class="javax.swing.JTextArea" name="mindjTextArea">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="tabSize" type="int" value="2"/>
                 <Property name="text" type="java.lang.String" value="rule &quot;looking for something to do&quot;&#xa;    salience 10  &#xa;    when&#xa;        $fW: RobotFrontWheels()&#xa;    then&#xa;        $fW.forward();&#xa;        notifications.fire(new MindNotificationEvent(&quot; Looking for something to do!&quot;));&#xa;end&#xa;&#xa;rule &quot;If there is something closer than 40 cm turn left 90 degrees&quot;&#xa;    when&#xa;        $fW: RobotFrontWheels()&#xa;        &#xa;        accumulate (SonarsReport(  $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point &quot;distance-sensor&quot;;&#xa;                                                 $avg: average($front),&#xa;                                                 $avgRight: average($right),&#xa;                                                 $avgLeft: average($left);&#xa;                                                 $avg &lt; 50, $avg &gt; 0, $avgRight &gt; 0, $avgLeft &gt; $avgRight)&#xa;        &#xa;    then&#xa;       &#xa;        $fW.rotateAndMove(&quot;left&quot;, 90, &quot;forward&quot;);&#xa;        notifications.fire(new MindNotificationEvent(&quot; Rotating 90 degrees left because there is something in front of me \u005cn -&gt; AVG: &quot; + $avg + &quot; - RIGHT AVG: &quot;+$avgRight + &quot; - LEFT AVG: &quot;+$avgLeft ));&#xa;        &#xa;end&#xa;&#xa;rule &quot;If there is something closer than 40 cm turn right 90 degrees&quot;&#xa;    &#xa;    when&#xa;        $fW: RobotFrontWheels()&#xa;        &#xa;        accumulate (SonarsReport(  $front: front, $right: right, $left: left) over window:time( 300ms ) from entry-point &quot;distance-sensor&quot;;&#xa;                                                 $avg: average($front),&#xa;                                                 $avgRight: average($right),&#xa;                                                 $avgLeft: average($left);&#xa;                                                 $avg &lt; 50, $avg &gt; 0, $avgLeft &gt; 0, $avgLeft &lt; $avgRight)&#xa;        &#xa;    then&#xa;       &#xa;        $fW.rotateAndMove(&quot;right&quot;, 90, &quot;forward&quot;);&#xa;        notifications.fire(new MindNotificationEvent(&quot; Rotating 90 degrees right because there is something in front of me /n -&gt; AVG: &quot; + $avg + &quot; - RIGHT AVG: &quot;+$avgRight + &quot; - LEFT AVG: &quot;+$avgLeft ));&#xa;        &#xa;end&#xa;&#xa;declare SlowDownRight&#xa;&#xa;end&#xa;&#xa;rule &quot;slow down on something too close on the left&quot;&#xa;    &#xa;    when&#xa;        $fW: RobotFrontWheels()&#xa;        &#xa;        accumulate (SonarsReport(   $left: left) over window:time( 300ms ) from entry-point &quot;distance-sensor&quot;;&#xa;                                                 $avgLeft: average($left);&#xa;                                                 $avgLeft &gt; 0, $avgLeft &lt; 20)&#xa;        &#xa;    then&#xa;        insertLogical(new SlowDownRight());&#xa;        &#xa;end&#xa;&#xa;rule &quot;slow down right&quot;&#xa;  when&#xa;     SlowDownRight()&#xa;    $fW: RobotFrontWheels()&#xa;then&#xa;&#xa;$fW.setWheelSpeed(&quot;right&quot;, 20);&#xa;        notifications.fire(new MindNotificationEvent(&quot; slowing down the right wheel &quot;));&#xa;        &#xa;end&#xa;&#xa;rule &quot;anti slow down right&quot;&#xa;  when&#xa;     not(SlowDownRight())&#xa;    $fW: RobotFrontWheels()&#xa;then&#xa;&#xa;$fW.setWheelSpeed(&quot;right&quot;, 35);&#xa;        notifications.fire(new MindNotificationEvent(&quot; slowing down the right wheel &quot;));&#xa;        &#xa;end&#xa;&#xa;&#xa;&#xa;&#xa;" containsInvalidXMLChars="true"/>
               </Properties>
             </Component>
